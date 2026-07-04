@@ -15,7 +15,16 @@ import config from 'src/config';
 import SpriteIcon from 'src/sprite/SpriteIcon';
 
 import { Tooltip } from 'src/toolkit/chakra/tooltip';
-import { apos, nbsp, ndash } from 'src/toolkit/utils/htmlEntities';
+
+function formatIndexingPercent(value: string | number | null | undefined) {
+  const ratio = Number(value);
+
+  if (!Number.isFinite(ratio)) {
+    return;
+  }
+
+  return Math.max(0, Math.min(100, Math.floor(ratio * 100)));
+}
 
 const IndexingStatusInternalTxs = () => {
 
@@ -61,11 +70,15 @@ const IndexingStatusInternalTxs = () => {
     return null;
   }
 
+  const indexedPercent = formatIndexingPercent(data.indexed_internal_transactions_ratio);
+  const indexedStatus = indexedPercent === undefined ?
+    'Internal transaction indexing is in progress.' :
+    `${ indexedPercent }% of Dakota Network blocks have internal transactions indexed.`;
+
   const hint = (
     <Text textStyle="xs">
-      { data.indexed_internal_transactions_ratio &&
-        `${ Math.floor(Number(data.indexed_internal_transactions_ratio) * 100) }% Blocks With Internal Transactions Indexed${ nbsp }${ ndash } ` }
-      We{ apos }re indexing this chain right now. Some of the counts may be inaccurate.
+      { indexedStatus } Counts involving contract-created or internal transactions may be incomplete
+      until indexing finishes.
     </Text>
   );
 
@@ -73,16 +86,17 @@ const IndexingStatusInternalTxs = () => {
     <Flex
       px={ 1 }
       bg={{ base: 'blackAlpha.50', _dark: 'whiteAlpha.100' }}
-      borderRadius="sm"
+      borderRadius="base"
       alignItems="center"
       justifyContent="center"
       color="green.400"
       _hover={{ color: 'hover' }}
+      columnGap={ 1 }
     >
       <SpriteIcon name="info" boxSize={ 5 }/>
-      { data.indexed_internal_transactions_ratio && (
+      { indexedPercent !== undefined && (
         <Text fontWeight={ 600 } textStyle="xs" color="inherit">
-          { Math.floor(Number(data.indexed_internal_transactions_ratio) * 100) + '%' }
+          { `Internal tx index: ${ indexedPercent }%` }
         </Text>
       ) }
     </Flex>

@@ -7,6 +7,7 @@ import useApiQuery from 'src/api/hooks/useApiQuery';
 
 import { fromBech32Address, isBech32Address } from 'src/slices/address/utils/bech32';
 import { SEARCH_RESULT_ITEM } from 'src/slices/search/stubs';
+import { getIpfsGatewaySearchUrl } from 'src/slices/search/utils/ipfs-gateway';
 
 import { getExternalSearchItem } from 'src/features/chain-variants/zeta-chain/utils/external-search';
 
@@ -25,13 +26,15 @@ export default function useSearchQuery(withRedirectCheck?: boolean) {
   const [ searchTerm, setSearchTerm ] = React.useState(initialValue);
 
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
+  const ipfsGatewayUrl = React.useMemo(() => getIpfsGatewaySearchUrl(debouncedSearchTerm), [ debouncedSearchTerm ]);
+  const isIpfsGatewaySearch = Boolean(ipfsGatewayUrl);
   const pathname = router.pathname;
 
   const query = useQueryWithPages({
     resourceName: 'core:search',
     filters: { q: isBech32Address(debouncedSearchTerm) ? fromBech32Address(debouncedSearchTerm) : debouncedSearchTerm },
     options: {
-      enabled: debouncedSearchTerm.trim().length > 0,
+      enabled: debouncedSearchTerm.trim().length > 0 && !isIpfsGatewaySearch,
       placeholderData: generateListStub<'core:search'>(SEARCH_RESULT_ITEM, 50, { next_page_params: {} }),
     },
   });
@@ -39,7 +42,7 @@ export default function useSearchQuery(withRedirectCheck?: boolean) {
   const redirectCheckQuery = useApiQuery('core:search_check_redirect', {
     // on search result page we check redirect only once on mount
     queryParams: { q: q.current },
-    queryOptions: { enabled: Boolean(q.current) && withRedirectCheck },
+    queryOptions: { enabled: Boolean(q.current) && withRedirectCheck && !isIpfsGatewaySearch },
   });
 
   const zetaChainCCTXQuery = useApiQuery('zetachain:transactions', {
@@ -49,7 +52,7 @@ export default function useSearchQuery(withRedirectCheck?: boolean) {
       offset: 0,
       direction: 'DESC',
     },
-    queryOptions: { enabled: config.features.zetachain.isEnabled && debouncedSearchTerm.trim().length > 0 },
+    queryOptions: { enabled: config.features.zetachain.isEnabled && debouncedSearchTerm.trim().length > 0 && !isIpfsGatewaySearch },
   });
 
   useUpdateValueEffect(() => {

@@ -42,7 +42,7 @@ const AppActionButton = ({ data, className, txHash, source }: Props) => {
           src={ appLogoURL }
           alt={ `${ appActionButtonText } button` }
           boxSize={ 5 }
-          borderRadius="sm"
+          borderRadius="base"
           mr={ 2 }
         />
       ) }

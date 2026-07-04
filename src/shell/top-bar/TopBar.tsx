@@ -16,7 +16,6 @@ import useIsMobile from 'src/shared/hooks/useIsMobile';
 import * as cookies from 'src/shared/storage/cookies';
 
 import NetworkMenu from './chain-menu/ChainMenu';
-import Settings from './settings/Settings';
 import TopBarStats from './TopBarStats';
 
 const TopBarContent = () => {
@@ -83,7 +82,6 @@ const TopBarContent = () => {
           ) }
           <HStack gap="4px">
             <CsvExportDownloads/>
-            <Settings/>
           </HStack>
         </HStack>
       </Flex>

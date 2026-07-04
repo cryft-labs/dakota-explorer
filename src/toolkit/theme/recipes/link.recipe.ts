@@ -53,6 +53,10 @@ export const recipe = defineRecipe({
         },
       },
       navigation: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        lineHeight: '1',
         color: 'link.navigation.fg',
         bg: 'transparent',
         _hover: {
@@ -62,6 +66,10 @@ export const recipe = defineRecipe({
         _selected: {
           color: 'link.navigation.fg.selected',
           bg: 'link.navigation.bg.selected',
+          _hover: {
+            color: 'link.navigation.fg.selected',
+            bg: 'link.navigation.bg.selected',
+          },
         },
         _active: {
           color: 'link.navigation.fg.active',

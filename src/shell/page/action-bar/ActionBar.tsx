@@ -29,7 +29,7 @@ const ActionBar = ({ children, className, showShadow }: Props) => {
       mt={ -6 }
       pb={ 3 }
       mx={{ base: -3, lg: 0 }}
-      px={{ base: 3, lg: 0 }}
+      px={{ base: 3, lg: 4 }}
       justifyContent="space-between"
       width={{ base: '100vw', lg: 'unset' }}
       position="sticky"

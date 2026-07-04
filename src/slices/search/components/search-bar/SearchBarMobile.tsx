@@ -8,6 +8,7 @@ import type { FormEvent } from 'react';
 import React from 'react';
 
 import useQuickSearchQuery from 'src/slices/search/hooks/useQuickSearchQuery';
+import { openIpfsGatewayFromSearch } from 'src/slices/search/utils/ipfs-gateway';
 import { getRecentSearchKeywords, saveToRecentKeywords } from 'src/slices/search/utils/recent-search-keywords';
 
 import * as mixpanel from 'src/services/mixpanel';
@@ -44,26 +45,44 @@ const SearchBarMobile = ({ isHeroBanner, onGoToSearchResults }: Props) => {
   const { searchTerm, debouncedSearchTerm, handleSearchTermChange, query, zetaChainCCTXQuery, externalSearchItem } = useQuickSearchQuery();
   const recentSearchKeywords = getRecentSearchKeywords();
 
-  const navigateToResults = React.useCallback((redirect: boolean) => {
-    if (searchTerm) {
-      const resultRoute: Route = { pathname: '/search-results', query: { q: searchTerm, redirect: redirect ? 'true' : 'false' } };
+  const navigateToResults = React.useCallback((redirect: boolean, submittedSearchTerm = searchTerm) => {
+    const trimmedSearchTerm = submittedSearchTerm.trim();
+
+    if (trimmedSearchTerm) {
+      const ipfsGatewayUrl = openIpfsGatewayFromSearch(trimmedSearchTerm);
+
+      if (ipfsGatewayUrl) {
+        mixpanel.logEvent(mixpanel.EventTypes.SEARCH_QUERY, {
+          'Search query': trimmedSearchTerm,
+          'Source page type': mixpanel.getPageType(router.pathname),
+          'Result URL': ipfsGatewayUrl,
+        });
+        saveToRecentKeywords(trimmedSearchTerm);
+        onGoToSearchResults?.(trimmedSearchTerm);
+        onClose();
+        return;
+      }
+
+      const resultRoute: Route = { pathname: '/search-results', query: { q: trimmedSearchTerm, redirect: redirect ? 'true' : 'false' } };
       const url = route(resultRoute);
       mixpanel.logEvent(mixpanel.EventTypes.SEARCH_QUERY, {
-        'Search query': searchTerm,
+        'Search query': trimmedSearchTerm,
         'Source page type': mixpanel.getPageType(router.pathname),
         'Result URL': url,
       });
-      saveToRecentKeywords(searchTerm);
-      router.push(resultRoute, undefined, { shallow: true });
-      onGoToSearchResults?.(searchTerm);
+      saveToRecentKeywords(trimmedSearchTerm);
+      router.push(resultRoute);
+      onGoToSearchResults?.(trimmedSearchTerm);
       onClose();
     }
   }, [ searchTerm, router, onGoToSearchResults, onClose ]);
 
   const handleSubmit = React.useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigateToResults(true);
-  }, [ navigateToResults ]);
+    const submittedSearchTerm = event.currentTarget.querySelector('input')?.value || searchTerm;
+
+    navigateToResults(true, submittedSearchTerm);
+  }, [ navigateToResults, searchTerm ]);
 
   const handleViewAllResultsClick = React.useCallback(() => {
     navigateToResults(false);
@@ -120,13 +139,17 @@ const SearchBarMobile = ({ isHeroBanner, onGoToSearchResults }: Props) => {
   } else {
     trigger = (
       <Button
-        variant="header"
+        variant="icon_background"
         flexShrink={ 0 }
         p={ 0 }
+        boxSize="40px"
+        minW="40px"
+        borderRadius="base"
+        aria-label="Search"
       >
         <SpriteIcon
           name="search"
-          boxSize={ 6 }
+          boxSize={ 5 }
           flexShrink={ 0 }
         />
       </Button>

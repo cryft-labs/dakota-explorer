@@ -103,8 +103,8 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
       header: {
         fg: {
           DEFAULT: { value: { _light: '#2A3547', _dark: '#94A3B8' } },
-          selected: { value: { _light: '#0F766E', _dark: '#34D399' } },
-          highlighted: { value: { _light: '#0F766E', _dark: '#34D399' } },
+          selected: { value: { _light: '#0F766E', _dark: '#FFFFFF' } },
+          highlighted: { value: { _light: '#0F766E', _dark: '#FFFFFF' } },
         },
         bg: {
           selected: { value: { _light: '#E6F7F3', _dark: '#113B32' } },
@@ -121,7 +121,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
       },
       icon_background: {
         bg: {
-          DEFAULT: { value: { _light: '{colors.gray.50}', _dark: '{colors.whiteAlpha.50}' } },
+          DEFAULT: { value: { _light: '#EEF8F4', _dark: '#102621' } },
         },
       },
       pagination: {

@@ -5,8 +5,6 @@ import React from 'react';
 
 import type { NavGroupItem } from '../types';
 
-import SpriteIcon from 'src/sprite/SpriteIcon';
-
 import { Link } from 'src/toolkit/chakra/link';
 import { Tooltip } from 'src/toolkit/chakra/tooltip';
 import { useDisclosure } from 'src/toolkit/hooks/useDisclosure';
@@ -29,12 +27,12 @@ const NavLinkGroup = ({ height, item }: Props) => {
     <HStack separator={ <Separator/> } alignItems="stretch">
       { item.subItems.map((subItem, index) => {
         if (!Array.isArray(subItem)) {
-          return <NavLink key={ subItem.text } item={ subItem }/>;
+          return <NavLink key={ subItem.text } item={ subItem } isSubMenuItem/>;
         }
 
         return (
           <chakra.ul key={ index } display="flex" flexDir="column" rowGap={ 1 }>
-            { subItem.map((navItem) => <NavLink key={ navItem.text } item={ navItem }/>) }
+            { subItem.map((navItem) => <NavLink key={ navItem.text } item={ navItem } isSubMenuItem/>) }
           </chakra.ul>
         );
       }) }
@@ -45,7 +43,7 @@ const NavLinkGroup = ({ height, item }: Props) => {
         if (Array.isArray(subItem)) {
           return null;
         }
-        return <NavLink key={ subItem.text } item={ subItem }/>;
+        return <NavLink key={ subItem.text } item={ subItem } isSubMenuItem/>;
       }) }
     </chakra.ul>
   );
@@ -67,19 +65,23 @@ const NavLinkGroup = ({ height, item }: Props) => {
         listStyleType="none"
         display="flex"
         alignItems="center"
+        justifyContent="center"
         h={ height }
-        px={ 3.5 }
+        minH={ height }
+        minW="112px"
+        px="15px"
         py={ 0 }
-        fontSize="14px"
-        lineHeight="20px"
-        fontWeight={ 700 }
+        fontSize="16px"
+        lineHeight="1"
+        fontWeight={ 600 }
         variant="navigation"
         { ...(item.isActive ? { 'data-selected': true } : {}) }
         { ...(open ? { 'data-active': true } : {}) }
-        borderRadius="10px"
+        borderRadius="base"
         whiteSpace="nowrap"
+        boxSizing="border-box"
       >
-        { item.text }
+        <chakra.span display="inline-flex" alignItems="center" h="100%">{ item.text }</chakra.span>
         { isHighlighted && (
           <LightningLabel
             iconColor={ item.isActive ? 'link.navigation.bg.selected' : 'link.navigation.bg.group' }
@@ -87,7 +89,6 @@ const NavLinkGroup = ({ height, item }: Props) => {
             ml={{ lg: '2px' }}
           />
         ) }
-        <SpriteIcon name="arrows/east-mini" boxSize={ 5 } transform="rotate(-90deg)" ml={ 1 }/>
       </Link>
     </Tooltip>
   );

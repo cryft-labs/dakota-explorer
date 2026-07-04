@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
-// SPDX-License-Identifier: LicenseRef-Blockscout
-
 import type { GridProps, HTMLChakraProps } from '@chakra-ui/react';
 import { Box, Grid, Flex, Text, VStack, HStack } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
@@ -37,6 +35,21 @@ const MAX_LINKS_COLUMNS = 4;
 const FRONT_VERSION_URL = `https://github.com/blockscout/frontend/tree/${ config.shell.footer.frontendVersion }`;
 const FRONT_COMMIT_URL = `https://github.com/blockscout/frontend/commit/${ config.shell.footer.frontendCommit }`;
 
+const DAKOTA_LINKS = [
+  {
+    text: 'Dakota Cards',
+    url: 'https://dakota.cards',
+  },
+  {
+    text: 'Documentation',
+    url: 'https://docs.dakota.cards',
+  },
+  {
+    text: 'Dashboard',
+    url: 'https://dashboard.dakota.cards',
+  },
+];
+
 const Footer = () => {
 
   const { data: backendVersionData } = useApiQuery('core:config_backend_version', {
@@ -48,50 +61,36 @@ const Footer = () => {
   });
   const apiVersionUrl = getApiVersionUrl(backendVersionData?.backend_version ?? undefined);
 
-  const BLOCKSCOUT_LINKS = [
+  const { data: statsData } = useApiQuery('core:stats', {
+    queryOptions: {
+      staleTime: 30_000,
+      refetchOnMount: false,
+    },
+  });
+
+  const latestBlockPeriodMs = Number(statsData?.average_block_time);
+  const latestBlockPeriod = Number.isFinite(latestBlockPeriodMs) && latestBlockPeriodMs > 0 ?
+    `${ (latestBlockPeriodMs / 1000).toFixed(1) }s` :
+    'Live';
+
+  const NETWORK_DETAILS = React.useMemo(() => [
     {
-      icon: 'social/git' as const,
-      iconSize: '20px',
-      text: 'Contribute',
-      url: 'https://github.com/blockscout/blockscout',
+      label: 'Chain ID',
+      value: config.chain.id || '112311',
     },
     {
-      icon: 'brands/pro_api' as const,
-      iconSize: '20px',
-      text: 'PRO API',
-      url: 'https://dev.blockscout.com',
+      label: 'Latest Block Period',
+      value: latestBlockPeriod,
     },
     {
-      icon: 'brands/autoscout' as const,
-      iconSize: '20px',
-      text: 'Autoscout',
-      url: 'https://autoscout.blockscout.com',
+      label: 'Native Coin',
+      value: config.chain.currency.name || 'Dakota Coin',
     },
     {
-      icon: 'docs' as const,
-      iconSize: '20px',
-      text: 'Docs',
-      url: 'https://docs.blockscout.com',
+      label: 'Ticker',
+      value: 'KOTA',
     },
-    {
-      icon: 'social/twitter' as const,
-      iconSize: '24px',
-      text: 'X',
-      url: 'https://x.com/blockscout',
-    },
-    {
-      icon: 'social/discord' as const,
-      iconSize: '24px',
-      text: 'Discord',
-      url: 'https://discord.gg/blockscout',
-    },
-    {
-      icon: 'brands/blockscout' as const,
-      iconSize: '20px',
-      text: 'All chains',
-      url: 'https://chains.blockscout.com',
-    },
-  ].filter(Boolean);
+  ], [ latestBlockPeriod ]);
 
   const frontendLink = (() => {
     if (config.shell.footer.frontendVersion) {
@@ -117,7 +116,8 @@ const Footer = () => {
     placeholderData: [],
   });
 
-  const colNum = isPlaceholderData ? 1 : Math.min(linksData?.length || Infinity, MAX_LINKS_COLUMNS) + 1;
+  const linkGroupsCount = isPlaceholderData ? 1 : Math.min((linksData?.length || 0) + 1, MAX_LINKS_COLUMNS);
+  const footerGridColNum = linkGroupsCount + 1;
 
   const renderNetworkInfo = React.useCallback((gridArea?: GridProps['gridArea']) => {
     return (
@@ -142,18 +142,25 @@ const Footer = () => {
 
     return (
       <Box gridArea={ gridArea }>
-        <Flex columnGap={ 2 } textStyle="xs" alignItems="center">
-          <span>Made with</span>
-          <Link href="https://www.blockscout.com" external noIcon display="inline-flex" color={ logoColor } _hover={{ color: logoColor }}>
-            <SpriteIcon
-              name="networks/logo-placeholder"
-              width="80px"
-              height={ 4 }
-            />
+        <Flex columnGap={ 2 } textStyle="xs" alignItems="center" color="text.secondary">
+          <span>Tailor-made using</span>
+          <Link
+            href="https://blockscout.com"
+            external
+            noIcon
+            display="inline-flex"
+            alignItems="center"
+            columnGap={ 1 }
+            color={ logoColor }
+            _hover={{ color: logoColor }}
+          >
+            <SpriteIcon name="brands/blockscout" boxSize={ 5 }/>
+            <span>Blockscout</span>
           </Link>
         </Flex>
         <Text mt={ 3 } fontSize="xs">
-          Dakota Explorer is an ecosystem explorer experience powered by Blockscout for inspecting and analyzing EVM based blockchains.
+          Dakota Network Blockchain Explorer helps inspect Dakota Network blocks, transactions,
+          tokens, addresses, and smart contracts across the Dakota Cards ecosystem.
         </Text>
         <VStack mt={ 6 } alignItems="start" textStyle="xs" gap={ 1 }>
           <Flex flexDir={ onionDomain ? 'row' : 'column' } _empty={{ display: 'none' }} columnGap={ 6 } rowGap={ 1 }>
@@ -170,7 +177,9 @@ const Footer = () => {
           </Flex>
           { onionDomain && (
             <HStack _empty={{ display: 'none' }} columnGap={ 0 }>
-              <Text aria-label={ `Also accessible via Tor Browser: ${ onionDomain }` }>Also accessible via Tor Browser</Text>
+              <Text aria-label={ `Also accessible via Tor Browser: ${ onionDomain }` }>
+                Also accessible via Tor Browser
+              </Text>
               <CopyToClipboard text={ onionDomain } tooltipContent="Copy .onion address to clipboard" ml={ 1 }/>
             </HStack>
           ) }
@@ -181,6 +190,59 @@ const Footer = () => {
       </Box>
     );
   }, [ apiVersionUrl, backendVersionData?.backend_version, frontendLink, onionDomain ]);
+
+  const renderDakotaLinks = React.useCallback((isLoading?: boolean) => {
+    return (
+      <Box>
+        <Skeleton
+          fontWeight={ 600 }
+          mb={ 3 }
+          display="inline-block"
+          loading={ Boolean(isLoading) }
+          color="text.primary"
+        >
+          Dakota ecosystem
+        </Skeleton>
+        <VStack gap={ 2 } alignItems="stretch">
+          { DAKOTA_LINKS.map(link => <FooterLinkItem { ...link } key={ link.text } isLoading={ isLoading }/>) }
+        </VStack>
+      </Box>
+    );
+  }, []);
+
+  const renderNetworkDetails = React.useCallback((gridArea?: GridProps['gridArea']) => {
+    return (
+      <Box gridArea={ gridArea }>
+        <Text textStyle="xs" fontWeight={ 600 } mb={ 3 } color="text.primary">
+          Network details
+        </Text>
+        <VStack gap={ 2 } alignItems="stretch">
+          { NETWORK_DETAILS.map((item) => (
+            <Flex
+              key={ item.label }
+              alignItems="center"
+              justifyContent="space-between"
+              columnGap={ 4 }
+              minH="36px"
+              px={ 3 }
+              py={ 2 }
+              borderWidth="1px"
+              borderColor={{ _light: 'rgba(15, 118, 110, 0.18)', _dark: 'rgba(52, 211, 153, 0.18)' }}
+              borderRadius="base"
+              bg={{ _light: 'rgba(255, 255, 255, 0.44)', _dark: 'rgba(7, 26, 23, 0.46)' }}
+            >
+              <Text textStyle="xs" color="text.secondary" whiteSpace="nowrap">
+                { item.label }
+              </Text>
+              <Text textStyle="xs" fontWeight={ 700 } color="text.primary" textAlign="right">
+                { item.value }
+              </Text>
+            </Flex>
+          )) }
+        </VStack>
+      </Box>
+    );
+  }, [ NETWORK_DETAILS ]);
 
   const containerProps: HTMLChakraProps<'div'> = {
     as: 'footer',
@@ -235,30 +297,36 @@ const Footer = () => {
           </div>
 
           <Grid
-            gap={{ base: 6, lg: colNum === MAX_LINKS_COLUMNS + 1 ? 2 : 8, xl: 12 }}
+            gap={{ base: 6, lg: 4, xl: 6 }}
             gridTemplateColumns={{
-              base: 'repeat(auto-fill, 160px)',
-              lg: `repeat(${ colNum }, 135px)`,
-              xl: `repeat(${ colNum }, 160px)`,
+              base: '1fr',
+              md: 'repeat(2, minmax(0, 180px))',
+              lg: `repeat(${ footerGridColNum }, 160px)`,
+              xl: `repeat(${ footerGridColNum }, 180px)`,
             }}
             justifyContent={{ lg: 'flex-end' }}
             mt={{ base: 8, lg: 0 }}
           >
-            {
-              ([
-                { title: 'Blockscout', links: BLOCKSCOUT_LINKS },
-                ...(linksData || []),
-              ])
-                .slice(0, colNum)
-                .map(linkGroup => (
-                  <Box key={ linkGroup.title }>
-                    <Skeleton fontWeight={ 500 } mb={ 3 } display="inline-block" loading={ isPlaceholderData }>{ linkGroup.title }</Skeleton>
-                    <VStack gap={ 1 } alignItems="start">
-                      { linkGroup.links.map(link => <FooterLinkItem { ...link } key={ link.text } isLoading={ isPlaceholderData }/>) }
-                    </VStack>
-                  </Box>
-                ))
-            }
+            { renderDakotaLinks(isPlaceholderData) }
+            { (linksData || []).slice(0, linkGroupsCount - 1).map(linkGroup => (
+              <Box key={ linkGroup.title }>
+                <Skeleton
+                  fontWeight={ 600 }
+                  mb={ 3 }
+                  display="inline-block"
+                  loading={ isPlaceholderData }
+                  color="text.primary"
+                >
+                  { linkGroup.title }
+                </Skeleton>
+                <VStack gap={ 2 } alignItems="stretch">
+                  { linkGroup.links.map(link => (
+                    <FooterLinkItem { ...link } key={ link.text } isLoading={ isPlaceholderData }/>
+                  )) }
+                </VStack>
+              </Box>
+            )) }
+            { renderNetworkDetails() }
           </Grid>
         </Grid>
       </Box>
@@ -286,23 +354,18 @@ const Footer = () => {
 
         <Grid
           gridArea={{ lg: 'links-bottom' }}
-          gap={ 1 }
+          gap={{ base: 6, lg: 4, xl: 6 }}
           gridTemplateColumns={{
-            base: 'repeat(auto-fill, 160px)',
-            lg: 'repeat(2, 160px)',
-            xl: 'repeat(3, 160px)',
+            base: '1fr',
+            sm: 'repeat(2, minmax(0, 180px))',
+            lg: 'repeat(2, 180px)',
           }}
-          gridTemplateRows={{
-            base: 'auto',
-            lg: 'repeat(3, auto)',
-            xl: 'repeat(2, auto)',
-          }}
-          gridAutoFlow={{ base: 'row', lg: 'column' }}
           alignContent="start"
           justifyContent={{ lg: 'flex-end' }}
           mt={{ base: 8, lg: 0 }}
         >
-          { BLOCKSCOUT_LINKS.map(link => <FooterLinkItem { ...link } key={ link.text }/>) }
+          { renderDakotaLinks() }
+          { renderNetworkDetails() }
         </Grid>
       </Grid>
     </Box>

@@ -17,7 +17,10 @@ import PageTitle from 'src/shell/page/title/PageTitle';
 import { useSettingsContext } from 'src/shell/top-bar/settings/context';
 
 import SearchBarSuggestBlockCountdown from 'src/slices/search/components/search-bar/SearchBarSuggest/SearchBarSuggestBlockCountdown';
+import SearchBarSuggestIpfsGateway from 'src/slices/search/components/search-bar/SearchBarSuggest/SearchBarSuggestIpfsGateway';
 import useSearchQuery from 'src/slices/search/hooks/useSearchQuery';
+import { getIpfsGatewaySearchUrl, openIpfsGatewayFromSearch } from 'src/slices/search/utils/ipfs-gateway';
+import { saveToRecentKeywords } from 'src/slices/search/utils/recent-search-keywords';
 import type { SearchResultAppItem } from 'src/slices/search/utils/search-categories';
 
 import ExternalSearchItem from 'src/features/chain-variants/zeta-chain/components/ExternalSearchItem';
@@ -58,6 +61,7 @@ const SearchResultsPageContent = () => {
 
   const marketplaceApps = useMarketplaceApps(debouncedSearchTerm);
   const settingsContext = useSettingsContext();
+  const ipfsGatewayUrl = React.useMemo(() => getIpfsGatewaySearchUrl(debouncedSearchTerm), [ debouncedSearchTerm ]);
 
   const handleNavigateToResults = React.useCallback((searchTerm: string) => {
     handleSearchTermChange(searchTerm);
@@ -118,9 +122,25 @@ const SearchResultsPageContent = () => {
     }
   }, [ redirectCheckQuery, router, debouncedSearchTerm, showContent ]);
 
+  const handleSubmitValue = React.useCallback((submittedSearchTerm: string) => {
+    const trimmedSearchTerm = submittedSearchTerm.trim();
+    const ipfsGatewayUrl = openIpfsGatewayFromSearch(trimmedSearchTerm);
+
+    if (ipfsGatewayUrl) {
+      saveToRecentKeywords(trimmedSearchTerm);
+    }
+  }, []);
+
   const handleSubmit = React.useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  }, [ ]);
+    const submittedSearchTerm = event.currentTarget.querySelector('input')?.value || searchTerm;
+
+    handleSubmitValue(submittedSearchTerm);
+  }, [ handleSubmitValue, searchTerm ]);
+
+  const handleIpfsGatewayClick = React.useCallback(() => {
+    saveToRecentKeywords(debouncedSearchTerm);
+  }, [ debouncedSearchTerm ]);
 
   const isLoading = marketplaceApps.isPlaceholderData || isPlaceholderData;
 
@@ -289,8 +309,18 @@ const SearchResultsPageContent = () => {
   const pageContent = !showContent ? <ContentLoader/> : (
     <>
       <PageTitle title="Search results"/>
-      { bar }
-      { content }
+      { ipfsGatewayUrl ? (
+        <SearchBarSuggestIpfsGateway
+          href={ ipfsGatewayUrl }
+          searchTerm={ debouncedSearchTerm }
+          onClick={ handleIpfsGatewayClick }
+        />
+      ) : (
+        <>
+          { bar }
+          { content }
+        </>
+      ) }
     </>
   );
 

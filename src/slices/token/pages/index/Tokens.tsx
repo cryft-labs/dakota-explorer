@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
-import { Box, HStack } from '@chakra-ui/react';
+import { Box, Flex, HStack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -178,18 +178,23 @@ const Tokens = () => {
   const actionBar = (() => {
     if (isMobile) {
       return (
-        <>
-          <HStack gap={ 3 } mb={ pagination.isVisible ? 0 : 6 }>
+        <ActionBar>
+          <Flex
+            alignItems="center"
+            gap={ 3 }
+            minW={ 0 }
+            px={{ base: 1, sm: 2 }}
+            width="100%"
+            flexWrap="wrap"
+          >
             { filter }
             { sortButton }
-            { searchInput }
-          </HStack>
-          { pagination.isVisible && (
-            <ActionBar mt={ 0 }>
-              <Pagination { ...pagination } ml="auto"/>
-            </ActionBar>
-          ) }
-        </>
+            <Box flex="1 1 220px" minW={ 0 }>
+              { searchInput }
+            </Box>
+            <Pagination { ...pagination } ml="auto"/>
+          </Flex>
+        </ActionBar>
       );
     }
 
@@ -199,11 +204,19 @@ const Tokens = () => {
 
     return (
       <ActionBar>
-        <HStack gap={ 3 }>
-          { filter }
-          { searchInput }
-        </HStack>
-        <Pagination { ...pagination } ml="auto"/>
+        <Flex
+          alignItems="center"
+          gap={ 4 }
+          justifyContent="space-between"
+          minW={ 0 }
+          width="100%"
+        >
+          <HStack gap={ 3 } minW={ 0 } flex="1">
+            { filter }
+            { searchInput }
+          </HStack>
+          <Pagination { ...pagination } ml="auto" flexShrink={ 0 }/>
+        </Flex>
       </ActionBar>
     );
   })();
@@ -291,13 +304,15 @@ const Tokens = () => {
         title="Tokens"
         withTextAd
       />
-      <RoutedTabs
-        tabs={ tabs }
-        listProps={ isMobile ? undefined : TAB_LIST_PROPS }
-        rightSlot={ tabsRightSlot }
-        rightSlotProps={ tabsRightSlot ? TABS_RIGHT_SLOT_PROPS : undefined }
-        stickyEnabled={ !isMobile }
-      />
+      <Box pt={{ base: 2, lg: 4 }}>
+        <RoutedTabs
+          tabs={ tabs }
+          listProps={ isMobile ? undefined : TAB_LIST_PROPS }
+          rightSlot={ tabsRightSlot }
+          rightSlotProps={ tabsRightSlot ? TABS_RIGHT_SLOT_PROPS : undefined }
+          stickyEnabled={ !isMobile }
+        />
+      </Box>
     </>
   );
 };

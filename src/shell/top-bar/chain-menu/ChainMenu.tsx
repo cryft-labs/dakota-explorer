@@ -26,11 +26,11 @@ const ChainMenu = () => {
     >
       <PopoverTrigger>
         <Button
-          variant="link"
+          variant="header"
           aria-label="Network menu"
           onClick={ menu.onToggle }
-          size="2xs"
-          fontWeight={ 500 }
+          size="sm"
+          fontWeight={ 600 }
         >
           <SpriteIcon name="networks" boxSize="14px"/>
           <span>Chains</span>

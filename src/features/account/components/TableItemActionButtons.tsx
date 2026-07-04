@@ -23,12 +23,12 @@ const TableItemActionButtons = ({ onEditClick, onDeleteClick, isLoading }: Props
       <Tooltip content="Edit" disableOnMobile>
         <IconButton
           aria-label="edit"
-          variant="link"
+          variant="icon_secondary"
           size="2xs"
           onClick={ onEditClick }
           onFocusCapture={ onFocusCapture }
           loadingSkeleton={ isLoading }
-          borderRadius="none"
+          borderRadius="base"
         >
           <SpriteIcon name="edit"/>
         </IconButton>
@@ -36,12 +36,12 @@ const TableItemActionButtons = ({ onEditClick, onDeleteClick, isLoading }: Props
       <Tooltip content="Delete" disableOnMobile>
         <IconButton
           aria-label="delete"
-          variant="link"
+          variant="icon_secondary"
           size="2xs"
           onClick={ onDeleteClick }
           onFocusCapture={ onFocusCapture }
           loadingSkeleton={ isLoading }
-          borderRadius="none"
+          borderRadius="base"
         >
           <SpriteIcon name="delete"/>
         </IconButton>

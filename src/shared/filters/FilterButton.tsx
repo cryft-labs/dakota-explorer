@@ -49,8 +49,10 @@ const FilterButton = ({ isLoading, appliedFiltersNum, ...rest }: Props, ref: Rea
       px={{ base: 1, lg: 3 }}
       { ...rest }
     >
-      <SpriteIcon name="filter" boxSize={ 5 }/>
-      <Box display={{ base: 'none', lg: 'block' }}>Filter</Box>
+      <SpriteIcon name="filter" boxSize={ 5 } color="currentColor" fill="currentColor"/>
+      <Box display={{ base: 'none', lg: 'flex' }} alignItems="center" lineHeight="1">
+        Filter
+      </Box>
       { numElement }
     </Button>
   );

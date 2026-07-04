@@ -17,7 +17,16 @@ import * as cookies from 'src/shared/storage/cookies';
 
 import { Alert } from 'src/toolkit/chakra/alert';
 import { Skeleton } from 'src/toolkit/chakra/skeleton';
-import { nbsp, ndash } from 'src/toolkit/utils/htmlEntities';
+
+function formatIndexingPercent(value: string | number | null | undefined) {
+  const ratio = Number(value);
+
+  if (!Number.isFinite(ratio)) {
+    return;
+  }
+
+  return Math.max(0, Math.min(100, Math.floor(ratio * 100)));
+}
 
 const IndexingStatusBlocks = () => {
   const appProps = useAppContext();
@@ -80,10 +89,14 @@ const IndexingStatusBlocks = () => {
     return null;
   }
 
+  const indexedPercent = formatIndexingPercent(data.indexed_blocks_ratio);
+  const statusText = indexedPercent === undefined ?
+    'Indexing status: block indexing is in progress.' :
+    `Indexing status: ${ indexedPercent }% of Dakota Network blocks are indexed.`;
+
   return (
     <Alert status="info" py={ 3 } borderRadius="md" showIcon>
-      { `${ data.indexed_blocks_ratio && `${ Math.floor(Number(data.indexed_blocks_ratio) * 100) }% Blocks Indexed${ nbsp }${ ndash } ` }
-          We're indexing this chain right now. Some of the counts may be inaccurate.` }
+      { `${ statusText } Explorer counts and stats may be incomplete until indexing finishes.` }
     </Alert>
   );
 };

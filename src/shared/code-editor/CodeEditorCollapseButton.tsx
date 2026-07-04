@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
+// SPDX-License-Identifier: LicenseRef-Blockscout
+
 import { Box } from '@chakra-ui/react';
 import React from 'react';
 
@@ -23,7 +25,7 @@ const CodeEditorCollapseButton = ({ onClick, label, isDisabled, isCollapsed }: P
       opacity={ isDisabled ? 0.6 : 1 }
       boxSize="20px"
       p="2px"
-      borderRadius="sm"
+      borderRadius="base"
       _before={{
         content: isCollapsed ? '"\\eb95"' : '"\\eac5"',
       }}

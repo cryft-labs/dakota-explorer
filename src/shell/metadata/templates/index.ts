@@ -33,7 +33,7 @@ const OG_ROOT_PAGE = {
   image: config.metadata.og.imageUrl,
 };
 
-const DESCRIPTION_DEFAULT = 'Scan %chain_explorer_title% with Blockscout. Search transactions, verify smart contracts, analyze addresses, and access blockchain data through explorer APIs.';
+const DESCRIPTION_DEFAULT = 'Use the Dakota Network Blockchain Explorer to search transactions, verify smart contracts, analyze addresses, and access Dakota Network blockchain data through explorer APIs.';
 
 export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
   '/': {
@@ -42,7 +42,7 @@ export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
         'default': '%chain_name% blockchain explorer - View %chain_name% stats',
       },
       description: {
-        'default': 'Explore %chain_name% blockchain data. Search transactions, addresses, tokens, blocks, and more.',
+        'default': 'Explore the Dakota Network Blockchain Explorer. Search Dakota Network transactions, addresses, tokens, blocks, smart contracts, and more.',
       },
     },
     og: OG_ROOT_PAGE,
@@ -861,7 +861,7 @@ export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
         'default': '%chain_name% ecosystems',
       },
       description: {
-        'default': 'Explore ecosystems and blockchain networks supported by Blockscout.',
+        'default': 'Explore Dakota Cards ecosystem activity and Dakota Network blockchain data.',
       },
     },
     og: OG_ROOT_PAGE,

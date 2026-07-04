@@ -26,9 +26,8 @@ const CsvExportDownloads = () => {
           <Flex position="relative">
             <IconButton
               aria-label="Open list of downloads"
-              variant="link"
-              size="2xs"
-              borderRadius="none"
+              variant="icon_background"
+              size="md"
             >
               <SpriteIcon name="download"/>
             </IconButton>
@@ -41,7 +40,7 @@ const CsvExportDownloads = () => {
               />
             ) }
           </Flex>
-          <Separator orientation="vertical" mx={ 2 } h={ 4 }/>
+          <Separator orientation="vertical" mx={ 1 } h={ 4 }/>
         </Flex>
       </PopoverTrigger>
       <PopoverContent w="300px" maxH="400px" overflowY="auto">

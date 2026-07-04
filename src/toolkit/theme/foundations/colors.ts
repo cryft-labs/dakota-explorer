@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
-// SPDX-License-Identifier: LicenseRef-Blockscout
-
 import { defaultsDeep } from 'es-toolkit/compat';
 
 import config from 'src/config';
@@ -34,7 +32,7 @@ const DEFAULT_THEME_COLORS = {
     control: {
       text: {
         _light: { value: '#0F766E' },
-        _dark: { value: '#34D399' },
+        _dark: { value: '#FFFFFF' },
       },
       bg: {
         _light: { value: '#E6F7F3' },
@@ -64,7 +62,7 @@ const DEFAULT_THEME_COLORS = {
       _dark: { value: '#34D399' },
       text: {
         _light: { value: '{colors.white}' },
-        _dark: { value: '#06261F' },
+        _dark: { value: '{colors.white}' },
       },
     },
   },
@@ -100,7 +98,7 @@ const DEFAULT_THEME_COLORS = {
     text: {
       selected: {
         _light: { value: '#0F766E' },
-        _dark: { value: '#34D399' },
+        _dark: { value: '#FFFFFF' },
       },
     },
   },
@@ -120,7 +118,7 @@ const DEFAULT_THEME_COLORS = {
     text: {
       primary: {
         _light: { value: '#0F766E' },
-        _dark: { value: '#34D399' },
+        _dark: { value: '#FFFFFF' },
       },
     },
   },

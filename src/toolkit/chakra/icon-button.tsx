@@ -23,24 +23,27 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
           return {
             _icon: { boxSize: 5 },
             boxSize: 5,
-            borderRadius: 'sm',
+            borderRadius: 'base',
           };
         }
         case '2xs_alt': {
           return {
             _icon: { boxSize: 3 },
             boxSize: 5,
-            borderRadius: 'sm',
+            borderRadius: 'base',
           };
         }
         case 'md': {
           return {
             _icon: { boxSize: 5 },
-            boxSize: 8,
+            boxSize: 10,
+            borderRadius: 'base',
           };
         }
         default:
-          return {};
+          return {
+            borderRadius: 'base',
+          };
       }
     })();
 

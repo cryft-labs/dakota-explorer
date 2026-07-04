@@ -16,16 +16,26 @@ import { checkRouteHighlight } from '../utils';
 interface Props {
   className?: string;
   height?: string;
+  isSubMenuItem?: boolean;
   item: NavItem;
   noIcon?: boolean;
 }
 
-const NavLink = ({ className, height, item, noIcon }: Props) => {
+const NavLink = ({ className, height, isSubMenuItem, item, noIcon }: Props) => {
   const isInternalLink = isInternalItem(item);
 
   const isActive = 'isActive' in item && item.isActive;
 
   const isHighlighted = checkRouteHighlight(item);
+
+  const shouldCenterContent = noIcon || isSubMenuItem;
+  let horizontalPadding: string | number = 2;
+  if (isSubMenuItem) {
+    horizontalPadding = 4;
+  }
+  if (noIcon) {
+    horizontalPadding = '15px';
+  }
 
   return (
     <chakra.li
@@ -37,20 +47,26 @@ const NavLink = ({ className, height, item, noIcon }: Props) => {
         external={ !isInternalLink }
         display="flex"
         alignItems="center"
+        justifyContent={ shouldCenterContent ? 'center' : 'flex-start' }
         variant="navigation"
         { ...(isActive ? { 'data-selected': true } : {}) }
         w={ noIcon ? 'auto' : '224px' }
         h={ height }
-        px={ noIcon ? 3.5 : 2 }
+        minH={ height }
+        px={ horizontalPadding }
         py={ noIcon ? 0 : '9px' }
-        fontSize="14px"
-        lineHeight="20px"
-        fontWeight={ noIcon ? 700 : 600 }
-        borderRadius="10px"
+        fontSize={ noIcon ? '16px' : '14px' }
+        lineHeight={ noIcon ? '1' : '20px' }
+        fontWeight={ 600 }
+        borderRadius="base"
         whiteSpace="nowrap"
+        textAlign={ isSubMenuItem ? 'center' : undefined }
+        boxSizing="border-box"
       >
-        { !noIcon && <NavLinkIcon item={ item } mr={ 3 }/> }
-        <chakra.span>{ item.text }</chakra.span>
+        { !noIcon && !isSubMenuItem && <NavLinkIcon item={ item } mr={ 3 }/> }
+        <chakra.span display="inline-flex" alignItems="center" justifyContent={ isSubMenuItem ? 'center' : undefined } h={ noIcon ? '100%' : 'auto' }>
+          { item.text }
+        </chakra.span>
         { isHighlighted && (
           <LightningLabel
             iconColor={ isActive ? 'link.navigation.bg.selected' : 'link.navigation.bg.group' }

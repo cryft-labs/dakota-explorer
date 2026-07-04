@@ -26,9 +26,11 @@ import getQueryParamString from 'src/shared/router/get-query-param-string';
 import RoutedTabs from 'src/toolkit/components/RoutedTabs/RoutedTabs';
 
 const TAB_LIST_PROPS = {
-  mb: 0,
-  pt: 6,
-  pb: 3,
+  mb: 3,
+  p: 0,
+  bgColor: 'transparent',
+  borderWidth: 0,
+  backdropFilter: 'none',
 };
 
 interface Props {
@@ -124,24 +126,35 @@ const AddressTokens = ({ shouldRender = true, isQueryEnabled = true }: Props) =>
       <AddressTokenBalances/>
       { /* should stay before tabs to scroll up with pagination */ }
       <Box ref={ scrollRef }></Box>
-      <RoutedTabs
-        tabs={ tabs }
-        variant="secondary"
-        size="sm"
-        listProps={ TAB_LIST_PROPS }
-        rightSlot={ rightSlot }
-        rightSlotProps={
-          ((tab === 'tokens_nfts' && !isMobile) || hasFungibleTokenFilter) ?
-            {
-              display: 'flex',
-              justifyContent: 'space-between',
-              ml: hasFungibleTokenFilter && isMobile ? 'auto' : 8,
-              widthAllocation: hasFungibleTokenFilter && isMobile ? 'fixed' : 'available',
-            } :
-            {}
-        }
-        stickyEnabled
-      />
+      <Box
+        bg={{ _light: 'rgba(255, 255, 255, 0.78)', _dark: 'rgba(5, 28, 24, 0.82)' }}
+        borderColor={{ _light: 'rgba(15, 118, 110, 0.16)', _dark: 'rgba(52, 211, 153, 0.14)' }}
+        borderRadius="12px"
+        borderWidth="1px"
+        overflow="hidden"
+        px={{ base: 3, lg: 4 }}
+        py={{ base: 3, lg: 4 }}
+        backdropFilter="blur(18px)"
+      >
+        <RoutedTabs
+          tabs={ tabs }
+          variant="secondary"
+          size="sm"
+          listProps={ TAB_LIST_PROPS }
+          rightSlot={ rightSlot }
+          rightSlotProps={
+            ((tab === 'tokens_nfts' && !isMobile) || hasFungibleTokenFilter) ?
+              {
+                display: 'flex',
+                justifyContent: 'space-between',
+                ml: hasFungibleTokenFilter && isMobile ? 'auto' : 8,
+                widthAllocation: hasFungibleTokenFilter && isMobile ? 'fixed' : 'available',
+              } :
+              {}
+          }
+          stickyEnabled
+        />
+      </Box>
     </>
   );
 };

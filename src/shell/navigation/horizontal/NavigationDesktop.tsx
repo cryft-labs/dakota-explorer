@@ -2,6 +2,9 @@
 
 import { Box, chakra, Flex, Separator } from '@chakra-ui/react';
 import React from 'react';
+import { LuBookOpen, LuChevronDown, LuExternalLink, LuGlobe, LuLayoutDashboard } from 'react-icons/lu';
+
+import DakotaThemeToggle from 'src/shell/header/DakotaThemeToggle';
 
 import NetworkLogo from 'src/slices/chain/logo/NetworkLogo';
 import TestnetBadge from 'src/slices/chain/TestnetBadge';
@@ -14,7 +17,9 @@ import RollupStageBadge from 'src/features/rollup/common/components/RollupStageB
 
 import config from 'src/config';
 
-import Settings from '../../top-bar/settings/Settings';
+import { Button } from 'src/toolkit/chakra/button';
+import { PopoverBody, PopoverContent, PopoverRoot, PopoverTrigger } from 'src/toolkit/chakra/popover';
+
 import NavigationPromoBanner from '../promo-banner/NavigationPromoBanner';
 import useNavItems, { isGroupItem } from '../useNavItems';
 import NavLink from './NavLink';
@@ -27,11 +32,89 @@ const DAKOTA_HEADER_ICON_SIZE = '40px';
 const DAKOTA_HEADER_MAX_WIDTH = '1200px';
 const DAKOTA_HEADER_GAP = '10px';
 const DAKOTA_HEADER_SECTION_GAP = '16px';
-const DAKOTA_PLATFORM_LINKS = [
-  { label: 'Main site', url: 'https://dakota.cards', variant: 'ghost' },
-  { label: 'Docs', url: 'https://docs.dakota.cards', variant: 'ghost' },
-  { label: 'Dashboard', url: 'https://dashboard.dakota.cards', variant: 'solid' },
+const DAKOTA_NAVIGATOR_LINKS = [
+  { label: 'Dashboard', url: 'https://dashboard.dakota.cards', icon: LuLayoutDashboard },
+  { label: 'Documentation', url: 'https://docs.dakota.cards', icon: LuBookOpen },
+  { label: 'Main Site', url: 'https://dakota.cards', icon: LuGlobe },
 ] as const;
+
+const DakotaNavigatorMenu = () => {
+  return (
+    <PopoverRoot positioning={{ placement: 'bottom', offset: { mainAxis: 8 } }}>
+      <PopoverTrigger>
+        <Button
+          aria-label="Open Dakota platform navigator"
+          h={ DAKOTA_HEADER_ACTION_HEIGHT }
+          px="14px"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="center"
+          gap="6px"
+          borderRadius="base"
+          fontSize="14px"
+          lineHeight="20px"
+          fontWeight={ 700 }
+          whiteSpace="nowrap"
+          color="white"
+          bg="#34D399"
+          borderWidth="0"
+          boxShadow="none"
+          _hover={{
+            color: 'white',
+            bg: '#2DD4BF',
+          }}
+        >
+          Navigator
+          <LuChevronDown size={ 16 } strokeWidth={ 2.25 }/>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent
+        w="220px"
+        p={ 0 }
+        borderRadius="12px"
+        borderColor={{ _light: 'rgba(15, 118, 110, 0.16)', _dark: 'rgba(52, 211, 153, 0.18)' }}
+        bg={{ _light: 'rgba(255, 255, 255, 0.96)', _dark: 'rgba(7, 26, 23, 0.98)' }}
+        boxShadow={{ _light: '0 18px 48px rgba(15, 118, 110, 0.16)', _dark: '0 18px 54px rgba(0, 0, 0, 0.36)' }}
+        backdropFilter="blur(12px)"
+      >
+        <PopoverBody p={ 2 }>
+          <Flex flexDir="column" gap={ 1 }>
+            { DAKOTA_NAVIGATOR_LINKS.map((item) => {
+              const LinkIcon = item.icon;
+
+              return (
+                <chakra.a
+                  key={ item.label }
+                  href={ item.url }
+                  target="_blank"
+                  rel="noreferrer"
+                  display="flex"
+                  alignItems="center"
+                  gap="10px"
+                  h="40px"
+                  px={ 3 }
+                  borderRadius="base"
+                  color="text.secondary"
+                  fontSize="14px"
+                  fontWeight={ 700 }
+                  _hover={{
+                    color: 'text.primary',
+                    bg: { _light: 'rgba(15, 118, 110, 0.06)', _dark: 'rgba(52, 211, 153, 0.1)' },
+                    textDecoration: 'none',
+                  }}
+                >
+                  <LinkIcon size={ 18 } strokeWidth={ 2.1 }/>
+                  <chakra.span flex="1">{ item.label }</chakra.span>
+                  <LuExternalLink size={ 14 } strokeWidth={ 2 }/>
+                </chakra.a>
+              );
+            }) }
+          </Flex>
+        </PopoverBody>
+      </PopoverContent>
+    </PopoverRoot>
+  );
+};
 
 const NavigationDesktop = () => {
   const { mainNavItems, accountNavItems } = useNavItems();
@@ -102,44 +185,15 @@ const NavigationDesktop = () => {
           minW={ 0 }
         >
           <Flex alignItems="center" gap="6px">
-            { DAKOTA_PLATFORM_LINKS.map((link) => (
-              <chakra.a
-                key={ link.label }
-                href={ link.url }
-                target="_blank"
-                rel="noreferrer"
-                display={ link.variant === 'solid' ? 'inline-flex' : { base: 'none', '2xl': 'inline-flex' } }
-                h={ DAKOTA_HEADER_ACTION_HEIGHT }
-                px={ link.variant === 'solid' ? '14px' : '10px' }
-                alignItems="center"
-                justifyContent="center"
-                borderRadius="10px"
-                fontSize="14px"
-                lineHeight="20px"
-                fontWeight={ link.variant === 'solid' ? 800 : 700 }
-                whiteSpace="nowrap"
-                color={ link.variant === 'solid' ? 'white' : 'text.secondary' }
-                bg={ link.variant === 'solid' ? '#34D399' : 'transparent' }
-                borderWidth={ link.variant === 'solid' ? '0' : '1px' }
-                borderColor={{ _light: 'rgba(15, 118, 110, 0.18)', _dark: 'rgba(148, 163, 184, 0.12)' }}
-                boxShadow={ link.variant === 'solid' ? '0 10px 26px rgba(52, 211, 153, 0.24)' : undefined }
-                _hover={{
-                  textDecoration: 'none',
-                  color: link.variant === 'solid' ? 'white' : 'text.primary',
-                  bg: link.variant === 'solid' ? '#2DD4BF' : { _light: 'rgba(15, 118, 110, 0.08)', _dark: 'rgba(52, 211, 153, 0.1)' },
-                }}
-              >
-                { link.label }
-              </chakra.a>
-            )) }
+            <DakotaNavigatorMenu/>
           </Flex>
           <Flex alignItems="center" gap="4px">
+            <DakotaThemeToggle/>
             <CsvExportDownloads/>
-            <Settings/>
           </Flex>
           <NavigationPromoBanner/>
-          { config.features.rewards.isEnabled && <RewardsButton size="sm"/> }
-          <UserProfileDesktop buttonSize="sm"/>
+          { config.features.rewards.isEnabled && <RewardsButton size="md"/> }
+          <UserProfileDesktop buttonSize="md"/>
         </Flex>
       </Box>
     </Box>

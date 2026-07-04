@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
 import { Box, chakra } from '@chakra-ui/react';
+import { keyframes } from '@emotion/react';
 import React from 'react';
 
 interface Props {
@@ -32,6 +33,25 @@ const DAKOTA_STARFIELD_BACKGROUND = [
   'radial-gradient(circle, rgba(15, 118, 110, 0.74) 0 1.2px, transparent 2.5px)',
 ].join(', ');
 
+const dakotaExplorerStarGleam = keyframes`
+  0%, 100% {
+    filter: drop-shadow(0 0 0 transparent);
+    opacity: 0.28;
+  }
+
+  42% {
+    filter: drop-shadow(0 0 7px rgba(255, 255, 255, 0.48));
+    opacity: 0.86;
+  }
+
+  68% {
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.28));
+    opacity: 0.48;
+  }
+`;
+
+const DAKOTA_EXPLORER_STAR_GLEAM_ANIMATION = `${ dakotaExplorerStarGleam } 5.2s ease-in-out infinite`;
+
 const Container = ({ children, className }: Props) => {
   return (
     <Box
@@ -42,13 +62,6 @@ const Container = ({ children, className }: Props) => {
       position="relative"
       isolation="isolate"
       overflow="clip"
-      css={{
-        '@keyframes dakotaExplorerStarGleam': {
-          '0%, 100%': { opacity: 0.28, filter: 'drop-shadow(0 0 0 transparent)' },
-          '42%': { opacity: 0.86, filter: 'drop-shadow(0 0 7px rgba(255, 255, 255, 0.48))' },
-          '68%': { opacity: 0.48, filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.28))' },
-        },
-      }}
       _before={{
         content: '""',
         position: 'fixed',
@@ -62,7 +75,7 @@ const Container = ({ children, className }: Props) => {
         backgroundPosition: '0 0, 0 0, 0 0, 13px 10px, 62px 36px, 121px 82px, 33px 34px, 174px 90px',
         mixBlendMode: { base: 'normal', _dark: 'screen' },
         opacity: { base: 0.24, _dark: 0.44 },
-        animation: 'dakotaExplorerStarGleam 5.2s ease-in-out infinite',
+        animation: DAKOTA_EXPLORER_STAR_GLEAM_ANIMATION,
         pointerEvents: 'none',
         zIndex: 0,
         _motionReduce: {

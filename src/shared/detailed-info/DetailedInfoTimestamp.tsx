@@ -84,7 +84,7 @@ const DetailedInfoTimestamp = ({ timestamp, isLoading, noRelativeTime, ...rest }
               aria-label="Toggle time format"
               variant="icon_secondary"
               boxSize={ 5 }
-              borderRadius="sm"
+              borderRadius="base"
               selected={ !isLoading }
               loadingSkeleton={ isLoading }
             >

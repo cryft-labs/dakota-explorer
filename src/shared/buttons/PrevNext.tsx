@@ -31,8 +31,8 @@ const PrevNext = ({ className, onClick, prevLabel, nextLabel, isPrevDisabled, is
   if (isLoading) {
     return (
       <Flex columnGap="10px" className={ className }>
-        <Skeleton loading boxSize={ 6 } borderRadius="sm"/>
-        <Skeleton loading boxSize={ 6 } borderRadius="sm"/>
+        <Skeleton loading boxSize={ 6 } borderRadius="base"/>
+        <Skeleton loading boxSize={ 6 } borderRadius="base"/>
       </Flex>
     );
   }
@@ -42,7 +42,7 @@ const PrevNext = ({ className, onClick, prevLabel, nextLabel, isPrevDisabled, is
       <Tooltip content={ prevLabel }>
         <IconButton
           aria-label="prev"
-          borderRadius="sm"
+          borderRadius="base"
           variant="icon_background"
           boxSize={ 6 }
           onClick={ handelPrevClick }
@@ -54,7 +54,7 @@ const PrevNext = ({ className, onClick, prevLabel, nextLabel, isPrevDisabled, is
       <Tooltip content={ nextLabel }>
         <IconButton
           aria-label="next"
-          borderRadius="sm"
+          borderRadius="base"
           variant="icon_background"
           boxSize={ 6 }
           ml="10px"

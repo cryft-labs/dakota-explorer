@@ -48,7 +48,7 @@ const CopyToClipboard = (props: Props) => {
       boxSize={ boxSize }
       onClick={ handleClick }
       ml={ 2 }
-      borderRadius="sm"
+      borderRadius="base"
       loadingSkeleton={ isLoading }
       variant="icon_secondary"
       size="2xs"

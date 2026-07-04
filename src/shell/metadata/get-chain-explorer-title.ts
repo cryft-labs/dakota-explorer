@@ -3,5 +3,5 @@
 import config from 'src/config';
 
 export default function getChainExplorerTitle() {
-  return config.chain.name + (config.chain.shortName ? ` (${ config.chain.shortName })` : '') + ' Explorer';
+  return `${ config.chain.name } Blockchain Explorer`;
 }

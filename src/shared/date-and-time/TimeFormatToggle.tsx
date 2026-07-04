@@ -40,7 +40,7 @@ const TimeFormatToggle = (props: Props) => {
           onClick={ handleClick }
           boxSize={ 5 }
           selected={ timeFormat === 'absolute' }
-          borderRadius="sm"
+          borderRadius="base"
           verticalAlign="bottom"
         >
           <SpriteIcon name="clock-light" boxSize="14px"/>

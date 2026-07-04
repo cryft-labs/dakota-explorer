@@ -6,7 +6,8 @@ export const recipe = defineRecipe({
   base: {
     display: 'flex',
     gap: 0,
-    borderRadius: 'sm',
+    borderRadius: 'base',
+    transition: 'all 0.3s ease',
     overflow: 'hidden',
     _disabled: {
       opacity: 'control.disabled',
@@ -16,12 +17,12 @@ export const recipe = defineRecipe({
   variants: {
     visual: {
       plain: {
-        bg: 'transparent',
+        bg: 'button.icon_background.bg',
         color: 'closeButton.fg',
         border: 'none',
         _hover: {
-          bg: 'transparent',
-          color: 'hover',
+          bg: 'hover',
+          color: 'white',
         },
       },
     },

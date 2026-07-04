@@ -5,6 +5,7 @@ import React from 'react';
 import useApiQuery from 'src/api/hooks/useApiQuery';
 
 import { isBech32Address, fromBech32Address } from 'src/slices/address/utils/bech32';
+import { getIpfsGatewaySearchUrl } from 'src/slices/search/utils/ipfs-gateway';
 
 import { getExternalSearchItem } from 'src/features/chain-variants/zeta-chain/utils/external-search';
 import multichainConfig from 'src/features/multichain/chains-config';
@@ -17,6 +18,8 @@ export default function useQuickSearchQuery() {
   const [ searchTerm, setSearchTerm ] = React.useState('');
 
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
+  const ipfsGatewayUrl = React.useMemo(() => getIpfsGatewaySearchUrl(debouncedSearchTerm), [ debouncedSearchTerm ]);
+  const isIpfsGatewaySearch = Boolean(ipfsGatewayUrl);
 
   const isMultichain = React.useMemo(() => {
     return Boolean(multichainConfig());
@@ -25,17 +28,17 @@ export default function useQuickSearchQuery() {
   const mainQuery = useApiQuery('core:quick_search', {
     queryParams: { q: isBech32Address(debouncedSearchTerm) ? fromBech32Address(debouncedSearchTerm) : debouncedSearchTerm },
     queryOptions: {
-      enabled: debouncedSearchTerm.trim().length > 0 && !isMultichain,
+      enabled: debouncedSearchTerm.trim().length > 0 && !isMultichain && !isIpfsGatewaySearch,
     },
   });
 
-  const multichainQuery = useQuickSearchQueryMultichain({ searchTerm: debouncedSearchTerm, enabled: isMultichain });
+  const multichainQuery = useQuickSearchQueryMultichain({ searchTerm: debouncedSearchTerm, enabled: isMultichain && !isIpfsGatewaySearch });
 
   const redirectCheckQuery = useApiQuery('core:search_check_redirect', {
     // on pages with regular search bar we check redirect on every search term change
     // in order to prepend its result to suggest list since this resource is much faster than regular search
     queryParams: { q: debouncedSearchTerm },
-    queryOptions: { enabled: Boolean(debouncedSearchTerm) && !isMultichain },
+    queryOptions: { enabled: Boolean(debouncedSearchTerm) && !isMultichain && !isIpfsGatewaySearch },
   });
 
   const zetaChainCCTXQuery = useApiQuery('zetachain:transactions', {
@@ -45,7 +48,7 @@ export default function useQuickSearchQuery() {
       offset: 0,
       direction: 'DESC',
     },
-    queryOptions: { enabled: debouncedSearchTerm.trim().length > 0 && config.features.zetachain.isEnabled },
+    queryOptions: { enabled: debouncedSearchTerm.trim().length > 0 && config.features.zetachain.isEnabled && !isIpfsGatewaySearch },
   });
 
   const query = isMultichain ? multichainQuery : mainQuery;

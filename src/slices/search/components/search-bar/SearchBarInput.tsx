@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
 import type { HTMLChakraProps } from '@chakra-ui/react';
-import { chakra, Center } from '@chakra-ui/react';
+import { chakra } from '@chakra-ui/react';
 import React from 'react';
-import type { ChangeEvent, FormEvent, FocusEvent } from 'react';
+import type { ChangeEvent, FormEvent, FocusEvent, KeyboardEvent as ReactKeyboardEvent } from 'react';
 
 import config from 'src/config';
 import useIsMobile from 'src/shared/hooks/useIsMobile';
@@ -47,7 +47,14 @@ const SearchBarInput = (
     onChange?.(event.target.value);
   }, [ onChange ]);
 
-  const handleKeyPress = React.useCallback((event: KeyboardEvent) => {
+  const handleFormKeyDown = React.useCallback((event: ReactKeyboardEvent<HTMLFormElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      event.currentTarget.requestSubmit();
+    }
+  }, []);
+
+  const handleKeyPress = React.useCallback((event: globalThis.KeyboardEvent) => {
     if (isMobile) {
       return;
     }
@@ -83,8 +90,8 @@ const SearchBarInput = (
   }, [ handleKeyPress ]);
 
   const getPlaceholder = () => {
-    const clusterText = nameServicesFeature.isEnabled && nameServicesFeature.clusters.isEnabled ? ' / cluster ' : '';
-    return `Search by address / txn hash / block / token${ clusterText }/... `;
+    const clusterText = nameServicesFeature.isEnabled && nameServicesFeature.clusters.isEnabled ? ' / cluster' : '';
+    return `Search by address / txn hash / block / token / CID${ clusterText }/... `;
   };
 
   const startElement = (
@@ -96,20 +103,7 @@ const SearchBarInput = (
   );
 
   const endElement = (
-    <>
-      <ClearButton onClick={ onClear } visible={ Boolean(value?.length) } mx={ 2 }/>
-      { !isMobile && (
-        <Center
-          boxSize="20px"
-          mr={ 2 }
-          borderRadius="sm"
-          borderWidth="1px"
-          borderColor="input.element"
-        >
-          /
-        </Center>
-      ) }
-    </>
+    <ClearButton onClick={ onClear } visible={ Boolean(value?.length) } mx={ 2 }/>
   );
 
   return (
@@ -119,6 +113,7 @@ const SearchBarInput = (
       onSubmit={ onSubmit }
       onBlur={ onBlur }
       onClick={ onFormClick }
+      onKeyDown={ handleFormKeyDown }
       w="100%"
       backgroundColor="bg.primary"
       borderRadius="base"
@@ -136,6 +131,7 @@ const SearchBarInput = (
           value={ value }
           onChange={ handleChange }
           onFocus={ onFocus }
+          readOnly={ readOnly }
           tabIndex={ readOnly ? -1 : 0 }
           borderWidth={ isHeroBanner ? borderWidthHeroBanner : '2px' }
           borderStyle="solid"

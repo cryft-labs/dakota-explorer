@@ -92,9 +92,9 @@ const VerifiedAddressesTableItem = ({ item, application, onAdd, onEdit, isLoadin
           <Tooltip content="Edit" disabled={ isLoading } disableOnMobile>
             <IconButton
               aria-label="edit"
-              variant="link"
+              variant="icon_secondary"
               size="2xs"
-              borderRadius="none"
+              borderRadius="base"
               onClick={ handleEditClick }
             >
               <SpriteIcon name="edit"/>

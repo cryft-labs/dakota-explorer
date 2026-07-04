@@ -12,6 +12,7 @@ import type { ResourceError } from 'src/api/resources';
 
 import { useSettingsContext } from 'src/shell/top-bar/settings/context';
 
+import { getIpfsGatewaySearchUrl } from 'src/slices/search/utils/ipfs-gateway';
 import type { ApiCategory, Category, ItemsCategoriesMap } from 'src/slices/search/utils/search-categories';
 import { getItemCategory, getSearchCategories } from 'src/slices/search/utils/search-categories';
 
@@ -31,6 +32,7 @@ import { ContentLoader } from 'src/toolkit/components/loaders/ContentLoader';
 import * as regexp from 'src/toolkit/utils/regexp';
 
 import SearchBarSuggestBlockCountdown from './SearchBarSuggestBlockCountdown';
+import SearchBarSuggestIpfsGateway from './SearchBarSuggestIpfsGateway';
 import SearchBarSuggestItem from './SearchBarSuggestItem';
 
 const TABS_HEIGHT = 72;
@@ -49,6 +51,7 @@ const SearchBarSuggest = ({ query, zetaChainCCTXQuery, externalSearchItem, searc
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const marketplaceApps = useMarketplaceApps(searchTerm);
   const settingsContext = useSettingsContext();
+  const ipfsGatewayUrl = React.useMemo(() => getIpfsGatewaySearchUrl(searchTerm), [ searchTerm ]);
 
   const categoriesRefs = React.useRef<Array<HTMLParagraphElement>>([]);
 
@@ -171,6 +174,16 @@ const SearchBarSuggest = ({ query, zetaChainCCTXQuery, externalSearchItem, searc
   }, [ searchCategories, itemsGroups, isMobile ]);
 
   const content = (() => {
+    if (ipfsGatewayUrl) {
+      return (
+        <SearchBarSuggestIpfsGateway
+          href={ ipfsGatewayUrl }
+          searchTerm={ searchTerm }
+          onClick={ onItemClick }
+        />
+      );
+    }
+
     if (query.isPending || marketplaceApps.isPlaceholderData || (config.features.zetachain.isEnabled && zetaChainCCTXQuery.isPending)) {
       return <ContentLoader text="We are searching, please wait... " fontSize="sm" maxW="250px"/>;
     }

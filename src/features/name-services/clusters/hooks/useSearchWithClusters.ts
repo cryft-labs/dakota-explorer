@@ -10,6 +10,7 @@ import { getResourceKey } from 'src/api/hooks/useApiQuery';
 import type { ResourcePayload, ResourceError } from 'src/api/resources';
 
 import useQuickSearchQuery from 'src/slices/search/hooks/useQuickSearchQuery';
+import { getIpfsGatewaySearchUrl } from 'src/slices/search/utils/ipfs-gateway';
 
 import config from 'src/config';
 
@@ -58,9 +59,10 @@ function transformClusterToSearchResult(cluster: {
 
 export default function useSearchWithClusters() {
   const quickSearch = useQuickSearchQuery();
+  const isIpfsGatewaySearch = Boolean(getIpfsGatewaySearchUrl(quickSearch.debouncedSearchTerm));
 
   const isClusterQuery = isClustersEnabled ?
-    isClusterSearch(quickSearch.debouncedSearchTerm) : false;
+    isClusterSearch(quickSearch.debouncedSearchTerm) && !isIpfsGatewaySearch : false;
 
   const clusterName = isClusterQuery ? extractClusterName(quickSearch.debouncedSearchTerm) : '';
 

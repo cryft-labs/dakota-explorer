@@ -44,9 +44,8 @@ const Settings = () => {
         <Flex alignItems="center">
           <PopoverTrigger>
             <IconButton
-              variant="link"
-              size="2xs"
-              borderRadius="sm"
+              variant="icon_background"
+              size="md"
               aria-label="User settings"
             >
               <SpriteIcon name="gear"/>
