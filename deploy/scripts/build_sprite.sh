@@ -4,6 +4,7 @@ icons_dir="./src/sprite/icons"
 target_dir="./public/icons"
 
 pnpm icons build -i $icons_dir -o $target_dir --optimize
+node ./deploy/scripts/normalize_sprite_ids.mjs
 
 create_registry_file() {
     # Create a temporary file to store the registry
