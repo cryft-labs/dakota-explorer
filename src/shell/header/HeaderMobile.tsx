@@ -4,14 +4,12 @@ import { Box, Flex } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import NetworkIcon from 'src/slices/chain/logo/NetworkIcon';
-import TestnetBadge from 'src/slices/chain/TestnetBadge';
+import NetworkLogo from 'src/slices/chain/logo/NetworkLogo';
 import SearchBarMobile from 'src/slices/search/components/search-bar/SearchBarMobile';
 
 import UserProfileAuth0 from 'src/features/account/components/user-profile/auth0/UserProfileMobile';
 import UserWalletMobile from 'src/features/account/components/user-profile/wallet/UserWalletMobile';
 import RewardsButton from 'src/features/rewards/components/RewardsButton';
-import RollupStageBadge from 'src/features/rollup/common/components/RollupStageBadge';
 
 import config from 'src/config';
 
@@ -50,42 +48,45 @@ const HeaderMobile = ({ hideSearchButton, onGoToSearchResults }: Props) => {
   return (
     <Box
       ref={ ref }
-      bg={{ _light: 'rgba(255, 255, 255, 0.84)', _dark: 'rgba(16, 38, 33, 0.84)' }}
+      bg={{ _light: 'rgba(255, 255, 255, 0.88)', _dark: 'rgba(7, 26, 23, 0.94)' }}
       display={{ base: 'block', lg: 'none' }}
       position="sticky"
-      top="-1px"
+      top={ 0 }
       left={ 0 }
       zIndex="sticky2"
-      pt="1px"
       height="74px"
       minH="74px"
       borderBottomWidth="1px"
-      borderColor="border.divider"
+      borderColor={{ _light: 'rgba(15, 118, 110, 0.16)', _dark: 'rgba(52, 211, 153, 0.16)' }}
+      borderRadius="0 0 40px 40px"
       backdropFilter="blur(12px)"
+      boxShadow={{ _light: '0 14px 38px rgba(15, 118, 110, 0.1)', _dark: '0 18px 48px rgba(0, 0, 0, 0.34)' }}
+      overflow="hidden"
     >
       <Flex
         as="header"
-        paddingX="24px"
+        paddingX={{ base: '20px', sm: '24px' }}
         paddingY={ 0 }
         bg="transparent"
         width="100%"
         height="74px"
         minH="74px"
         alignItems="center"
+        gap="10px"
         transitionProperty="box-shadow"
         transitionDuration="slow"
         boxShadow={ isSticky ? 'md' : 'none' }
       >
-        <Burger/>
-        <Flex alignItems="center" flexGrow={ 1 } mx="10px">
-          <NetworkIcon/>
-          <TestnetBadge ml="10px"/>
-          <RollupStageBadge ml="10px"/>
+        <Flex alignItems="center" flex="1 1 auto" minW={ 0 }>
+          <Box maxW={{ base: '190px', sm: '220px' }} overflow="hidden">
+            <NetworkLogo/>
+          </Box>
         </Flex>
-        <Flex columnGap="10px">
+        <Flex columnGap="8px" alignItems="center" flexShrink={ 0 }>
           { !hideSearchButton && <SearchBarMobile onGoToSearchResults={ onGoToSearchResults }/> }
           { config.features.rewards.isEnabled && <RewardsButton/> }
           { userProfile }
+          <Burger/>
         </Flex>
       </Flex>
     </Box>
