@@ -9,7 +9,7 @@ import config from 'src/config';
 
 import { Skeleton } from 'src/toolkit/chakra/skeleton';
 
-export const href = config.app.spriteHash ? `/icons/sprite.${ config.app.spriteHash }.svg` : '/icons/sprite.svg';
+export const href = `/icons/sprite.svg${ config.app.spriteHash ? `?v=${ config.app.spriteHash }` : '' }`;
 
 export { IconName };
 

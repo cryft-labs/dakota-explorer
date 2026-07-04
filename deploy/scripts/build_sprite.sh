@@ -51,11 +51,12 @@ if [ "$NEXT_PUBLIC_APP_ENV" != "pw" ]; then
     # Generate hash from the sprite file
     HASH=$(md5sum $target_dir/sprite.svg | cut -d' ' -f1 | head -c 8)
 
-    # Remove old sprite files
+    # Remove old hashed sprite files
     rm -f $target_dir/sprite.*.svg
 
-    # Rename the new sprite file
-    mv $target_dir/sprite.svg "$target_dir/sprite.${HASH}.svg"
+    # Keep sprite.svg as a fallback for builds that do not receive the hash env
+    # and create a hashed copy for the normal cache-busted path.
+    cp $target_dir/sprite.svg "$target_dir/sprite.${HASH}.svg"
 
     export NEXT_PUBLIC_ICON_SPRITE_HASH=${HASH}
 
@@ -66,7 +67,7 @@ if [ "$NEXT_PUBLIC_APP_ENV" != "pw" ]; then
         create_registry_file
     fi
 
-    echo "SVG sprite created: sprite.${HASH}.svg"
+    echo "SVG sprite created: sprite.svg and sprite.${HASH}.svg"
 else
     echo "SVG sprite created: sprite.svg (hash skipped for playwright environment)"
 fi
