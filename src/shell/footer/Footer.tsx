@@ -61,36 +61,16 @@ const Footer = () => {
   });
   const apiVersionUrl = getApiVersionUrl(backendVersionData?.backend_version ?? undefined);
 
-  const { data: statsData } = useApiQuery('core:stats', {
-    queryOptions: {
-      staleTime: 30_000,
-      refetchOnMount: false,
-    },
-  });
-
-  const latestBlockPeriodMs = Number(statsData?.average_block_time);
-  const latestBlockPeriod = Number.isFinite(latestBlockPeriodMs) && latestBlockPeriodMs > 0 ?
-    `${ (latestBlockPeriodMs / 1000).toFixed(1) }s` :
-    'Live';
-
   const NETWORK_DETAILS = React.useMemo(() => [
     {
       label: 'Chain ID',
       value: config.chain.id || '112311',
     },
     {
-      label: 'Latest Block Period',
-      value: latestBlockPeriod,
-    },
-    {
-      label: 'Native Coin',
-      value: config.chain.currency.name || 'Dakota Coin',
-    },
-    {
       label: 'Ticker',
       value: 'KOTA',
     },
-  ], [ latestBlockPeriod ]);
+  ], []);
 
   const frontendLink = (() => {
     if (config.shell.footer.frontendVersion) {
