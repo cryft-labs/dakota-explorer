@@ -22,6 +22,8 @@ const SVG_OPTIONS = {
   margin: 0,
 };
 
+const QR_DIALOG_INK_COLOR = '#020d0b';
+
 interface Props {
   className?: string;
   hash: string;
@@ -84,11 +86,12 @@ const AddressQrCode = ({ hash, className, isLoading }: Props) => {
       ) }
       { !error && (
         <DialogRoot open={ open } onOpenChange={ onOpenChange } size={{ lgDown: 'full', lg: 'sm' }}>
-          <DialogContent className="light">
-            <DialogHeader>Address QR code</DialogHeader>
+          <DialogContent className="light" color={ QR_DIALOG_INK_COLOR }>
+            <DialogHeader color={ QR_DIALOG_INK_COLOR }>Address QR code</DialogHeader>
             <DialogBody>
               <AddressEntity
                 mb={ 3 }
+                color={ QR_DIALOG_INK_COLOR }
                 fontWeight={ 500 }
                 address={{ hash }}
                 noLink
