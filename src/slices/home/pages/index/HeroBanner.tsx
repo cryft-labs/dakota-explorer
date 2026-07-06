@@ -226,7 +226,7 @@ const BORDER_DEFAULT = { _light: '1px solid rgba(15, 118, 110, 0.18)', _dark: '1
 
 const HERO_SUBTEXT = [
   'Search Dakota Network blocks, transactions, tokens, addresses, and smart contracts across the Dakota Cards ecosystem.',
-  'Live chain activity stays connected to the same platform surfaces your teams already use.',
+  'Use the Navigator menu for switching between network sites while following live network activity.',
 ].join(' ');
 
 const HeroBanner = () => {

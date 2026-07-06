@@ -39,7 +39,7 @@ export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
   '/': {
     metadata: {
       title: {
-        'default': '%chain_name% blockchain explorer - View %chain_name% stats',
+        'default': 'Dakota Cards | Blockchain and Network Explorer',
       },
       description: {
         'default': 'Explore the Dakota Network Blockchain Explorer. Search Dakota Network transactions, addresses, tokens, blocks, smart contracts, and more.',
