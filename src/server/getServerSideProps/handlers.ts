@@ -92,7 +92,7 @@ Promise<GetServerSidePropsResult<Props<Pathname>>> => {
       referrer: req.headers.referer || '',
       adBannerProvider: adBannerProvider,
       apiData: null,
-      uuid,
+      uuid: uuid || '',
       cspNonce,
       onionDomain,
     },

@@ -17,6 +17,11 @@ interface Props {
   onSelect?: () => void;
 }
 
+const DAKOTA_SHARED_THEME_IDS: Record<ColorMode, ColorThemeId> = {
+  light: 'light',
+  dark: 'midnight',
+};
+
 const SettingsColorTheme = ({ onSelect }: Props) => {
   const { setColorMode } = useColorMode();
 
@@ -40,13 +45,19 @@ const SettingsColorTheme = ({ onSelect }: Props) => {
     cookies.set(cookies.NAMES.COLOR_MODE, nextTheme.colorMode);
     cookies.set(cookies.NAMES.COLOR_THEME, themeId);
     window.localStorage.setItem(cookies.NAMES.COLOR_MODE, nextTheme.colorMode);
+    cookies.setDakotaSharedThemeMode(nextTheme.colorMode);
   }, [ setColorMode ]);
 
   React.useEffect(() => {
+    const sharedColorMode = cookies.getDakotaSharedThemeMode() as ColorMode | undefined;
     const cookieColorMode = cookies.get(cookies.NAMES.COLOR_MODE) as ColorMode | undefined;
     const cookieColorTheme = cookies.get(cookies.NAMES.COLOR_THEME) as ColorThemeId | undefined;
 
     const nextColorMode = (() => {
+      if (sharedColorMode) {
+        return sharedColorMode;
+      }
+
       if (!cookieColorMode) {
         return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       }
@@ -54,7 +65,17 @@ const SettingsColorTheme = ({ onSelect }: Props) => {
       return cookieColorMode;
     })();
 
-    const nextColorTheme = cookieColorTheme || getDefaultColorTheme(nextColorMode);
+    const cookieThemeIsValid = Boolean(
+      cookieColorTheme && COLOR_THEMES.some((theme) => theme.id === cookieColorTheme && theme.colorMode === nextColorMode),
+    );
+
+    let nextColorTheme = getDefaultColorTheme(nextColorMode);
+
+    if (sharedColorMode) {
+      nextColorTheme = DAKOTA_SHARED_THEME_IDS[sharedColorMode];
+    } else if (cookieThemeIsValid && cookieColorTheme) {
+      nextColorTheme = cookieColorTheme;
+    }
 
     setTheme(nextColorTheme);
     setActiveThemeId(nextColorTheme);

@@ -23,6 +23,10 @@ type Props = {
 const DAKOTA_LIGHT_THEME_ID: ColorThemeId = 'light';
 const DAKOTA_DARK_THEME_ID: ColorThemeId = 'midnight';
 
+function getDakotaThemeId(colorMode: ColorMode): ColorThemeId {
+  return colorMode === 'light' ? DAKOTA_LIGHT_THEME_ID : DAKOTA_DARK_THEME_ID;
+}
+
 function applyThemeVariables(colorMode: ColorMode, themeId: ColorThemeId) {
   const varValue = getThemeHexWithOverrides(themeId);
 
@@ -41,29 +45,45 @@ const DakotaThemeToggle = ({ className, mode = 'icon' }: Props) => {
   const { colorMode, setColorMode } = useColorMode();
   const isDark = colorMode === 'dark';
   const nextColorMode: ColorMode = isDark ? 'light' : 'dark';
-  const nextThemeId = nextColorMode === 'light' ? DAKOTA_LIGHT_THEME_ID : DAKOTA_DARK_THEME_ID;
   const ThemeIcon = isDark ? LuSun : LuMoon;
   const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
   const buttonText = isDark ? 'Light Mode' : 'Dark Mode';
 
+  const syncThemeMode = React.useCallback((nextMode: ColorMode) => {
+    const syncedThemeId = getDakotaThemeId(nextMode);
+
+    setColorMode(nextMode);
+    applyThemeVariables(nextMode, syncedThemeId);
+    cookies.set(cookies.NAMES.COLOR_MODE, nextMode);
+    cookies.set(cookies.NAMES.COLOR_THEME, syncedThemeId);
+    window.localStorage.setItem(cookies.NAMES.COLOR_MODE, nextMode);
+  }, [ setColorMode ]);
+
   React.useEffect(() => {
+    const sharedColorMode = cookies.getDakotaSharedThemeMode();
+
+    if (sharedColorMode) {
+      syncThemeMode(sharedColorMode);
+      return cookies.subscribeDakotaSharedThemeMode(syncThemeMode);
+    }
+
     const cookieColorMode = cookies.get(cookies.NAMES.COLOR_MODE) as ColorMode | undefined;
     const cookieColorTheme = cookies.get(cookies.NAMES.COLOR_THEME) as ColorThemeId | undefined;
     const initialColorMode = cookieColorMode || colorMode;
-    const initialThemeId = cookieColorTheme || COLOR_THEMES.find((theme) => theme.colorMode === initialColorMode)?.id;
+    const cookieThemeIsValid = Boolean(
+      cookieColorTheme && COLOR_THEMES.some((theme) => theme.id === cookieColorTheme && theme.colorMode === initialColorMode),
+    );
+    const initialThemeId = cookieThemeIsValid && cookieColorTheme ? cookieColorTheme : getDakotaThemeId(initialColorMode);
 
-    if (initialColorMode && initialThemeId) {
-      applyThemeVariables(initialColorMode, initialThemeId);
-    }
-  }, [ colorMode ]);
+    applyThemeVariables(initialColorMode, initialThemeId);
+
+    return cookies.subscribeDakotaSharedThemeMode(syncThemeMode);
+  }, [ colorMode, syncThemeMode ]);
 
   const handleClick = React.useCallback(() => {
-    setColorMode(nextColorMode);
-    applyThemeVariables(nextColorMode, nextThemeId);
-    cookies.set(cookies.NAMES.COLOR_MODE, nextColorMode);
-    cookies.set(cookies.NAMES.COLOR_THEME, nextThemeId);
-    window.localStorage.setItem(cookies.NAMES.COLOR_MODE, nextColorMode);
-  }, [ nextColorMode, nextThemeId, setColorMode ]);
+    syncThemeMode(nextColorMode);
+    cookies.setDakotaSharedThemeMode(nextColorMode);
+  }, [ nextColorMode, syncThemeMode ]);
 
   const icon = <ThemeIcon size={ 20 } strokeWidth={ 2.15 }/>;
 
