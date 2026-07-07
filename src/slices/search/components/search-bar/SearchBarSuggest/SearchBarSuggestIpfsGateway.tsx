@@ -29,7 +29,7 @@ const SearchBarSuggestIpfsGateway = ({ href, searchTerm, onClick }: Props) => {
         bgColor: { _light: '#E6F7F3', _dark: '#113B32' },
         borderColor: 'hover',
       }}
-      aria-label="Open CID in IPFS gateway"
+      aria-label="Open IPFS CID in IPFS gateway"
     >
       <Flex
         gap={ 3 }
@@ -39,7 +39,7 @@ const SearchBarSuggestIpfsGateway = ({ href, searchTerm, onClick }: Props) => {
       >
         <Box minW={ 0 }>
           <Text fontWeight={ 700 } color="text.primary">
-            CID detected
+            IPFS CID detected
           </Text>
           <Text color="text.secondary" overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">
             { searchTerm }

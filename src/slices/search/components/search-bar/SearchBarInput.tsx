@@ -91,7 +91,7 @@ const SearchBarInput = (
 
   const getPlaceholder = () => {
     const clusterText = nameServicesFeature.isEnabled && nameServicesFeature.clusters.isEnabled ? ' / cluster' : '';
-    return `Search by address / txn hash / block / token / CID${ clusterText }/... `;
+    return `Search by address / txn hash / block / token / IPFS CID${ clusterText }/... `;
   };
 
   const startElement = (
