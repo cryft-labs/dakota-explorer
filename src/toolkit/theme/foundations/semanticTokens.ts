@@ -74,6 +74,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
       solid: {
         bg: {
           DEFAULT: { value: { _light: '{colors.theme.button.primary._light}', _dark: '{colors.theme.button.primary._dark}' } },
+          hover: { value: { _light: '#0D6F66', _dark: '#0F766E' } },
         },
         text: {
           DEFAULT: { value: { _light: '{colors.theme.button.primary.text._light}', _dark: '{colors.theme.button.primary.text._dark}' } },

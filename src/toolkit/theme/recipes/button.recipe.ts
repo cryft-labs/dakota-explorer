@@ -21,7 +21,7 @@ export const recipe = defineRecipe({
         color: 'button.solid.text',
         boxShadow: 'none',
         _hover: {
-          bg: 'hover',
+          bg: 'button.solid.bg.hover',
           color: 'white',
         },
         _loading: {
@@ -33,7 +33,7 @@ export const recipe = defineRecipe({
           },
         },
         _expanded: {
-          bg: 'hover',
+          bg: 'button.solid.bg.hover',
           color: 'white',
         },
       },

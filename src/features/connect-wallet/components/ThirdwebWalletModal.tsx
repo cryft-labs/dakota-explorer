@@ -16,11 +16,11 @@ import { getProfiles, getSocialIcon, preAuthenticate } from 'thirdweb/wallets/in
 import AddressIdenticon from 'src/slices/address/components/icon/AddressIdenticon';
 
 import {
+  createThirdwebInAppWallet,
   getThirdwebAppMetadata,
   thirdwebChain,
   thirdwebChains,
   thirdwebClient,
-  thirdwebInAppWallet,
 } from 'src/features/connect-wallet/utils/thirdweb-config';
 
 import DakotaStarfield from 'src/shared/components/DakotaStarfield';
@@ -291,9 +291,20 @@ const WalletConnectPrompt = ({ label, uri, onCancel }: WalletConnectPromptProps)
       </Text>
 
       <SimpleGrid columns={{ base: 1, sm: 2 }} gap={ 2 } w="full">
-        <Button variant="solid" onClick={ handleCopy } disabled={ !uri }>
-          <SpriteIcon name={ isCopied ? 'copy_check' : 'copy' }/>
-          { isCopied ? 'Pairing link copied' : 'Copy pairing link' }
+        <Button
+          variant="solid"
+          position="relative"
+          justifyContent="center"
+          px="44px"
+          onClick={ handleCopy }
+          disabled={ !uri }
+        >
+          <Box position="absolute" left={ 3 } display="inline-flex" boxSize={ 5 }>
+            <SpriteIcon name={ isCopied ? 'copy_check' : 'copy' }/>
+          </Box>
+          <Text as="span" width="full" fontSize="sm" textAlign="center" whiteSpace="nowrap">
+            { isCopied ? 'Copied' : 'Copy pairing link' }
+          </Text>
         </Button>
         <Button variant="solid" onClick={ onCancel }>
           Back to wallet options
@@ -481,8 +492,9 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
 
   const handleSocialConnect = React.useCallback((strategy: 'google' | 'apple') => {
     void runConnection(strategy, async() => {
-      await thirdwebInAppWallet.connect({ client: thirdwebClient, chain: thirdwebChain, strategy });
-      return thirdwebInAppWallet;
+      const wallet = createThirdwebInAppWallet(window.location.href);
+      await wallet.connect({ client: thirdwebClient, chain: thirdwebChain, strategy });
+      return wallet;
     });
   }, [ runConnection ]);
 
@@ -559,14 +571,15 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
     }
 
     void runConnection('email-verify', async() => {
-      await thirdwebInAppWallet.connect({
+      const wallet = createThirdwebInAppWallet();
+      await wallet.connect({
         client: thirdwebClient,
         chain: thirdwebChain,
         strategy: 'email',
         email: normalizedEmail,
         verificationCode: normalizedCode,
       });
-      return thirdwebInAppWallet;
+      return wallet;
     });
   }, [ email, runConnection, verificationCode ]);
 

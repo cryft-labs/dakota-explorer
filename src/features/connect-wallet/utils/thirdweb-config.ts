@@ -40,7 +40,17 @@ if (!thirdwebChain) {
   throw new Error('Thirdweb requires at least one configured chain');
 }
 
-export const thirdwebInAppWallet = inAppWallet({ auth: { options: [ 'google', 'apple', 'email' ] } });
+const THIRDWEB_IN_APP_AUTH_OPTIONS = [ 'google', 'apple', 'email' ] as const;
+
+export const createThirdwebInAppWallet = (redirectUrl?: string) => inAppWallet({
+  auth: {
+    mode: 'redirect',
+    options: [ ...THIRDWEB_IN_APP_AUTH_OPTIONS ],
+    ...(redirectUrl ? { redirectUrl } : {}),
+  },
+});
+
+export const thirdwebInAppWallet = createThirdwebInAppWallet();
 
 export const thirdwebAppMetadata = {
   name: 'Dakota Cards | Network Explorer',

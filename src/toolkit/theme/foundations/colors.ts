@@ -59,7 +59,7 @@ const DEFAULT_THEME_COLORS = {
   button: {
     primary: {
       _light: { value: '#0F766E' },
-      _dark: { value: '#34D399' },
+      _dark: { value: '#115E59' },
       text: {
         _light: { value: '{colors.white}' },
         _dark: { value: '{colors.white}' },

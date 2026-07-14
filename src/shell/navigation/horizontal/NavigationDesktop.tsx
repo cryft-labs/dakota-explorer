@@ -55,13 +55,13 @@ const DakotaNavigatorMenu = () => {
           lineHeight="20px"
           fontWeight={ 700 }
           whiteSpace="nowrap"
-          color="white"
-          bg="#34D399"
+          color="button.solid.text"
+          bg="button.solid.bg"
           borderWidth="0"
           boxShadow="none"
           _hover={{
             color: 'white',
-            bg: '#2DD4BF',
+            bg: 'button.solid.bg.hover',
           }}
         >
           Navigator
