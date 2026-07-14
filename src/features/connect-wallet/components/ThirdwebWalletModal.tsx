@@ -660,11 +660,11 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
       unmountOnExit
     >
       <DialogContent
-        maxW={{ base: 'calc(100vw - 24px)', md: '560px' }}
+        maxW={{ base: '100vw', lg: '560px' }}
         maxH={{ base: 'calc(100dvh - 12px)', lg: 'calc(100dvh - 48px)' }}
         mt={{ lg: 0 }}
-        mx={{ lg: 0 }}
-        mb={{ base: 2, lg: 0 }}
+        mx={ 0 }
+        mb={ 0 }
         overflow="hidden"
         position="relative"
         isolation="isolate"
@@ -673,7 +673,10 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
         bg={{ _light: 'rgba(255, 255, 255, 0.98)', _dark: 'rgba(7, 30, 25, 0.98)' }}
         borderWidth="1px"
         borderColor={{ _light: 'rgba(15, 118, 110, 0.2)', _dark: 'rgba(52, 211, 153, 0.2)' }}
-        borderRadius="md"
+        borderTopLeftRadius="md"
+        borderTopRightRadius="md"
+        borderBottomLeftRadius={{ base: 0, lg: 'md' }}
+        borderBottomRightRadius={{ base: 0, lg: 'md' }}
         boxShadow={{ _light: '0 24px 70px rgba(15, 118, 110, 0.18)', _dark: '0 28px 80px rgba(0, 0, 0, 0.5)' }}
         backdropFilter="blur(18px)"
       >
@@ -713,6 +716,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
               textAlign: 'center',
             },
             '& [data-part="close-trigger"]': {
+              display: { base: 'none', lg: 'inline-flex' },
               position: 'absolute',
               right: '16px',
               top: '50%',
