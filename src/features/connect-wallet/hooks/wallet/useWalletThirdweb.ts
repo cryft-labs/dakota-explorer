@@ -1,0 +1,157 @@
+// SPDX-License-Identifier: LicenseRef-Blockscout
+
+import type { ConnectionOptions } from '@thirdweb-dev/wagmi-adapter';
+import React from 'react';
+import {
+  useActiveAccount,
+  useActiveWallet,
+  useActiveWalletConnectionStatus,
+  useDisconnect as useThirdwebDisconnect,
+} from 'thirdweb/react';
+import type { Wallet } from 'thirdweb/wallets';
+import { useAccount, useConnect, useDisconnect, useSwitchChain } from 'wagmi';
+
+import type { Params, Result } from './types';
+
+import { useThirdwebWalletModal } from 'src/features/connect-wallet/components/ThirdwebWalletModal';
+import { thirdwebChain } from 'src/features/connect-wallet/utils/thirdweb-config';
+import {
+  runThirdwebWagmiSync,
+  THIRDWEB_WAGMI_CONNECTOR_ID,
+} from 'src/features/connect-wallet/utils/thirdweb-connector';
+
+import * as mixpanel from 'src/services/mixpanel';
+import getErrorMessage from 'src/shared/errors/get-error-message';
+
+import { toaster } from 'src/toolkit/chakra/toaster';
+
+const isDismissedConnection = (error: unknown) => {
+  if (error === undefined || error === null) {
+    return true;
+  }
+
+  const message = getErrorMessage(error);
+  return Boolean(message && /user rejected|user denied|rejected request|user closed|cancelled|canceled|popup closed/i.test(message));
+};
+
+export default function useWalletThirdweb({ source, onConnect }: Params): Result {
+  const walletModal = useThirdwebWalletModal();
+  const activeAccount = useActiveAccount();
+  const activeWallet = useActiveWallet();
+  const connectionStatus = useActiveWalletConnectionStatus();
+  const { disconnect: disconnectThirdweb } = useThirdwebDisconnect();
+
+  const wagmiAccount = useAccount();
+  const { connectors, connectAsync } = useConnect();
+  const { disconnect: disconnectWagmi } = useDisconnect();
+  const { switchChainAsync } = useSwitchChain();
+
+  const [ isSyncing, setIsSyncing ] = React.useState(false);
+
+  const isSameAccount = Boolean(
+    activeAccount?.address &&
+    wagmiAccount.address &&
+    activeAccount.address.toLowerCase() === wagmiAccount.address.toLowerCase(),
+  );
+  const isWagmiReady = isSameAccount && wagmiAccount.connector?.id === THIRDWEB_WAGMI_CONNECTOR_ID;
+  const isConnected = connectionStatus === 'connected' && isWagmiReady;
+
+  const syncWallet = React.useCallback(async(wallet: Wallet) => {
+    const connector = connectors.find((connector) => connector.id === THIRDWEB_WAGMI_CONNECTOR_ID);
+    const account = wallet.getAccount();
+    const chain = wallet.getChain() ?? thirdwebChain;
+
+    if (!connector || !account) {
+      throw new Error('The Dakota Cards Explorer wallet connector is unavailable');
+    }
+
+    const hasSameAccount = wagmiAccount.address?.toLowerCase() === account.address.toLowerCase();
+    const hasThirdwebConnector = wagmiAccount.connector?.id === THIRDWEB_WAGMI_CONNECTOR_ID;
+
+    await runThirdwebWagmiSync(async() => {
+      if (hasSameAccount && hasThirdwebConnector) {
+        if (wagmiAccount.chainId !== chain.id) {
+          await switchChainAsync({ chainId: chain.id });
+        }
+        return;
+      }
+
+      const connectionOptions = { wallet } satisfies ConnectionOptions;
+      await connectAsync({ connector, chainId: chain.id, ...connectionOptions });
+    });
+  }, [ connectAsync, connectors, switchChainAsync, wagmiAccount.address, wagmiAccount.chainId, wagmiAccount.connector?.id ]);
+
+  const handleConnect = React.useCallback(async() => {
+    let connectedWallet: Wallet | undefined;
+    setIsSyncing(true);
+    mixpanel.logEvent(mixpanel.EventTypes.WALLET_CONNECT, { Source: source, Status: 'Started' });
+
+    try {
+      connectedWallet = await walletModal.openConnect();
+
+      if (!connectedWallet) {
+        return;
+      }
+
+      await syncWallet(connectedWallet);
+
+      mixpanel.logEvent(mixpanel.EventTypes.WALLET_CONNECT, { Source: source, Status: 'Connected' });
+      mixpanel.userProfile.setOnce({
+        'With Connected Wallet': true,
+      });
+      onConnect?.();
+    } catch (error) {
+      if (connectedWallet) {
+        disconnectThirdweb(connectedWallet);
+      }
+
+      if (!isDismissedConnection(error)) {
+        toaster.error({
+          title: 'Wallet connection failed',
+          description: getErrorMessage(error) || 'Unable to connect your Dakota wallet. Please try again.',
+        });
+      }
+    } finally {
+      setIsSyncing(false);
+    }
+  }, [ disconnectThirdweb, onConnect, source, syncWallet, walletModal ]);
+
+  const handleDisconnect = React.useCallback(() => {
+    if (activeWallet) {
+      disconnectThirdweb(activeWallet);
+    }
+
+    if (wagmiAccount.connector?.id === THIRDWEB_WAGMI_CONNECTOR_ID) {
+      disconnectWagmi({ connector: wagmiAccount.connector });
+    }
+  }, [ activeWallet, disconnectThirdweb, disconnectWagmi, wagmiAccount.connector ]);
+
+  const openModal = React.useCallback(() => {
+    if (!activeAccount || !activeWallet) {
+      void handleConnect();
+      return;
+    }
+
+    walletModal.openAccount();
+  }, [ activeAccount, activeWallet, handleConnect, walletModal ]);
+
+  return React.useMemo(() => ({
+    connect: () => void handleConnect(),
+    disconnect: handleDisconnect,
+    isOpen: walletModal.isOpen || isSyncing,
+    isConnected,
+    isReconnecting: connectionStatus === 'unknown' || wagmiAccount.isReconnecting,
+    address: isConnected ? activeAccount?.address : undefined,
+    openModal,
+  }), [
+    activeAccount?.address,
+    connectionStatus,
+    handleConnect,
+    handleDisconnect,
+    isConnected,
+    isSyncing,
+    openModal,
+    walletModal.isOpen,
+    wagmiAccount.isReconnecting,
+  ]);
+}

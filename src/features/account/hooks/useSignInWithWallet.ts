@@ -9,7 +9,7 @@ import type { UserInfo } from 'src/features/account/types/api';
 
 import useApiFetch from 'src/api/hooks/useApiFetch';
 
-import useWalletReown from 'src/features/connect-wallet/hooks/wallet/useWalletReown';
+import useWallet from 'src/features/connect-wallet/hooks/useWallet';
 
 import config from 'src/config';
 import type * as mixpanel from 'src/services/mixpanel';
@@ -55,7 +55,7 @@ function useSignInWithWallet({ onSuccess, onError, source = 'Login', isAuth, log
   const isConnectingWalletRef = React.useRef(false);
 
   const apiFetch = useApiFetch();
-  const web3Wallet = useWalletReown({ source });
+  const web3Wallet = useWallet({ source });
   const { signMessageAsync } = useSignMessage();
   const { switchChainAsync } = useSwitchChain();
 

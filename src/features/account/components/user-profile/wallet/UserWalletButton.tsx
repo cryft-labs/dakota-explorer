@@ -1,16 +1,13 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
 import type { ButtonProps } from '@chakra-ui/react';
-import { Box, HStack } from '@chakra-ui/react';
 import React from 'react';
 
 import useIsMobile from 'src/shared/hooks/useIsMobile';
-import shortenString from 'src/shared/texts/shorten-string';
+import SpriteIcon from 'src/sprite/SpriteIcon';
 
 import { Button } from 'src/toolkit/chakra/button';
 import { Tooltip } from 'src/toolkit/chakra/tooltip';
-
-import UserIdenticon from '../UserIdenticon';
 
 interface Props {
   size?: ButtonProps['size'];
@@ -18,49 +15,37 @@ interface Props {
   isPending?: boolean;
   isAutoConnectDisabled?: boolean;
   address?: string;
-  domain?: string;
 }
 
-const UserWalletButton = ({ size, variant, isPending, isAutoConnectDisabled, address, domain, ...rest }: Props, ref: React.ForwardedRef<HTMLButtonElement>) => {
+const UserWalletButton = ({ size, variant, isPending, isAutoConnectDisabled, address, ...rest }: Props, ref: React.ForwardedRef<HTMLButtonElement>) => {
 
   const isMobile = useIsMobile();
-
-  const content = (() => {
-    if (!address) {
-      return 'Connect';
-    }
-
-    const text = domain || shortenString(address);
-
-    return (
-      <HStack gap={ 2 }>
-        <UserIdenticon address={ address } isAutoConnectDisabled={ isAutoConnectDisabled }/>
-        <Box display={{ base: 'none', md: 'block' }}>{ text }</Box>
-      </HStack>
-    );
-  })();
+  const isConnected = Boolean(address);
 
   return (
     <Tooltip
-      content="Connect your wallet to Blockscout for full-featured access"
-      disabled={ isMobile || Boolean(address) }
+      content={ isConnected ? 'Connected wallet' : 'Connect your wallet to the Dakota Cards Explorer' }
+      disabled={ isMobile }
       openDelay={ 500 }
       disableOnMobile
     >
       <span>
         <Button
           ref={ ref }
+          aria-label={ isConnected ? 'Open connected wallet' : 'Connect wallet' }
           size={ size }
           variant={ variant }
-          selected={ Boolean(address) }
+          selected={ isConnected }
           highlighted={ isAutoConnectDisabled }
-          px={{ base: 2.5, lg: 3 }}
-          fontWeight={ address ? 700 : 600 }
+          w="40px"
+          minW="40px"
+          h="40px"
+          p={ 0 }
+          borderRadius="full"
           loading={ isPending }
-          loadingText={ isMobile ? undefined : 'Connecting' }
           { ...rest }
         >
-          { content }
+          <SpriteIcon name="wallet" boxSize={ 5 }/>
         </Button>
       </span>
     </Tooltip>

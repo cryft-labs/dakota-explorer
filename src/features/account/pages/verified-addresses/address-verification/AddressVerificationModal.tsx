@@ -22,7 +22,7 @@ type StateData = AddressVerificationFormFirstStepFields & contractsInfo.PrepareA
 
 const feature = config.features.connectWallet;
 // Dynamic providers cannot be nested, so a dummy provider is used here
-const Web3Provider = feature.isEnabled && feature.connectorType === 'dynamic' ? FallbackProvider : Web3ProviderBase;
+const Web3Provider = feature.isEnabled ? FallbackProvider : Web3ProviderBase;
 
 interface Props {
   open: boolean;

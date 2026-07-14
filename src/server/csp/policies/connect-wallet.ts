@@ -14,23 +14,24 @@ export function connectWallet(isPrivateMode: boolean): CspDev.DirectiveDescripto
   }
 
   switch (feature.connectorType) {
-    case 'reown': {
+    case 'thirdweb': {
       return {
         'connect-src': [
-          '*.web3modal.com',
-          '*.web3modal.org',
+          '*.thirdweb.com',
+          'wss://*.thirdweb.com',
           '*.walletconnect.com',
           '*.walletconnect.org',
           'wss://relay.walletconnect.com',
           'wss://relay.walletconnect.org',
           'wss://www.walletlink.org',
         ],
-        'frame-ancestors': [
-          '*.walletconnect.org',
-          '*.walletconnect.com',
+        'frame-src': [
+          '*.thirdweb.com',
         ],
         'img-src': [
           KEY_WORDS.BLOB,
+          KEY_WORDS.DATA,
+          '*.thirdweb.com',
           '*.walletconnect.com',
         ],
       };

@@ -6,16 +6,16 @@ import accountFeature from 'src/features/account/config';
 import multichain from 'src/features/multichain/config';
 
 import app from 'src/config/app';
-import { getEnvValue, parseEnvJson } from 'src/config/utils/envs';
+import { getEnvValue } from 'src/config/utils/envs';
 import type { Feature } from 'src/config/utils/features';
 
-const walletConnectProjectId = getEnvValue('NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID');
+const thirdwebClientId = getEnvValue('NEXT_PUBLIC_THIRDWEB_CLIENT_ID');
 
 const title = 'Blockchain interaction (writing to contract, etc.)';
 
 type FeaturePayload = {
-  connectorType: 'reown';
-  reown: { projectId: string; featuredWalletIds: Array<string> };
+  connectorType: 'thirdweb';
+  thirdweb: { clientId: string };
 } | {
   connectorType: 'dynamic';
   dynamic: { environmentId: string };
@@ -49,14 +49,13 @@ const config: Feature<FeaturePayload> = (() => {
           environmentId: accountFeature.dynamic.environmentId,
         },
       });
-    } else if (walletConnectProjectId) {
+    } else if (thirdwebClientId) {
       return Object.freeze({
         title,
         isEnabled: true,
-        connectorType: 'reown',
-        reown: {
-          projectId: walletConnectProjectId,
-          featuredWalletIds: parseEnvJson<Array<string>>(getEnvValue('NEXT_PUBLIC_WALLET_CONNECT_FEATURED_WALLET_IDS')) ?? [],
+        connectorType: 'thirdweb',
+        thirdweb: {
+          clientId: thirdwebClientId,
         },
       });
     }

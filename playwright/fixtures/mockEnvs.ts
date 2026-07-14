@@ -69,7 +69,7 @@ export const ENVS_MAP: Record<string, Array<[string, string]>> = {
     [ 'NEXT_PUBLIC_TRANSACTION_INTERPRETATION_PROVIDER', 'blockscout' ],
   ],
   noWalletClient: [
-    [ 'NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID', '' ],
+    [ 'NEXT_PUBLIC_THIRDWEB_CLIENT_ID', '' ],
   ],
   noAccount: [
     [ 'NEXT_PUBLIC_IS_ACCOUNT_SUPPORTED', 'false' ],

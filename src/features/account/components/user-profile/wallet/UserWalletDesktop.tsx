@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
+// SPDX-License-Identifier: LicenseRef-Blockscout
+
 import { type ButtonProps } from '@chakra-ui/react';
 import React from 'react';
 
-import useWeb3AccountWithDomain from 'src/features/connect-wallet/hooks/useAccountWithDomain';
+import useWeb3Account from 'src/features/connect-wallet/hooks/useAccount';
 import useWeb3Wallet from 'src/features/connect-wallet/hooks/useWallet';
 import { useMarketplaceContext } from 'src/features/marketplace/context';
 
@@ -22,17 +24,12 @@ const UserWalletDesktop = ({ buttonSize, buttonVariant = 'header' }: Props) => {
   const walletMenu = useDisclosure();
 
   const web3Wallet = useWeb3Wallet({ source: 'Header' });
-  const web3AccountWithDomain = useWeb3AccountWithDomain(web3Wallet.isConnected);
+  const web3Account = useWeb3Account();
   const { isAutoConnectDisabled } = useMarketplaceContext();
 
   const isPending =
-    (web3Wallet.isConnected && web3AccountWithDomain.isLoading) ||
+    (web3Wallet.isConnected && web3Account.isConnecting) ||
     (!web3Wallet.isConnected && web3Wallet.isOpen);
-
-  const handleOpenWalletClick = React.useCallback(() => {
-    web3Wallet.openModal();
-    walletMenu.onClose();
-  }, [ web3Wallet, walletMenu ]);
 
   const handleDisconnectClick = React.useCallback(() => {
     web3Wallet.disconnect();
@@ -58,21 +55,18 @@ const UserWalletDesktop = ({ buttonSize, buttonVariant = 'header' }: Props) => {
         <UserWalletButton
           size={ buttonSize }
           variant={ buttonVariant }
-          address={ web3AccountWithDomain.address }
-          domain={ web3AccountWithDomain.domain }
+          address={ web3Account.address }
           isPending={ isPending }
           isAutoConnectDisabled={ isAutoConnectDisabled }
         />
       </PopoverTrigger>
-      { web3AccountWithDomain.address && walletMenu.open && (
-        <PopoverContent w="235px">
+      { web3Account.address && walletMenu.open && (
+        <PopoverContent w="260px">
           <PopoverBody>
             <UserWalletMenuContent
-              address={ web3AccountWithDomain.address }
-              domain={ web3AccountWithDomain.domain }
+              address={ web3Account.address }
               isAutoConnectDisabled={ isAutoConnectDisabled }
               isReconnecting={ web3Wallet.isReconnecting }
-              onOpenWallet={ handleOpenWalletClick }
               onDisconnect={ handleDisconnectClick }
             />
           </PopoverBody>

@@ -31,7 +31,7 @@ const getChainInfo = (
     },
     blockExplorers: {
       'default': {
-        name: 'Blockscout',
+        name: `${ config.chain.name ?? 'Network' } Explorer`,
         url: config.app.baseUrl,
       },
     },
@@ -69,7 +69,7 @@ export const parentChain: Chain | undefined = (() => {
     },
     blockExplorers: {
       'default': {
-        name: 'Blockscout',
+        name: `${ parentChain.name } Explorer`,
         url: parentChain.baseUrl,
       },
     },

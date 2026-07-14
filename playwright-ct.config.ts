@@ -119,9 +119,8 @@ const config: PlaywrightTestConfig = defineConfig({
           // Mock for reCaptcha hook
           { find: 'src/services/re-captcha/useReCaptcha', replacement: './playwright/mocks/client/services/re-captcha/useReCaptcha.js' },
 
-          // The createWeb3Modal() function from web3modal/wagmi/react somehow pollutes the global styles which causes the tests to fail
-          // We don't call this function in TestApp and since we use useWeb3Modal() and useWeb3ModalState() hooks in the code, we have to mock the module
-          // Otherwise it will complain that createWeb3Modal() is no called before the hooks are used
+          // The optional MultiSender widget still bundles AppKit and initializes it during component tests.
+          // Mock that widget-owned dependency so its global styles do not leak into unrelated snapshots.
           { find: /^@reown\/appkit\/react$/, replacement: './playwright/mocks/modules/@reown/appkit/react.js' },
 
           { find: '/playwright/index.ts', replacement: './playwright/index.ts' },

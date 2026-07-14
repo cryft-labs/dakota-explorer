@@ -5,10 +5,12 @@ import { useRouter } from 'next/router';
 import type { Route } from 'nextjs-routes';
 import React from 'react';
 
+import type { Params as WalletParams, Result as WalletResult } from 'src/features/connect-wallet/hooks/wallet/types';
+
 import useApiFetch from 'src/api/hooks/useApiFetch';
 import { getResourceKey } from 'src/api/hooks/useApiQuery';
 
-import useWalletReown from 'src/features/connect-wallet/hooks/wallet/useWalletReown';
+import useWalletFallback from 'src/features/connect-wallet/hooks/wallet/useWalletFallback';
 import { useRewardsContext } from 'src/features/rewards/context';
 
 import config from 'src/config';
@@ -16,6 +18,12 @@ import * as mixpanel from 'src/services/mixpanel';
 import * as cookies from 'src/shared/storage/cookies';
 
 import { toaster } from 'src/toolkit/chakra/toaster';
+
+const connectWalletFeature = config.features.connectWallet;
+const useLogoutWallet: (params: WalletParams) => WalletResult =
+  connectWalletFeature.isEnabled && connectWalletFeature.connectorType === 'thirdweb' ?
+    (await import('src/features/connect-wallet/hooks/wallet/useWalletThirdweb')).default :
+    () => useWalletFallback();
 
 const PROTECTED_ROUTES: Array<Route['pathname']> = [
   '/account/api-key',
@@ -32,7 +40,7 @@ export default function useLogout() {
   const queryClient = useQueryClient();
   const apiFetch = useApiFetch();
   const { logout: rewardsLogout } = useRewardsContext();
-  const { disconnect } = useWalletReown({ source: 'Profile dropdown' });
+  const { disconnect } = useLogoutWallet({ source: 'Profile dropdown' });
 
   return React.useCallback(async() => {
     try {

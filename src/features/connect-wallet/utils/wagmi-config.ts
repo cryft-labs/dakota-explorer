@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
-import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
-import type { AppKitNetwork } from '@reown/appkit/networks';
+import { inAppWalletConnector } from '@thirdweb-dev/wagmi-adapter';
 import type { Chain, Transport } from 'viem';
 import { fallback, http } from 'viem';
 import { createConfig } from 'wagmi';
 
 import { chains, parentChain } from 'src/features/connect-wallet/utils/chains';
+import { thirdwebClient } from 'src/features/connect-wallet/utils/thirdweb-client';
 import essentialDappsChainsConfig from 'src/features/marketplace/chains-config/essential-dapps';
 import multichainConfig from 'src/features/multichain/chains-config';
 
@@ -49,38 +49,30 @@ const reduceExternalChainsToTransportConfig = (readOnly: boolean): Record<string
 };
 
 const wagmi = (() => {
-
-  if (!feature.isEnabled || feature.connectorType === 'dynamic') {
-    const wagmiConfig = createConfig({
-      chains: chains as [Chain, ...Array<Chain>],
-      transports: {
-        ...getChainTransportFromConfig(appConfig, true),
-        ...(parentChain ? { [parentChain.id]: http(parentChain.rpcUrls.default.http[0]) } : {}),
-        ...reduceExternalChainsToTransportConfig(true),
-      },
-      ssr: true,
-      batch: { multicall: { wait: 100, batchSize: 1024 } },
-      multiInjectedProviderDiscovery: feature.isEnabled && feature.connectorType === 'dynamic' ? false : true,
-    });
-
-    return { config: wagmiConfig, adapter: null };
-  }
-
-  const wagmiAdapter = new WagmiAdapter({
-    networks: chains as Array<AppKitNetwork>,
-    multiInjectedProviderDiscovery: true,
-    transports: {
-      ...getChainTransportFromConfig(appConfig, false),
-      ...(parentChain ? { [parentChain.id]: http() } : {}),
-      ...reduceExternalChainsToTransportConfig(false),
+  const isThirdweb = feature.isEnabled && feature.connectorType === 'thirdweb';
+  const isDynamic = feature.isEnabled && feature.connectorType === 'dynamic';
+  const thirdwebWagmiConnector = isThirdweb && thirdwebClient ? inAppWalletConnector({
+    client: thirdwebClient,
+    metadata: {
+      name: 'Dakota Wallet',
+      icon: appConfig.chain.icon.default,
     },
-    projectId: feature.reown.projectId,
+  }) : undefined;
+
+  const wagmiConfig = createConfig({
+    chains: chains as [Chain, ...Array<Chain>],
+    connectors: thirdwebWagmiConnector ? [ thirdwebWagmiConnector ] : undefined,
+    transports: {
+      ...getChainTransportFromConfig(appConfig, !isThirdweb),
+      ...(parentChain ? { [parentChain.id]: http(isThirdweb ? undefined : parentChain.rpcUrls.default.http[0]) } : {}),
+      ...reduceExternalChainsToTransportConfig(!isThirdweb),
+    },
     ssr: true,
     batch: { multicall: { wait: 100, batchSize: 1024 } },
-    syncConnectedChain: false,
+    multiInjectedProviderDiscovery: !isThirdweb && !isDynamic,
   });
 
-  return { config: wagmiAdapter.wagmiConfig, adapter: wagmiAdapter };
+  return { config: wagmiConfig };
 })();
 
 export default wagmi;

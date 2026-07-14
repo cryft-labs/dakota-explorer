@@ -16,7 +16,7 @@ The "Compulsoriness" column is scoped to the section the variable lives in:
 If a feature also needs variables that live in another section (an API host, a service key, etc.), they're listed in that feature's **Dependencies** table and linked back to their canonical row.
 
 ### Disclaimer about using variables
-Please be aware that all environment variables prefixed with `NEXT_PUBLIC_` will be exposed to the browser. So any user can obtain its values. Make sure that for all 3rd-party services keys (e.g., Reown, etc.) in the services administration panel you have created a whitelist of allowed origins and have added your app domain into it. That will help you prevent using your key by unauthorized app, if someone gets its value.
+Please be aware that all environment variables prefixed with `NEXT_PUBLIC_` will be exposed to the browser. So any user can obtain its values. Make sure that for all 3rd-party services keys (e.g., Thirdweb, etc.) in the services administration panel you have created a whitelist of allowed origins and have added your app domain into it. That will help you prevent using your key by unauthorized app, if someone gets its value.
 
 ### Note about escaping variables values
 All json-like values should be single-quoted. If it contains a hash (`#`) or a dollar-sign (`$`) the whole value should be wrapped in single quotes as well (see `dotenv` [readme](https://github.com/bkeepers/dotenv#variable-substitution) for the reference)
@@ -869,12 +869,11 @@ ZetaChain cross-chain transaction (CCTX) pages and views on ZetaChain instances.
 
 ### Connect wallet
 
-Wallet connection support (read transactions, write to contract, etc.) via [Reown AppKit](https://cloud.reown.com/).
+Wallet connection support (read transactions, write to contract, etc.) via [Thirdweb](https://portal.thirdweb.com/).
 
 | Variable | Type | Description | Compulsoriness | Default value | Example value | Version |
 | --- | --- | --- | --- | --- | --- | --- |
-| NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID | `string` | Project id for [Reown AppKit](https://cloud.reown.com//) integration | Required | - | `<your-secret>` | v1.0.x+ |
-| NEXT_PUBLIC_WALLET_CONNECT_FEATURED_WALLET_IDS | `Array<string>` | List of [featured wallet IDs](https://docs.reown.com/appkit/react/core/options#featuredwalletids) in the "Connect your wallet" modal. To obtain the wallet ID, please use [WalletGuide](https://walletguide.walletconnect.network). | - | - | `['c286eebc742a537cd1d6818363e9dc53b21759a1e8e5d9b263d0c03ec7703576']` | v2.6.0+ |
+| NEXT_PUBLIC_THIRDWEB_CLIENT_ID | `string` | Public client ID for the [Thirdweb](https://portal.thirdweb.com/) wallet connection used by the explorer | Required | - | `<your-client-id>` | v2.6.0+ |
 
 &nbsp;
 
