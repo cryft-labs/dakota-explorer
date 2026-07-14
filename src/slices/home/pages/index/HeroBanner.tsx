@@ -20,6 +20,7 @@ const DAKOTA_HERO_PILLS = [
   'Transactions',
   'Token activity',
   'Smart contracts',
+  'IPFS CID search',
 ];
 
 const dakotaHeroPanelReveal = keyframes`

@@ -2,6 +2,8 @@
 
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
+// SPDX-License-Identifier: LicenseRef-Blockscout
+
 import { Box, Flex, Input, SimpleGrid, Stack, Text } from '@chakra-ui/react';
 import QRCode from 'qrcode';
 import React from 'react';
@@ -639,6 +641,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
   })();
 
   const isBusy = Boolean(pendingAction) || isConnecting;
+  const hasVerificationCode = verificationCode.length > 0;
 
   const handleGoogleConnect = React.useCallback(() => {
     handleSocialConnect('google');
@@ -695,83 +698,96 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
         </Button>
       </SimpleGrid>
 
-      { emailStep === 'email' ? (
-        <Box as="form" onSubmit={ handleSendCode } textAlign="center">
-          <Flex gap={ 2 } direction="row">
-            <Input
-              aria-label="Email address"
-              type="email"
-              value={ email }
-              onChange={ handleEmailChange }
-              placeholder="you@example.com"
-              h="42px"
-              minW={ 0 }
-              textAlign="center"
-              borderColor="border.divider"
-              disabled={ isBusy }
-              required
-            />
-            <Button
-              type="submit"
-              variant="solid"
-              h="42px"
-              minW={{ base: '118px', sm: '132px' }}
-              flexShrink={ 0 }
-              justifyContent="center"
-              whiteSpace="nowrap"
-              loading={ pendingAction === 'email' }
-              disabled={ isBusy || !email.trim() }
-            >
-              <SpriteIcon name="email" boxSize={ 4 }/>
-              Send code
-            </Button>
-          </Flex>
-        </Box>
-      ) : (
-        <Box as="form" onSubmit={ handleVerifyEmail } textAlign="center">
-          <Text fontSize="sm" fontWeight={ 700 } textAlign="center">Enter verification code</Text>
-          <Text color="text.secondary" fontSize="xs" mt={ 1 } mb={ 3 } textAlign="center">
-            We sent a code to { email.trim() }.
-          </Text>
-          <Flex gap={ 2 } direction="row">
-            <Input
-              aria-label="Email verification code"
-              inputMode="numeric"
-              autoComplete="one-time-code"
-              value={ verificationCode }
-              onChange={ handleVerificationCodeChange }
-              placeholder="Verification code"
-              h="42px"
-              minW={ 0 }
-              textAlign="center"
-              borderColor="border.divider"
-              disabled={ isBusy }
-              required
-            />
-            <Button
-              type="submit"
-              variant="solid"
-              h="42px"
-              minW={{ base: '118px', sm: '132px' }}
-              flexShrink={ 0 }
-              justifyContent="center"
-              loading={ pendingAction === 'email-verify' }
-              disabled={ isBusy || !verificationCode.trim() }
-            >
-              Verify
-            </Button>
-          </Flex>
-          <Button
-            variant="solid"
-            size="sm"
-            mt={ 3 }
-            onClick={ handleUseAnotherEmail }
-            disabled={ isBusy }
+      <Box h="96px">
+        { emailStep === 'email' ? (
+          <Box
+            as="form"
+            h="full"
+            display="flex"
+            alignItems="center"
+            onSubmit={ handleSendCode }
+            textAlign="center"
           >
-            Use another email
-          </Button>
-        </Box>
-      ) }
+            <Flex gap={ 2 } direction="row" width="full">
+              <Input
+                aria-label="Email address"
+                type="email"
+                value={ email }
+                onChange={ handleEmailChange }
+                placeholder="you@example.com"
+                h="42px"
+                minW={ 0 }
+                textAlign="center"
+                borderColor="border.divider"
+                disabled={ isBusy }
+                required
+              />
+              <Button
+                type="submit"
+                variant="solid"
+                h="42px"
+                minW={{ base: '118px', sm: '132px' }}
+                flexShrink={ 0 }
+                justifyContent="center"
+                whiteSpace="nowrap"
+                loading={ pendingAction === 'email' }
+                disabled={ isBusy || !email.trim() }
+              >
+                <SpriteIcon name="email" boxSize={ 4 }/>
+                Send code
+              </Button>
+            </Flex>
+          </Box>
+        ) : (
+          <Box as="form" h="full" onSubmit={ handleVerifyEmail } textAlign="center">
+            <Text fontSize="sm" fontWeight={ 700 } textAlign="center">Enter verification code</Text>
+            <Flex gap={ 2 } direction="row" mt={ 2 }>
+              <Input
+                aria-label="Email verification code"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                value={ verificationCode }
+                onChange={ handleVerificationCodeChange }
+                placeholder="Verification code"
+                h="42px"
+                minW={ 0 }
+                textAlign="center"
+                borderColor="border.divider"
+                disabled={ isBusy }
+                required
+              />
+              <Button
+                type={ hasVerificationCode ? 'submit' : 'button' }
+                variant={ hasVerificationCode ? 'solid' : 'plain' }
+                h="42px"
+                minW={{ base: '118px', sm: '132px' }}
+                flexShrink={ 0 }
+                justifyContent="center"
+                color={ hasVerificationCode ? undefined : 'link.primary' }
+                loading={ hasVerificationCode && pendingAction === 'email-verify' }
+                disabled={ isBusy }
+                onClick={ hasVerificationCode ? undefined : handleUseAnotherEmail }
+              >
+                { hasVerificationCode ? 'Verify' : 'Change' }
+              </Button>
+            </Flex>
+            <Text
+              color="text.secondary"
+              fontSize="xs"
+              lineHeight="16px"
+              mt={ 1 }
+              px={ 2 }
+              textAlign="center"
+              whiteSpace="nowrap"
+              overflow="hidden"
+              textOverflow="ellipsis"
+              title={ email.trim() }
+            >
+              We sent a code to { email.trim() }.
+            </Text>
+          </Box>
+        ) }
+      </Box>
 
       <Flex alignItems="center" gap={ 3 }>
         <Box h="1px" flex="1" bg="border.divider"/>
