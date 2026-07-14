@@ -2,6 +2,8 @@
 
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
+// SPDX-License-Identifier: LicenseRef-Blockscout
+
 import { Box, Flex, Spinner, Text } from '@chakra-ui/react';
 import React from 'react';
 
@@ -64,8 +66,8 @@ const UserWalletMenuContent = ({
         />
         { isReconnecting && <Spinner size="sm" m="2px" flexShrink={ 0 }/> }
       </Flex>
-      <Button size="sm" width="full" variant="outline" onClick={ onDisconnect } mt={ 4 }>
-        Disconnect
+      <Button width="full" variant="solid" onClick={ onDisconnect } mt={ 4 }>
+        Disconnect wallet
       </Button>
     </Box>
   );

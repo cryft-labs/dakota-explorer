@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
+// SPDX-License-Identifier: LicenseRef-Blockscout
+
 import { Box, Flex, Input, SimpleGrid, Stack, Text } from '@chakra-ui/react';
 import QRCode from 'qrcode';
 import React from 'react';
@@ -363,6 +365,23 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
   const dragStartY = React.useRef(0);
   const dragOffsetRef = React.useRef(0);
   const connectionAttemptRef = React.useRef(0);
+  const lastViewRef = React.useRef<Exclude<ModalView, null>>('connect');
+  const lastConnectedAddressRef = React.useRef<string | undefined>(undefined);
+
+  React.useEffect(() => {
+    if (view) {
+      lastViewRef.current = view;
+    }
+  }, [ view ]);
+
+  React.useEffect(() => {
+    if (activeAccount?.address) {
+      lastConnectedAddressRef.current = activeAccount.address;
+    }
+  }, [ activeAccount?.address ]);
+
+  const renderedView = view ?? lastViewRef.current;
+  const displayedAddress = activeAccount?.address ?? lastConnectedAddressRef.current;
 
   React.useEffect(() => {
     if (view === 'connect') {
@@ -584,14 +603,14 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
   }, [ email, runConnection, verificationCode ]);
 
   const handleCopyAddress = React.useCallback(async() => {
-    if (!activeAccount?.address) {
+    if (!displayedAddress) {
       return;
     }
 
-    await navigator.clipboard.writeText(activeAccount.address);
+    await navigator.clipboard.writeText(displayedAddress);
     setIsCopied(true);
     window.setTimeout(() => setIsCopied(false), 1600);
-  }, [ activeAccount?.address ]);
+  }, [ displayedAddress ]);
 
   const handleDisconnect = React.useCallback(() => {
     if (activeWallet) {
@@ -803,7 +822,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
     />
   ) : walletOptionsContent;
 
-  const accountContent = activeAccount ? (
+  const accountContent = displayedAddress ? (
     <Stack gap={ 5 } textAlign="center">
       <Text color="text.secondary" fontSize="sm" textAlign="center">
         This wallet address is active for Dakota Cards Explorer signatures and contract transactions.
@@ -818,7 +837,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
         bg={{ _light: 'rgba(240, 253, 250, 0.72)', _dark: 'rgba(16, 55, 47, 0.54)' }}
       >
         <Flex alignItems="center" gap={ 3 }>
-          <AddressIdenticon size={ 42 } hash={ activeAccount.address }/>
+          <AddressIdenticon size={ 42 } hash={ displayedAddress }/>
           <Text minW={ 0 } flex="1" fontSize="xs" color="text.secondary">
             { walletLabel }
           </Text>
@@ -836,15 +855,19 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
         <Text
           mt={ 2 }
           width="full"
+          minW={ 0 }
           fontFamily="mono"
-          fontSize={{ base: '10px', sm: 'xs' }}
+          fontSize={{ base: '11px', sm: 'sm' }}
+          lineHeight="20px"
           fontWeight={ 700 }
+          letterSpacing="0"
           textAlign="center"
           whiteSpace="nowrap"
-          overflowX="auto"
-          css={{ scrollbarWidth: 'thin' }}
+          overflow="hidden"
+          textOverflow="ellipsis"
+          title={ displayedAddress }
         >
-          { activeAccount.address }
+          { displayedAddress }
         </Text>
       </Box>
 
@@ -942,7 +965,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
             },
           }}
         >
-          { view === 'account' ? 'Connected wallet' : 'Connect wallet' }
+          { renderedView === 'account' ? 'Connected wallet' : 'Connect wallet' }
         </DialogHeader>
         <DialogBody
           position="relative"
@@ -951,7 +974,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
           pb={{ base: 4, lg: 6 }}
           textAlign="center"
         >
-          { view === 'account' ? accountContent : connectContent }
+          { renderedView === 'account' ? accountContent : connectContent }
         </DialogBody>
       </DialogContent>
     </DialogRoot>
