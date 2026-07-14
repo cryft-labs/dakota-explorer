@@ -2,7 +2,7 @@
 
 import { defineChain } from 'thirdweb';
 import type { Wallet } from 'thirdweb/wallets';
-import { createWallet, inAppWallet } from 'thirdweb/wallets';
+import { createWallet, inAppWallet, walletConnect } from 'thirdweb/wallets';
 
 import { chains, currentChain } from 'src/features/connect-wallet/utils/chains';
 import { thirdwebClient as configuredThirdwebClient } from 'src/features/connect-wallet/utils/thirdweb-client';
@@ -42,16 +42,34 @@ if (!thirdwebChain) {
 
 export const thirdwebInAppWallet = inAppWallet({ auth: { options: [ 'google', 'apple', 'email' ] } });
 
-export const thirdwebWallets: Array<Wallet> = [
-  thirdwebInAppWallet,
-  createWallet('io.metamask'),
-  createWallet('com.coinbase.wallet'),
-  createWallet('walletConnect'),
-];
-
 export const thirdwebAppMetadata = {
   name: 'Dakota Cards | Network Explorer',
   description: 'Dakota Network blockchain and network explorer',
   url: config.app.baseUrl,
   logoUrl: config.chain.icon.default,
 };
+
+export const getThirdwebAppMetadata = () => {
+  const url = typeof window === 'undefined' ? thirdwebAppMetadata.url : window.location.origin;
+
+  try {
+    return {
+      ...thirdwebAppMetadata,
+      url,
+      logoUrl: new URL(thirdwebAppMetadata.logoUrl, `${ url }/`).toString(),
+    };
+  } catch {
+    return { ...thirdwebAppMetadata, url };
+  }
+};
+
+export const thirdwebWallets: Array<Wallet> = [
+  thirdwebInAppWallet,
+  createWallet('io.metamask'),
+  createWallet('com.coinbase.wallet', {
+    appMetadata: thirdwebAppMetadata,
+    chains: [ thirdwebChain ],
+    walletConfig: { options: 'eoaOnly' },
+  }),
+  walletConnect(),
+];

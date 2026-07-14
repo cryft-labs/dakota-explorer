@@ -12,6 +12,8 @@ import {
 import { useAccount, useConnect, useDisconnect, useSwitchChain } from 'wagmi';
 
 import {
+  getThirdwebAppMetadata,
+  thirdwebChain,
   thirdwebClient,
   thirdwebWallets,
 } from 'src/features/connect-wallet/utils/thirdweb-config';
@@ -90,11 +92,19 @@ interface Props {
 }
 
 const ThirdwebProvider = ({ children }: Props) => {
+  const appMetadata = React.useMemo(() => getThirdwebAppMetadata(), []);
+
   return (
     <ThirdwebProviderCore>
       <WagmiProvider>
         <ThirdwebWalletModalProvider>
-          <AutoConnect client={ thirdwebClient } wallets={ thirdwebWallets }/>
+          <AutoConnect
+            appMetadata={ appMetadata }
+            chain={ thirdwebChain }
+            client={ thirdwebClient }
+            wallets={ thirdwebWallets }
+            timeout={ 20_000 }
+          />
           <ThirdwebWagmiBridge/>
           { children }
         </ThirdwebWalletModalProvider>

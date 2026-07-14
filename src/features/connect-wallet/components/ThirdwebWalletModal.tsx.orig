@@ -392,11 +392,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
 
   const handleClose = React.useCallback(() => {
     connectionAttemptRef.current += 1;
-
-    if (view === 'connect') {
-      cancelConnection();
-    }
-
+    cancelConnection();
     setPendingAction(undefined);
     setWalletConnectPrompt(undefined);
     setError(undefined);
@@ -404,7 +400,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
     setIsDragging(false);
     dragOffsetRef.current = 0;
     onClose();
-  }, [ cancelConnection, onClose, view ]);
+  }, [ cancelConnection, onClose ]);
 
   const handleDragStart = React.useCallback((event: React.PointerEvent<HTMLDivElement>) => {
     dragStartY.current = event.clientY;
@@ -468,7 +464,6 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
       onConnected(connectedWallet);
     } catch (connectError) {
       if (attemptId === connectionAttemptRef.current) {
-        cancelConnection();
         setError(getErrorMessage(connectError) || 'Unable to connect this wallet. Please try again.');
       }
     } finally {
@@ -477,7 +472,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
         setWalletConnectPrompt(undefined);
       }
     }
-  }, [ cancelConnection, connect, disconnectWallet, onConnected ]);
+  }, [ connect, disconnectWallet, onConnected ]);
 
   const handleSocialConnect = React.useCallback((strategy: 'google' | 'apple') => {
     void runConnection(strategy, async() => {
@@ -790,13 +785,16 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
     />
   ) : walletOptionsContent;
 
+
   const accountContent = activeAccount ? (
     <Stack gap={ 5 } textAlign="center">
       <Text color="text.secondary" fontSize="sm" textAlign="center">
         This wallet address is active for Dakota Cards Explorer signatures and contract transactions.
       </Text>
 
-      <Box
+      <Flex
+        alignItems="center"
+        gap={ 3 }
         borderWidth="1px"
         borderColor="border.divider"
         borderRadius="md"
@@ -804,36 +802,29 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
         py={ 3 }
         bg={{ _light: 'rgba(240, 253, 250, 0.72)', _dark: 'rgba(16, 55, 47, 0.54)' }}
       >
-        <Flex alignItems="center" gap={ 3 }>
-          <AddressIdenticon size={ 42 } hash={ activeAccount.address }/>
-          <Text minW={ 0 } flex="1" fontSize="xs" color="text.secondary">
-            { walletLabel }
+        <AddressIdenticon size={ 42 } hash={ activeAccount.address }/>
+        <Box minW={ 0 } flex="1">
+          <Text fontSize="xs" color="text.secondary" mb={ 1 }>{ walletLabel }</Text>
+          <Text
+            fontFamily="mono"
+            fontSize="sm"
+            fontWeight={ 700 }
+            overflowWrap="anywhere"
+          >
+            { activeAccount.address }
           </Text>
-          <Tooltip content={ isCopied ? 'Copied' : 'Copy address' }>
-            <IconButton
-              aria-label={ isCopied ? 'Address copied' : 'Copy wallet address' }
-              variant="icon_secondary"
-              size="md"
-              onClick={ handleCopyAddress }
-            >
-              <SpriteIcon name={ isCopied ? 'copy_check' : 'copy' }/>
-            </IconButton>
-          </Tooltip>
-        </Flex>
-        <Text
-          mt={ 2 }
-          width="full"
-          fontFamily="mono"
-          fontSize={{ base: '10px', sm: 'xs' }}
-          fontWeight={ 700 }
-          textAlign="center"
-          whiteSpace="nowrap"
-          overflowX="auto"
-          css={{ scrollbarWidth: 'thin' }}
-        >
-          { activeAccount.address }
-        </Text>
-      </Box>
+        </Box>
+        <Tooltip content={ isCopied ? 'Copied' : 'Copy address' }>
+          <IconButton
+            aria-label={ isCopied ? 'Address copied' : 'Copy wallet address' }
+            variant="icon_secondary"
+            size="md"
+            onClick={ handleCopyAddress }
+          >
+            <SpriteIcon name={ isCopied ? 'copy_check' : 'copy' }/>
+          </IconButton>
+        </Tooltip>
+      </Flex>
 
       <Flex justifyContent="space-between" alignItems="center" gap={ 4 } fontSize="sm">
         <Text color="text.secondary">Network</Text>

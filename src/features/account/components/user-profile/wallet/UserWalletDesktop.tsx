@@ -28,12 +28,18 @@ const UserWalletDesktop = ({ buttonSize, buttonVariant = 'header' }: Props) => {
   const { isAutoConnectDisabled } = useMarketplaceContext();
 
   const isPending =
+    web3Wallet.isReconnecting ||
     (web3Wallet.isConnected && web3Account.isConnecting) ||
     (!web3Wallet.isConnected && web3Wallet.isOpen);
 
   const handleDisconnectClick = React.useCallback(() => {
     web3Wallet.disconnect();
     walletMenu.onClose();
+  }, [ web3Wallet, walletMenu ]);
+
+  const handleOpenDetailsClick = React.useCallback(() => {
+    walletMenu.onClose();
+    web3Wallet.openModal();
   }, [ web3Wallet, walletMenu ]);
 
   const handleOpenChange = React.useCallback(({ open }: { open: boolean }) => {
@@ -55,19 +61,20 @@ const UserWalletDesktop = ({ buttonSize, buttonVariant = 'header' }: Props) => {
         <UserWalletButton
           size={ buttonSize }
           variant={ buttonVariant }
-          address={ web3Account.address }
+          address={ web3Wallet.address }
           isPending={ isPending }
           isAutoConnectDisabled={ isAutoConnectDisabled }
         />
       </PopoverTrigger>
-      { web3Account.address && walletMenu.open && (
+      { web3Wallet.address && walletMenu.open && (
         <PopoverContent w="260px">
           <PopoverBody>
             <UserWalletMenuContent
-              address={ web3Account.address }
+              address={ web3Wallet.address }
               isAutoConnectDisabled={ isAutoConnectDisabled }
               isReconnecting={ web3Wallet.isReconnecting }
               onDisconnect={ handleDisconnectClick }
+              onOpenDetails={ handleOpenDetailsClick }
             />
           </PopoverBody>
         </PopoverContent>

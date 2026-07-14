@@ -147,6 +147,7 @@ export default function useWalletThirdweb({ source, onConnect }: Params): Result
     openModal,
   }), [
     activeAccount?.address,
+    connectionStatus,
     handleConnect,
     handleDisconnect,
     isConnected,
@@ -154,5 +155,6 @@ export default function useWalletThirdweb({ source, onConnect }: Params): Result
     isSyncing,
     openModal,
     walletModal.isOpen,
+    wagmiAccount.isReconnecting,
   ]);
 }

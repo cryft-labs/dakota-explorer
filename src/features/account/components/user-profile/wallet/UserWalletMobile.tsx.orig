@@ -22,18 +22,12 @@ const UserWalletMobile = () => {
   const { isAutoConnectDisabled } = useMarketplaceContext();
 
   const isPending =
-    web3Wallet.isReconnecting ||
     (web3Wallet.isConnected && web3Account.isConnecting) ||
     (!web3Wallet.isConnected && web3Wallet.isOpen);
 
   const handleDisconnectClick = React.useCallback(() => {
     web3Wallet.disconnect();
     walletMenu.onClose();
-  }, [ web3Wallet, walletMenu ]);
-
-  const handleOpenDetailsClick = React.useCallback(() => {
-    walletMenu.onClose();
-    web3Wallet.openModal();
   }, [ web3Wallet, walletMenu ]);
 
   const handleOpenChange = React.useCallback(({ open }: { open: boolean }) => {
@@ -57,19 +51,18 @@ const UserWalletMobile = () => {
       <DrawerTrigger>
         <UserWalletButton
           variant="header"
-          address={ web3Wallet.address }
+          address={ web3Account.address }
           isPending={ isPending }
         />
       </DrawerTrigger>
       <DrawerContent maxWidth="300px">
         <DrawerBody p={ 6 }>
-          { web3Wallet.address && walletMenu.open && (
+          { web3Account.address && walletMenu.open && (
             <UserWalletMenuContent
-              address={ web3Wallet.address }
+              address={ web3Account.address }
               isAutoConnectDisabled={ isAutoConnectDisabled }
               isReconnecting={ web3Wallet.isReconnecting }
               onDisconnect={ handleDisconnectClick }
-              onOpenDetails={ handleOpenDetailsClick }
             />
           ) }
         </DrawerBody>
