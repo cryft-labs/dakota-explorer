@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
 import { Box, Flex, Input, SimpleGrid, Stack, Text } from '@chakra-ui/react';
+import { keyframes } from '@emotion/react';
 import QRCode from 'qrcode';
 import React from 'react';
 import {
@@ -118,6 +119,17 @@ interface ModalProps {
 }
 
 type ExternalWalletId = 'io.metamask' | 'com.coinbase.wallet' | 'walletConnect';
+
+const verificationNoticeReveal = keyframes({
+  from: {
+    opacity: 0,
+    transform: 'translate(-50%, 12px) scale(0.98)',
+  },
+  to: {
+    opacity: 1,
+    transform: 'translate(-50%, calc(-100% - 10px)) scale(1)',
+  },
+});
 
 const EXTERNAL_WALLETS: Array<{ id: ExternalWalletId; label: string }> = [
   { id: 'io.metamask', label: 'MetaMask' },
@@ -758,12 +770,12 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
               />
               <Button
                 type={ hasVerificationCode ? 'submit' : 'button' }
-                variant={ hasVerificationCode ? 'solid' : 'plain' }
+                variant="solid"
                 h="42px"
                 minW={{ base: '118px', sm: '132px' }}
                 flexShrink={ 0 }
                 justifyContent="center"
-                color={ hasVerificationCode ? undefined : 'link.primary' }
+                whiteSpace="nowrap"
                 loading={ hasVerificationCode && pendingAction === 'email-verify' }
                 disabled={ isBusy }
                 onClick={ hasVerificationCode ? undefined : handleUseAnotherEmail }
@@ -771,20 +783,6 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
                 { hasVerificationCode ? 'Verify' : 'Change' }
               </Button>
             </Flex>
-            <Text
-              color="text.secondary"
-              fontSize="xs"
-              lineHeight="16px"
-              mt={ 1 }
-              px={ 2 }
-              textAlign="center"
-              whiteSpace="nowrap"
-              overflow="hidden"
-              textOverflow="ellipsis"
-              title={ email.trim() }
-            >
-              We sent a code to { email.trim() }.
-            </Text>
           </Box>
         ) }
       </Box>
@@ -921,7 +919,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
         mt={{ lg: 0 }}
         mx={ 0 }
         mb={ 0 }
-        overflow="hidden"
+        overflow="visible"
         position="relative"
         isolation="isolate"
         transform={ dragOffset > 0 ? { base: `translate3d(0, ${ dragOffset }px, 0)`, lg: 'none' } : undefined }
@@ -936,6 +934,43 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
         boxShadow={{ _light: '0 24px 70px rgba(15, 118, 110, 0.18)', _dark: '0 28px 80px rgba(0, 0, 0, 0.5)' }}
         backdropFilter="blur(18px)"
       >
+        { renderedView === 'connect' && emailStep === 'verify' && !walletConnectPrompt && (
+          <Flex
+            role="status"
+            aria-live="polite"
+            position="absolute"
+            top={ 0 }
+            left="50%"
+            zIndex={ 5 }
+            w="calc(100% - 32px)"
+            maxW="500px"
+            alignItems="center"
+            justifyContent="center"
+            gap={ 2 }
+            px={ 4 }
+            py={ 2.5 }
+            color="white"
+            bg={{ _light: 'rgba(15, 118, 110, 0.98)', _dark: 'rgba(11, 86, 69, 0.98)' }}
+            borderWidth="1px"
+            borderColor={{ _light: 'rgba(13, 148, 136, 0.35)', _dark: 'rgba(52, 211, 153, 0.35)' }}
+            borderRadius="md"
+            boxShadow={{ _light: '0 12px 30px rgba(15, 118, 110, 0.2)', _dark: '0 14px 34px rgba(0, 0, 0, 0.42)' }}
+            pointerEvents="none"
+            animation={ verificationNoticeReveal + ' 260ms cubic-bezier(0.22, 1, 0.36, 1) both' }
+          >
+            <SpriteIcon name="email" boxSize={ 4 } flexShrink={ 0 }/>
+            <Text
+              fontSize="sm"
+              fontWeight={ 700 }
+              whiteSpace="nowrap"
+              overflow="hidden"
+              textOverflow="ellipsis"
+              title={ email.trim() }
+            >
+              Verification code sent to { email.trim() }.
+            </Text>
+          </Flex>
+        ) }
         <Box
           aria-hidden="true"
           data-wallet-drag-handle="true"
@@ -959,7 +994,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
             bg={{ _light: 'rgba(15, 118, 110, 0.28)', _dark: 'rgba(255, 255, 255, 0.3)' }}
           />
         </Box>
-        <DakotaStarfield ambientInset="-12px" glimmerInset="-6px"/>
+        <DakotaStarfield ambientInset="0" glimmerInset="0"/>
         <DialogHeader
           position="relative"
           zIndex={ 3 }

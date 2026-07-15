@@ -62,9 +62,9 @@ export const recipe = defineRecipe({
         color: 'button.outline.fg',
         borderColor: 'button.outline.fg',
         _hover: {
-          bg: 'hover',
-          color: 'white',
-          borderColor: 'hover',
+          bg: 'button.solid.bg.hover',
+          color: 'button.solid.text',
+          borderColor: 'button.solid.bg.hover',
         },
         _loading: {
           opacity: 1,

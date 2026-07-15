@@ -41,3 +41,44 @@ describe('stats details route', () => {
     expect(result).toMatchSnapshot();
   });
 });
+
+describe('crawler metadata', () => {
+  it('publishes Dakota homepage schema and IPFS CID copy', () => {
+    const result = generate({ pathname: '/' });
+
+    expect(result.description).toContain('IPFS CIDs');
+    expect(result.robots).toBe('index,follow');
+    expect(result.canonical).toBe('http://localhost:3000/');
+    expect(result.jsonLd).toMatchObject({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Dakota Cards Explorer',
+      url: 'http://localhost:3000',
+    });
+  });
+
+  it('builds a canonical URL for a dynamic route', () => {
+    const result = generate({ pathname: '/tx/[hash]', query: { hash: transaction.hash } });
+
+    expect(result.canonical).toBe(`http://localhost:3000/tx/${ transaction.hash }`);
+  });
+
+  it('drops tab query parameters from address canonicals', () => {
+    const result = generate({
+      pathname: '/address/[hash]',
+      query: { hash: addressHash, tab: 'contract' },
+    });
+
+    expect(result.canonical).toBe(`http://localhost:3000/address/${ addressHash }`);
+  });
+
+  it('prevents search and account utility pages from being indexed', () => {
+    const searchResult = generate({ pathname: '/search-results', query: { q: 'latest block' } });
+    const accountResult = generate({ pathname: '/account/watchlist' });
+
+    expect(searchResult.canonical).toBeUndefined();
+    expect(searchResult.robots).toBe('noindex,follow');
+    expect(accountResult.canonical).toBeUndefined();
+    expect(accountResult.robots).toBe('noindex,nofollow');
+  });
+});

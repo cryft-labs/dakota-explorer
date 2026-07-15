@@ -10,12 +10,31 @@ import generateTokenProductSchema from 'src/slices/token/structured-data/token';
 
 import generateDappInfoSchema from 'src/features/marketplace/structured-data/dapp-info';
 
+import config from 'src/config';
+
 interface Params<Pathname extends Route['pathname']> {
   route: RouteParams<Pathname>;
   apiData: ApiData<Pathname>;
 }
 
+export const STRUCTURED_DATA_SCRIPT_ID = 'dakota-explorer-structured-data';
+
 export function generateStructuredData<Pathname extends Route['pathname']>(params: Params<Pathname>): StructuredData | undefined {
+
+  if (params.route.pathname === '/') {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Dakota Cards Explorer',
+      alternateName: [
+        'Dakota Network Explorer',
+        'Dakota Cards Blockchain and Network Explorer',
+      ],
+      url: config.app.baseUrl,
+      description: config.metadata.og.description,
+      inLanguage: 'en',
+    };
+  }
 
   if (!params.apiData || typeof params.apiData !== 'object' || params.apiData === null) {
     return;

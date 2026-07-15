@@ -5,8 +5,8 @@ import { getEnvValue, getExternalAssetFilePath } from 'src/config/utils/envs';
 
 const defaultImageUrl = '/static/og_image.png';
 const defaultDescription = [
-  'Dakota Network Blockchain Explorer for searching Dakota Network transactions, blocks,',
-  'addresses, tokens, smart contracts, and validator activity across the Dakota Cards ecosystem.',
+  'Dakota Network Blockchain Explorer for searching transactions, blocks, addresses, tokens,',
+  'smart contracts, validator activity, and IPFS CIDs across the Dakota Cards ecosystem.',
 ].join(' ');
 
 const metadata = Object.freeze({

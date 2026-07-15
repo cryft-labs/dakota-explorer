@@ -16,3 +16,6 @@ echo "Thirdweb SDK version: ${INSTALLED_THIRDWEB_VERSION}"
 source ./deploy/scripts/build_sprite.sh
 ./deploy/scripts/make_envs_script.sh
 next build
+node ./deploy/scripts/og_image_generator.js
+bash ./deploy/scripts/sitemap_generator.sh
+node ./deploy/scripts/verify_seo_artifacts.mjs

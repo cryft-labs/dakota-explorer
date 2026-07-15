@@ -82,7 +82,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
       },
       outline: {
         fg: {
-          DEFAULT: { value: { _light: '{colors.theme.button.primary._light}', _dark: '{colors.theme.button.primary._dark}' } },
+          DEFAULT: { value: { _light: '{colors.theme.button.primary._light}', _dark: '{colors.theme.link.primary._dark}' } },
         },
       },
       subtle: {

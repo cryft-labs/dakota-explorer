@@ -15,6 +15,7 @@ import { castToString } from 'src/toolkit/utils/guards';
 import compileValue from './compile-value';
 import getCanonicalUrl from './get-canonical-url';
 import getChainExplorerTitle from './get-chain-explorer-title';
+import { getRobotsDirective } from './route-indexing';
 import { generateStructuredData } from './structured-data';
 import { TEMPLATE_MAP } from './templates';
 
@@ -37,16 +38,18 @@ export default function generate<Pathname extends Route['pathname']>(route: Rout
   const description = compileValue(TEMPLATE_MAP[route.pathname].metadata.description, params);
 
   const jsonLd = generateStructuredData({ route, apiData });
+  const canonical = getCanonicalUrl(route.pathname, route.query);
 
   return {
     title: title,
     description,
     opengraph: {
       title: title,
-      description: TEMPLATE_MAP[route.pathname].og?.description,
-      imageUrl: TEMPLATE_MAP[route.pathname].og?.image,
+      description: TEMPLATE_MAP[route.pathname].og?.description || description,
+      imageUrl: TEMPLATE_MAP[route.pathname].og?.image || config.metadata.og.imageUrl,
     },
-    canonical: getCanonicalUrl(route.pathname),
+    canonical,
+    robots: getRobotsDirective(route.pathname),
     jsonLd,
   };
 }

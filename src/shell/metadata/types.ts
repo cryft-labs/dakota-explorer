@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
 import type { Route } from 'nextjs-routes';
-import type { Product, WebApplication, WithContext } from 'schema-dts';
+import type { Product, WebApplication, WebSite, WithContext } from 'schema-dts';
 
 import type { MarketplaceDapp } from '@blockscout/admin-rs-types';
 import type { schemas } from '@blockscout/api-types';
@@ -20,7 +20,8 @@ export type ApiData<Pathname extends Route['pathname']> =
 ) | null;
 /* eslint-enable @stylistic/indent */
 
-export type StructuredData = WithContext<Product> | WithContext<WebApplication>;
+export type StructuredData = WithContext<Product> | WithContext<WebApplication> | WithContext<WebSite>;
+export type RobotsDirective = 'index,follow' | 'noindex,follow' | 'noindex,nofollow';
 
 export interface Metadata {
   title: string;
@@ -31,5 +32,6 @@ export interface Metadata {
     imageUrl?: string;
   };
   canonical: string | undefined;
+  robots: RobotsDirective;
   jsonLd?: StructuredData;
 }

@@ -3,6 +3,16 @@ const path = require('path');
 
 const stripTrailingSlash = (str) => str[str.length - 1] === '/' ? str.slice(0, -1) : str;
 
+const NON_INDEXABLE_ROUTES = new Set([
+  '/404',
+  '/graphiql',
+  '/l2-deposits',
+  '/l2-output-roots',
+  '/l2-txn-batches',
+  '/l2-withdrawals',
+  '/search-results',
+]);
+
 const fetchResource = async(url, formatter) => {
   console.log('🌀 [next-sitemap] Fetching resource:', url);
   try {
@@ -117,6 +127,7 @@ const fetchStatsCharts = async() => {
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl,
+  autoLastmod: false,
   generateIndexSitemap: false,
   generateRobotsTxt: true,
   robotsTxtOptions: {
@@ -131,6 +142,7 @@ module.exports = {
   sourceDir: path.resolve(process.cwd(), '../../../.next'),
   outDir: path.resolve(process.cwd(), '../../../public'),
   exclude: [
+    ...NON_INDEXABLE_ROUTES,
     '/account/*',
     '/auth/*',
     '/login',
@@ -138,6 +150,10 @@ module.exports = {
     '/chakra',
   ],
   transform: async({ lastmod, ...config }, path) => {
+    if (NON_INDEXABLE_ROUTES.has(path)) {
+      return null;
+    }
+
     switch (path) {
       case '/batches':
       case '/deposits':
@@ -298,26 +314,38 @@ module.exports = {
       fetchResource(
         `${ apiUrl }/stats/hot-smart-contracts?scale=30d`,
         (data) => data.items.map(({ contract_address }) => ({
-          path: `/address/${ contract_address.hash }?tab=contract`
+          path: `/address/${ contract_address.hash }`
         })),
       ) : 
       fetchResource(
         `${ apiUrl }/smart-contracts`,
         (data) => data.items.map(({ address }) => ({
-          path: `/address/${ address.hash }?tab=contract`
+          path: `/address/${ address.hash }`
         })),
       );
     const dapps = fetchDapps();
     const statsCharts = fetchStatsCharts();
 
-    return Promise.all([
-      ...(await addresses || []),
-      ...(await txs || []),
-      ...(await blocks || []),
-      ...(await tokens || []),
-      ...(await contracts || []),
-      ...(await dapps || []),
-      ...(await statsCharts || []),
-    ].map(({ path, lastmod }) => config.transform({ ...config, lastmod }, path)));
+    const resourceGroups = await Promise.all([
+      addresses,
+      txs,
+      blocks,
+      tokens,
+      contracts,
+      dapps,
+      statsCharts,
+    ]);
+    const entriesByPath = new Map();
+
+    resourceGroups.flatMap((entries) => entries || []).forEach((entry) => {
+      const currentEntry = entriesByPath.get(entry.path);
+      if (!currentEntry || entry.lastmod) {
+        entriesByPath.set(entry.path, entry);
+      }
+    });
+
+    return Promise.all(
+      Array.from(entriesByPath.values()).map(({ path, lastmod }) => config.transform({ ...config, lastmod }, path)),
+    );
   },
 };

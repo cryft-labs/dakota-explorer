@@ -33,7 +33,7 @@ const OG_ROOT_PAGE = {
   image: config.metadata.og.imageUrl,
 };
 
-const DESCRIPTION_DEFAULT = 'Use the Dakota Network Blockchain Explorer to search transactions, verify smart contracts, analyze addresses, and access Dakota Network blockchain data through explorer APIs.';
+const DESCRIPTION_DEFAULT = 'Use the Dakota Network Blockchain Explorer to search transactions and IPFS CIDs, verify smart contracts, analyze addresses, and access Dakota Network blockchain data through explorer APIs.';
 
 export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
   '/': {
@@ -42,7 +42,7 @@ export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
         'default': 'Dakota Cards | Blockchain and Network Explorer',
       },
       description: {
-        'default': 'Explore the Dakota Network Blockchain Explorer. Search Dakota Network transactions, addresses, tokens, blocks, smart contracts, and more.',
+        'default': 'Explore the Dakota Network Blockchain Explorer. Search transactions, addresses, tokens, blocks, smart contracts, and IPFS CIDs across the Dakota Cards ecosystem.',
       },
     },
     og: OG_ROOT_PAGE,

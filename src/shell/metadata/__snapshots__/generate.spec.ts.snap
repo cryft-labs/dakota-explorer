@@ -2,43 +2,46 @@
 
 exports[`address route > enhanced data 1`] = `
 {
-  "canonical": undefined,
-  "description": "View the account balance, transactions, and other data for duck.eth on the Blockscout (Blockscout) Explorer",
+  "canonical": "http://localhost:3000/address/0xd789a607CEac2f0E14867de4EB15b15C9FFB5859",
+  "description": "View the account balance, transactions, and other data for duck.eth on the Blockscout Blockchain Explorer",
   "jsonLd": undefined,
   "opengraph": {
-    "description": undefined,
-    "imageUrl": undefined,
-    "title": "Blockscout address details for duck.eth | Blockscout",
+    "description": "View the account balance, transactions, and other data for duck.eth on the Blockscout Blockchain Explorer",
+    "imageUrl": "http://localhost:3000/static/og_image.png",
+    "title": "Blockscout address details for duck.eth",
   },
-  "title": "Blockscout address details for duck.eth | Blockscout",
+  "robots": "index,follow",
+  "title": "Blockscout address details for duck.eth",
 }
 `;
 
 exports[`address route > no enhanced data 1`] = `
 {
-  "canonical": undefined,
+  "canonical": "http://localhost:3000/address/0xd789a607CEac2f0E14867de4EB15b15C9FFB5859",
   "description": "View the account balance, transactions, and more for 0xd789a607CEac2f0E14867de4EB15b15C9FFB5859 on Blockscout.",
   "jsonLd": undefined,
   "opengraph": {
-    "description": undefined,
-    "imageUrl": undefined,
-    "title": "Blockscout address details for 0xd789a607CEac2f0E14867de4EB15b15C9FFB5859 | Blockscout",
+    "description": "View the account balance, transactions, and more for 0xd789a607CEac2f0E14867de4EB15b15C9FFB5859 on Blockscout.",
+    "imageUrl": "http://localhost:3000/static/og_image.png",
+    "title": "Blockscout address details for 0xd789a607CEac2f0E14867de4EB15b15C9FFB5859",
   },
-  "title": "Blockscout address details for 0xd789a607CEac2f0E14867de4EB15b15C9FFB5859 | Blockscout",
+  "robots": "index,follow",
+  "title": "Blockscout address details for 0xd789a607CEac2f0E14867de4EB15b15C9FFB5859",
 }
 `;
 
 exports[`dynamic route 1`] = `
 {
-  "canonical": undefined,
+  "canonical": "http://localhost:3000/tx/0x62d597ebcf3e8d60096dd0363bc2f0f5e2df27ba1dacd696c51aa7c9409f3193",
   "description": "Blockscout detailed transaction info. View transaction status, block confirmation, gas fee, native coin and token transfers.",
   "jsonLd": undefined,
   "opengraph": {
-    "description": undefined,
-    "imageUrl": undefined,
-    "title": "Blockscout transaction 0x62d597ebcf3e8d60096dd0363bc2f0f5e2df27ba1dacd696c51aa7c9409f3193 | Blockscout",
+    "description": "Blockscout detailed transaction info. View transaction status, block confirmation, gas fee, native coin and token transfers.",
+    "imageUrl": "http://localhost:3000/static/og_image.png",
+    "title": "Blockscout transaction 0x62d597ebcf3e8d60096dd0363bc2f0f5e2df27ba1dacd696c51aa7c9409f3193",
   },
-  "title": "Blockscout transaction 0x62d597ebcf3e8d60096dd0363bc2f0f5e2df27ba1dacd696c51aa7c9409f3193 | Blockscout",
+  "robots": "index,follow",
+  "title": "Blockscout transaction 0x62d597ebcf3e8d60096dd0363bc2f0f5e2df27ba1dacd696c51aa7c9409f3193",
 }
 `;
 
@@ -48,38 +51,41 @@ exports[`static route 1`] = `
   "description": "Browse Blockscout transactions. Track transaction status, fees, and details in real time.",
   "jsonLd": undefined,
   "opengraph": {
-    "description": "",
+    "description": "Dakota Network Blockchain Explorer for searching transactions, blocks, addresses, tokens, smart contracts, validator activity, and IPFS CIDs across the Dakota Cards ecosystem.",
     "imageUrl": "http://localhost:3000/static/og_image.png",
-    "title": "Blockscout transactions - Blockscout explorer | Blockscout",
+    "title": "Blockscout transactions - Blockscout explorer",
   },
-  "title": "Blockscout transactions - Blockscout explorer | Blockscout",
+  "robots": "index,follow",
+  "title": "Blockscout transactions - Blockscout explorer",
 }
 `;
 
 exports[`stats details route > enhanced data 1`] = `
 {
-  "canonical": undefined,
+  "canonical": "http://localhost:3000/stats/accountsGrowth",
   "description": "Cumulative account growth over time",
   "jsonLd": undefined,
   "opengraph": {
-    "description": undefined,
-    "imageUrl": undefined,
-    "title": "Number of accounts chart on Blockscout | Blockscout",
+    "description": "Cumulative account growth over time",
+    "imageUrl": "http://localhost:3000/static/og_image.png",
+    "title": "Number of accounts chart on Blockscout",
   },
-  "title": "Number of accounts chart on Blockscout | Blockscout",
+  "robots": "index,follow",
+  "title": "Number of accounts chart on Blockscout",
 }
 `;
 
 exports[`stats details route > no enhanced data 1`] = `
 {
-  "canonical": undefined,
+  "canonical": "http://localhost:3000/stats/accountsGrowth",
   "description": "Explore the accountsGrowth chart on Blockscout.",
   "jsonLd": undefined,
   "opengraph": {
-    "description": undefined,
-    "imageUrl": undefined,
-    "title": "Blockscout stats - Accounts growth chart | Blockscout",
+    "description": "Explore the accountsGrowth chart on Blockscout.",
+    "imageUrl": "http://localhost:3000/static/og_image.png",
+    "title": "Blockscout stats - Accounts growth chart",
   },
-  "title": "Blockscout stats - Accounts growth chart | Blockscout",
+  "robots": "index,follow",
+  "title": "Blockscout stats - Accounts growth chart",
 }
 `;

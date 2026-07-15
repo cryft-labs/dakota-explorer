@@ -140,8 +140,7 @@ const Footer = () => {
         </Flex>
         <Text mt={ 3 } fontSize="xs">
           Dakota Network Blockchain Explorer helps inspect Dakota Network blocks, transactions,
-          tokens, addresses, and smart contracts across the Dakota Cards ecosystem. IPFS CID searches
-          open matching content through the configured gateway.
+          tokens, addresses, smart contracts, and IPFS CIDs across the Dakota Cards ecosystem.
         </Text>
         <VStack mt={ 6 } alignItems="start" textStyle="xs" gap={ 1 }>
           <Flex flexDir={ onionDomain ? 'row' : 'column' } _empty={{ display: 'none' }} columnGap={ 6 } rowGap={ 1 }>
