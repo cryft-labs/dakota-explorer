@@ -6,6 +6,16 @@
     <span> blockchain explorer</span>
 </p>
 
+## Dakota deployment status
+
+The owner authorized merging the reviewed deployment changes into main on
+September 11, 2026. Commit `ca603ae` pins the Node 24 image and restricts runtime
+file permissions; this is the source already used by the Nebula deployment.
+The live explorer is `http://100.111.69.1:8080/`. Use the
+[network explorer runbook](https://github.com/cryft-labs/dakota-network/blob/main/Tools/Explorer/README.md)
+for the installed configuration and acceptance record. Pushing main does not
+restart hosts or open public ingress. The upstream examples below are generic.
+
 ## Running and configuring the app
 
 App is distributed as a docker image. Here you can find information about the [package](https://github.com/blockscout/frontend/pkgs/container/frontend) and its recent [releases](https://github.com/blockscout/frontend/releases).
