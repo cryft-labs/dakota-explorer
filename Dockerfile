@@ -1,7 +1,7 @@
 # *****************************
 # *** STAGE 1: Dependencies ***
 # *****************************
-FROM node:22.14.0-alpine AS deps
+FROM docker.io/library/node:24.21.0-alpine@sha256:be80f76cf40ec8e42b9bec49f60a55e0660f30af58d3e5a25530785b30ea67e2 AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat python3 make g++
 RUN ln -sf /usr/bin/python3 /usr/bin/python
@@ -17,7 +17,7 @@ RUN pnpm install --frozen-lockfile
 # *****************************
 # ****** STAGE 2: Build *******
 # *****************************
-FROM node:22.14.0-alpine AS builder
+FROM docker.io/library/node:24.21.0-alpine@sha256:be80f76cf40ec8e42b9bec49f60a55e0660f30af58d3e5a25530785b30ea67e2 AS builder
 RUN apk add --no-cache --upgrade libc6-compat bash jq
 RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
 
@@ -45,7 +45,7 @@ RUN set -a && \
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Build app for production
 ENV NODE_OPTIONS="--max-old-space-size=8192"
@@ -86,14 +86,14 @@ RUN pnpm exec tsc -p ./tools/dev-server/tsconfig.json
 # ******* STAGE 3: Run ********
 # *****************************
 # Production image, copy all the files and run next
-FROM node:22.14.0-alpine AS runner
+FROM docker.io/library/node:24.21.0-alpine@sha256:be80f76cf40ec8e42b9bec49f60a55e0660f30af58d3e5a25530785b30ea67e2 AS runner
 RUN apk add --no-cache --upgrade bash curl jq unzip
 
 ### APP
 WORKDIR /app
 
 # Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -128,8 +128,8 @@ COPY --chmod=755 ./deploy/scripts/export_pro_api_flag.sh .
 ## Favicon generator
 COPY --chmod=755 ./deploy/scripts/favicon_generator.sh .
 COPY --from=builder /app/favicon-generator-bundle ./deploy/tools/favicon-generator
-RUN ["chmod", "-R", "777", "./deploy/tools/favicon-generator"]
-RUN ["chmod", "-R", "777", "./public"]
+RUN chown -R nextjs:nodejs ./deploy/tools/favicon-generator && chmod -R u=rwX,go=rX ./deploy/tools/favicon-generator
+RUN chown -R nextjs:nodejs ./public && chmod -R u=rwX,go=rX ./public
 ## Sitemap generator
 COPY --chmod=755 ./deploy/scripts/sitemap_generator.sh .
 COPY --from=builder /app/sitemap-generator-bundle ./deploy/tools/sitemap-generator

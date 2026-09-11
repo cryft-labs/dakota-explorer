@@ -12,3 +12,9 @@ README.md
 /test-results/
 /playwright-report/
 /blob-report/
+# Local credentials/configuration are never image build inputs.
+.env
+.env.local
+.env.*.local
+.env.secrets
+.env.secrets.*
