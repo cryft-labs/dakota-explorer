@@ -12,7 +12,7 @@ WORKDIR /app
 RUN apk add git
 # Cryft: install from the manifests alone, scripts off, so this (slow) layer is reused until a dependency changes.
 # The hooks need the source, so they run after the copy: the dependencies' allowed build scripts (pnpm rebuild;
-# allowBuilds in pnpm-workspace.yaml) and the root postinstall (chakra typegen of the theme). The root `prepare`
+# allowBuilds in pnpm-workspace.yaml) and, with them, the root postinstall (chakra typegen of the theme). The root `prepare`
 # (husky) is skipped, as before: there is no .git in the build.
 COPY pnpm-lock.yaml pnpm-workspace.yaml package.json ./
 COPY src/toolkit/package/package.json ./src/toolkit/package/
@@ -26,15 +26,16 @@ COPY deploy/tools/llms-txt-generator/package.json ./deploy/tools/llms-txt-genera
 COPY deploy/tools/affected-tests/package.json ./deploy/tools/affected-tests/
 RUN pnpm install --frozen-lockfile --ignore-scripts
 COPY . .
-RUN pnpm rebuild && pnpm run postinstall
+RUN pnpm rebuild
 
 
 # *****************************
 # ****** STAGE 2: Build *******
 # *****************************
-FROM docker.io/library/node:24.21.0-alpine@sha256:be80f76cf40ec8e42b9bec49f60a55e0660f30af58d3e5a25530785b30ea67e2 AS builder
+# Cryft: the build continues on the deps stage's own layers (node_modules and the source are already there), so no
+# build copies the whole dependency tree into a new layer again (3 min a build before).
+FROM deps AS builder
 RUN apk add --no-cache --upgrade libc6-compat bash jq
-RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
 
 # pass build args to env variables
 ARG GIT_COMMIT_SHA
@@ -47,9 +48,8 @@ ENV NEXT_OPEN_TELEMETRY_ENABLED=$NEXT_OPEN_TELEMETRY_ENABLED
 ENV NODE_ENV production
 
 ### APP
-# Copy dependencies and source code from deps stage
+# Dependencies and source code: already here (FROM deps)
 WORKDIR /app
-COPY --from=deps /app ./
 
 # Build SVG sprite and generate .env.registry with ENVs list and save build args into .env file
 RUN set -a && \
