@@ -13,7 +13,7 @@ import * as svgSprite from 'src/sprite/SpriteIcon';
 
 const marketplaceFeature = config.features.marketplace;
 const usercentrics = config.services.usercentrics;
-const DAKOTA_FAVICON_SRC = '/assets/dakota/dakota-rabbit-logo.svg';
+const DAKOTA_FAVICON_SRC = '/assets/cryft/cryft-cards-mark.svg';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {

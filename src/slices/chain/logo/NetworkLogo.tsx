@@ -12,7 +12,7 @@ import { Image } from 'src/toolkit/chakra/image';
 
 import { INVERT_FILTER } from './consts';
 
-const DAKOTA_MARK_SRC = '/assets/dakota/dakota-rabbit-logo.svg';
+const DAKOTA_MARK_SRC = '/assets/cryft/cryft-cards-mark.svg';
 
 const LogoFallback = () => {
   return (
@@ -40,7 +40,7 @@ const NetworkLogo = ({ className }: Props) => {
       <chakra.a
         className={ className }
         href={ route({ pathname: '/' }) }
-        aria-label="Dakota Cards Network Explorer"
+        aria-label="Cryft Cards Network Explorer"
         display="inline-flex"
         alignItems="center"
         gap="10px"
@@ -54,13 +54,13 @@ const NetworkLogo = ({ className }: Props) => {
           w="48px"
           h="48px"
           src={ DAKOTA_MARK_SRC }
-          alt="Dakota Cards Explorer logo mark"
+          alt="Cryft Cards Explorer logo mark"
           fallback={ <LogoFallback/> }
           objectFit="contain"
         />
         <Box minW={ 0 }>
           <Text m={ 0 } fontWeight={ 700 } lineHeight="1.05" fontSize="14px" color="text.primary" whiteSpace="nowrap">
-            Dakota Cards
+            Cryft Cards
           </Text>
           <Text
             m={ 0 }

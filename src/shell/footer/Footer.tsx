@@ -37,16 +37,12 @@ const FRONT_COMMIT_URL = `https://github.com/blockscout/frontend/commit/${ confi
 
 const DAKOTA_LINKS = [
   {
-    text: 'Dakota Cards',
-    url: 'https://dakota.cards',
+    text: 'Cryft Cards',
+    url: 'https://cryft.app',
   },
   {
-    text: 'Documentation',
-    url: 'https://docs.dakota.cards',
-  },
-  {
-    text: 'Dashboard',
-    url: 'https://dashboard.dakota.cards',
+    text: 'How it works',
+    url: 'https://cryft.app/how',
   },
 ];
 
@@ -68,7 +64,7 @@ const Footer = () => {
     },
     {
       label: 'Ticker',
-      value: 'KOTA',
+      value: config.chain.currency.symbol || 'CRYFT',
     },
   ], []);
 
@@ -139,8 +135,8 @@ const Footer = () => {
           </Link>
         </Flex>
         <Text mt={ 3 } fontSize="xs">
-          Dakota Network Blockchain Explorer helps inspect Dakota Network blocks, transactions,
-          tokens, addresses, smart contracts, and IPFS CIDs across the Dakota Cards ecosystem.
+          Cryft Network Blockchain Explorer helps inspect Cryft Network blocks, transactions,
+          tokens, addresses, smart contracts, and IPFS CIDs across the Cryft Cards ecosystem.
         </Text>
         <VStack mt={ 6 } alignItems="start" textStyle="xs" gap={ 1 }>
           <Flex flexDir={ onionDomain ? 'row' : 'column' } _empty={{ display: 'none' }} columnGap={ 6 } rowGap={ 1 }>
@@ -181,7 +177,7 @@ const Footer = () => {
           loading={ Boolean(isLoading) }
           color="text.primary"
         >
-          Dakota ecosystem
+          Cryft ecosystem
         </Skeleton>
         <VStack gap={ 2 } alignItems="stretch">
           { DAKOTA_LINKS.map(link => <FooterLinkItem { ...link } key={ link.text } isLoading={ isLoading }/>) }

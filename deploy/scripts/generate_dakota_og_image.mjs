@@ -8,7 +8,7 @@ import path from 'node:path';
 
 const root = process.cwd();
 const templatePath = path.join(root, 'deploy/tools/dakota-og-preview.html');
-const logoPath = path.join(root, 'public/assets/dakota/dakota-rabbit-logo.svg');
+const logoPath = path.join(root, 'public/assets/cryft/cryft-cards-mark.svg');
 const outputPath = path.join(root, 'public/static/dakota_og_image.png');
 const edgePath = process.env.EDGE_PATH || 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
 

@@ -59,8 +59,11 @@ export const getDefaultAttributes = () => ({
   secure: config.app.protocol === 'https',
 });
 
-function shouldUseDakotaCookieDomain(hostname: string): boolean {
-  return hostname === 'dakota.cards' || hostname.endsWith('.dakota.cards');
+const SHARED_COOKIE_DOMAINS = [ 'cryft.cards', 'dakota.cards' ];
+
+function getDakotaCookieDomain(hostname: string): string | undefined {
+  const domain = SHARED_COOKIE_DOMAINS.find((item) => hostname === item || hostname.endsWith(`.${ item }`));
+  return domain ? `.${ domain }` : undefined;
 }
 
 function getDakotaSharedThemeAttributes(): Cookies.CookieAttributes {
@@ -72,7 +75,7 @@ function getDakotaSharedThemeAttributes(): Cookies.CookieAttributes {
     sameSite: 'lax',
     expires: DAKOTA_SHARED_COOKIE_MAX_AGE_DAYS,
     secure,
-    ...(shouldUseDakotaCookieDomain(hostname) ? { domain: '.dakota.cards' } : {}),
+    ...(getDakotaCookieDomain(hostname) ? { domain: getDakotaCookieDomain(hostname) } : {}),
   };
 }
 

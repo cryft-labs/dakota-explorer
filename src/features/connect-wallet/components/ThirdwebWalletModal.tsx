@@ -426,7 +426,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
       const provider = profile.type.charAt(0).toUpperCase() + profile.type.slice(1);
       setIdentityLabel(profile.details.email ? `${ provider } - ${ profile.details.email }` : `${ provider } account`);
     }).catch(() => {
-      isActive && setIdentityLabel('Dakota Cards wallet');
+      isActive && setIdentityLabel('Cryft Cards wallet');
     });
 
     return () => {
@@ -646,7 +646,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
       case 'walletConnect':
         return 'WalletConnect';
       case 'inApp':
-        return 'Dakota Cards wallet';
+        return 'Cryft Cards wallet';
       default:
         return 'Connected wallet';
     }
@@ -680,7 +680,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
   const walletOptionsContent = (
     <Stack gap={{ base: 3, md: 5 }} textAlign="center">
       <Text color="text.secondary" fontSize="sm" lineHeight="tall" textAlign="center">
-        Choose how you want to connect to the Dakota Cards Explorer.
+        Choose how you want to connect to the Cryft Cards Explorer.
       </Text>
 
       <SimpleGrid columns={ 2 } gap={{ base: 2, md: 3 }}>
@@ -824,7 +824,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
       ) }
 
       <Text color="text.secondary" fontSize="xs" textAlign="center">
-        Your wallet session stays secure. The Dakota Cards Explorer never receives your seed phrase or private key.
+        Your wallet session stays secure. The Cryft Cards Explorer never receives your seed phrase or private key.
       </Text>
     </Stack>
   );
@@ -839,7 +839,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
   const accountContent = displayedAddress ? (
     <Stack gap={ 5 } textAlign="center">
       <Text color="text.secondary" fontSize="sm" textAlign="center">
-        This wallet address is active for Dakota Cards Explorer signatures and contract transactions.
+        This wallet address is active for Cryft Cards Explorer signatures and contract transactions.
       </Text>
 
       <Box

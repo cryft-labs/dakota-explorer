@@ -51,7 +51,7 @@ const TEXT_COLOR_DEFAULT = { _light: '#1F2937', _dark: 'rgba(244, 248, 247, 0.96
 const BORDER_DEFAULT = { _light: '1px solid rgba(15, 118, 110, 0.18)', _dark: '1px solid rgba(52, 211, 153, 0.18)' };
 
 const HERO_SUBTEXT = [
-  'Search Dakota Network blocks, transactions, tokens, addresses, and smart contracts across the Dakota Cards ecosystem.',
+  'Search Cryft Network blocks, transactions, tokens, addresses, and smart contracts across the Cryft Cards ecosystem.',
   'Use the Navigator menu for switching between network sites while following live network activity.',
 ].join(' ');
 

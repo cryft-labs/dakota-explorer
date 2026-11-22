@@ -43,7 +43,7 @@ describe('stats details route', () => {
 });
 
 describe('crawler metadata', () => {
-  it('publishes Dakota homepage schema and IPFS CID copy', () => {
+  it('publishes Cryft homepage schema and IPFS CID copy', () => {
     const result = generate({ pathname: '/' });
 
     expect(result.description).toContain('IPFS CIDs');
@@ -52,7 +52,7 @@ describe('crawler metadata', () => {
     expect(result.jsonLd).toMatchObject({
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: 'Dakota Cards Explorer',
+      name: 'Cryft Cards Explorer',
       url: 'http://localhost:3000',
     });
   });

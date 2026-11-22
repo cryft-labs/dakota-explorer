@@ -10,7 +10,7 @@ import { getEnvValue, getExternalAssetFilePath, parseEnvJson } from 'src/config/
 import { urlValidator } from 'src/toolkit/components/forms/validators/url';
 
 const DEFAULT_CURRENCY_DECIMALS = 18;
-const DAKOTA_BRAND_ASSET = '/assets/dakota/dakota-rabbit-logo.svg';
+const DAKOTA_BRAND_ASSET = '/assets/cryft/cryft-cards-mark.svg';
 
 const rollupType = getEnvValue('NEXT_PUBLIC_ROLLUP_TYPE') as RollupType;
 
@@ -36,8 +36,8 @@ const rpcUrls = (() => {
 
 const chain = Object.freeze({
   id: getEnvValue('NEXT_PUBLIC_NETWORK_ID'),
-  name: getEnvValue('NEXT_PUBLIC_NETWORK_NAME') || 'Dakota Explorer',
-  shortName: getEnvValue('NEXT_PUBLIC_NETWORK_SHORT_NAME') || 'Dakota',
+  name: getEnvValue('NEXT_PUBLIC_NETWORK_NAME') || 'Cryft Network',
+  shortName: getEnvValue('NEXT_PUBLIC_NETWORK_SHORT_NAME') || 'Cryft',
   currency: {
     name: getEnvValue('NEXT_PUBLIC_NETWORK_CURRENCY_NAME'),
     weiName: getEnvValue('NEXT_PUBLIC_NETWORK_CURRENCY_WEI_NAME'),

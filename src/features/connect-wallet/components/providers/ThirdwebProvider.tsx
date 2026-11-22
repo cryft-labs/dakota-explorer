@@ -68,7 +68,7 @@ const ThirdwebWagmiBridge = () => {
     }).catch(() => {
       toaster.error({
         title: 'Wallet connection failed',
-        description: 'The Dakota wallet session could not be prepared for explorer transactions. Please reconnect and try again.',
+        description: 'The Cryft wallet session could not be prepared for explorer transactions. Please reconnect and try again.',
       });
     });
   }, [

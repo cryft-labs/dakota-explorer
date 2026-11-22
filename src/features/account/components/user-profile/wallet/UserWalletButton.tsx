@@ -24,7 +24,7 @@ const UserWalletButton = ({ size, variant, isPending, isAutoConnectDisabled, add
 
   return (
     <Tooltip
-      content={ isConnected ? 'Connected wallet' : 'Connect your wallet to the Dakota Cards Explorer' }
+      content={ isConnected ? 'Connected wallet' : 'Connect your wallet to the Cryft Cards Explorer' }
       disabled={ isMobile }
       openDelay={ 500 }
       disableOnMobile

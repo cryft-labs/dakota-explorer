@@ -2,7 +2,7 @@
 
 import { Box, chakra, Flex, Separator } from '@chakra-ui/react';
 import React from 'react';
-import { LuBookOpen, LuChevronDown, LuExternalLink, LuGlobe, LuLayoutDashboard } from 'react-icons/lu';
+import { LuBookOpen, LuChevronDown, LuExternalLink, LuGlobe } from 'react-icons/lu';
 
 import DakotaThemeToggle from 'src/shell/header/DakotaThemeToggle';
 
@@ -33,9 +33,8 @@ const DAKOTA_HEADER_MAX_WIDTH = '1200px';
 const DAKOTA_HEADER_GAP = '10px';
 const DAKOTA_HEADER_SECTION_GAP = '16px';
 const DAKOTA_NAVIGATOR_LINKS = [
-  { label: 'Dashboard', url: 'https://dashboard.dakota.cards', icon: LuLayoutDashboard },
-  { label: 'Documentation', url: 'https://docs.dakota.cards', icon: LuBookOpen },
-  { label: 'Main Site', url: 'https://dakota.cards', icon: LuGlobe },
+  { label: 'Cryft Cards', url: 'https://cryft.app', icon: LuGlobe },
+  { label: 'How it works', url: 'https://cryft.app/how', icon: LuBookOpen },
 ] as const;
 
 const DakotaNavigatorMenu = () => {
@@ -43,7 +42,7 @@ const DakotaNavigatorMenu = () => {
     <PopoverRoot positioning={{ placement: 'bottom', offset: { mainAxis: 8 } }}>
       <PopoverTrigger>
         <Button
-          aria-label="Open Dakota platform navigator"
+          aria-label="Open Cryft platform navigator"
           h={ DAKOTA_HEADER_ACTION_HEIGHT }
           px="14px"
           display="inline-flex"

@@ -73,7 +73,7 @@ const IndexingStatusInternalTxs = () => {
   const indexedPercent = formatIndexingPercent(data.indexed_internal_transactions_ratio);
   const indexedStatus = indexedPercent === undefined ?
     'Internal transaction indexing is in progress.' :
-    `${ indexedPercent }% of Dakota Network blocks have internal transactions indexed.`;
+    `${ indexedPercent }% of Cryft Network blocks have internal transactions indexed.`;
 
   const hint = (
     <Text textStyle="xs">

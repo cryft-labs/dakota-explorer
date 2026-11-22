@@ -54,7 +54,7 @@ const wagmi = (() => {
   const thirdwebWagmiConnector = isThirdweb && thirdwebClient ? inAppWalletConnector({
     client: thirdwebClient,
     metadata: {
-      name: 'Dakota Wallet',
+      name: 'Cryft Wallet',
       icon: appConfig.chain.icon.default,
     },
   }) : undefined;

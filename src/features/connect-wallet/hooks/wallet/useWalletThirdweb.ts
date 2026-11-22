@@ -64,7 +64,7 @@ export default function useWalletThirdweb({ source, onConnect }: Params): Result
     const chain = wallet.getChain() ?? thirdwebChain;
 
     if (!connector || !account) {
-      throw new Error('The Dakota Cards Explorer wallet connector is unavailable');
+      throw new Error('The Cryft Cards Explorer wallet connector is unavailable');
     }
 
     const hasSameAccount = wagmiAccount.address?.toLowerCase() === account.address.toLowerCase();
@@ -110,7 +110,7 @@ export default function useWalletThirdweb({ source, onConnect }: Params): Result
       if (!isDismissedConnection(error)) {
         toaster.error({
           title: 'Wallet connection failed',
-          description: getErrorMessage(error) || 'Unable to connect your Dakota wallet. Please try again.',
+          description: getErrorMessage(error) || 'Unable to connect your Cryft wallet. Please try again.',
         });
       }
     } finally {

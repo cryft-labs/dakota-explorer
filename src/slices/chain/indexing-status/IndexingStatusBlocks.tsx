@@ -92,7 +92,7 @@ const IndexingStatusBlocks = () => {
   const indexedPercent = formatIndexingPercent(data.indexed_blocks_ratio);
   const statusText = indexedPercent === undefined ?
     'Indexing status: block indexing is in progress.' :
-    `Indexing status: ${ indexedPercent }% of Dakota Network blocks are indexed.`;
+    `Indexing status: ${ indexedPercent }% of Cryft Network blocks are indexed.`;
 
   return (
     <Alert status="info" py={ 3 } borderRadius="md" showIcon>

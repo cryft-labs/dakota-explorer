@@ -2,7 +2,7 @@
 
 import { chakra } from '@chakra-ui/react';
 import React from 'react';
-import { LuBookOpen, LuChevronDown, LuExternalLink, LuGlobe, LuLayoutDashboard } from 'react-icons/lu';
+import { LuBookOpen, LuChevronDown, LuExternalLink, LuGlobe } from 'react-icons/lu';
 
 import NavigationMobile from 'src/shell/navigation/mobile/NavigationMobile';
 
@@ -23,9 +23,8 @@ interface Props {
 }
 
 const DAKOTA_PLATFORM_LINKS = [
-  { label: 'Dashboard', url: 'https://dashboard.dakota.cards', icon: LuLayoutDashboard },
-  { label: 'Documentation', url: 'https://docs.dakota.cards', icon: LuBookOpen },
-  { label: 'Main Site', url: 'https://dakota.cards', icon: LuGlobe },
+  { label: 'Cryft Cards', url: 'https://cryft.app', icon: LuGlobe },
+  { label: 'How it works', url: 'https://cryft.app/how', icon: LuBookOpen },
 ] as const;
 const DAKOTA_NAVIGATOR_MENU_ID = 'dakota-mobile-navigator-links';
 
@@ -80,11 +79,11 @@ const Burger = ({ isMarketplaceAppPage }: Props) => {
       >
         <DrawerBody display="flex" flexDirection="column" overflowX="hidden" overflowY="auto" px="24px" py="20px">
           <NetworkLogo/>
-          <chakra.nav aria-label="Dakota platform links">
+          <chakra.nav aria-label="Cryft platform links">
             <Button
               aria-controls={ DAKOTA_NAVIGATOR_MENU_ID }
               aria-expanded={ isNavigatorOpen }
-              aria-label="Toggle Dakota platform navigator"
+              aria-label="Toggle Cryft platform navigator"
               onClick={ handleNavigatorToggle }
               h="38px"
               w="100%"

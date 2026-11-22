@@ -53,8 +53,8 @@ export const createThirdwebInAppWallet = (redirectUrl?: string) => inAppWallet({
 export const thirdwebInAppWallet = createThirdwebInAppWallet();
 
 export const thirdwebAppMetadata = {
-  name: 'Dakota Cards | Network Explorer',
-  description: 'Dakota Network blockchain and network explorer',
+  name: 'Cryft Cards | Network Explorer',
+  description: 'Cryft Network blockchain and network explorer',
   url: config.app.baseUrl,
   logoUrl: config.chain.icon.default,
 };

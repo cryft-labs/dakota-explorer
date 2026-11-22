@@ -51,7 +51,7 @@ exports[`static route 1`] = `
   "description": "Browse Blockscout transactions. Track transaction status, fees, and details in real time.",
   "jsonLd": undefined,
   "opengraph": {
-    "description": "Dakota Network Blockchain Explorer for searching transactions, blocks, addresses, tokens, smart contracts, validator activity, and IPFS CIDs across the Dakota Cards ecosystem.",
+    "description": "Cryft Network Blockchain Explorer for searching transactions, blocks, addresses, tokens, smart contracts, validator activity, and IPFS CIDs across the Cryft Cards ecosystem.",
     "imageUrl": "http://localhost:3000/static/og_image.png",
     "title": "Blockscout transactions - Blockscout explorer",
   },

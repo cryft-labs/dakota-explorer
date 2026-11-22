@@ -16,7 +16,7 @@ const appOrigin = [
   appHost,
   appPort && `:${ appPort }`,
 ].filter(Boolean).join('');
-const isDakota = appHost?.endsWith('.dakota.cards') || process.env.NEXT_PUBLIC_APP_INSTANCE?.startsWith('dakota');
+const isDakota = (appHost?.endsWith('.dakota.cards') || appHost?.endsWith('.cryft.cards')) || process.env.NEXT_PUBLIC_APP_INSTANCE?.startsWith('dakota');
 const dakotaImageFile = path.resolve(process.cwd(), 'public/static/dakota_og_image.png');
 const configuredLogo = process.env.NEXT_PUBLIC_NETWORK_LOGO_DARK ?? process.env.NEXT_PUBLIC_NETWORK_LOGO;
 const configuredBanner = process.env.NEXT_PUBLIC_HOMEPAGE_HERO_BANNER_CONFIG;
@@ -37,7 +37,7 @@ function copyPlaceholderImage() {
 if (process.env.NEXT_PUBLIC_OG_IMAGE_URL) {
   console.log('⏩ NEXT_PUBLIC_OG_IMAGE_URL is set. Skipping OG image generation...');
 } else if (isDakota && fs.existsSync(dakotaImageFile)) {
-  console.log('Copying Dakota-branded OG image...');
+  console.log('Copying Cryft-branded OG image...');
   fs.copyFileSync(dakotaImageFile, targetFile);
 } else if (!process.env.NEXT_PUBLIC_NETWORK_NAME) {
   console.log('⏩ NEXT_PUBLIC_NETWORK_NAME is not set. Copying placeholder image...');
@@ -48,10 +48,10 @@ if (process.env.NEXT_PUBLIC_OG_IMAGE_URL) {
 } else {
   try {
     const bannerConfig = JSON.parse(configuredBanner?.replaceAll('\'', '"') || '{}');
-    const dakotaLogoOrigin = appHost === 'localhost' ? 'https://explore.dakota.cards' : appOrigin;
+    const dakotaLogoOrigin = appHost === 'localhost' ? 'https://explore.cryft.cards' : appOrigin;
     const data = {
-      title: bannerConfig.text || (isDakota ? 'Dakota Network Explorer' : `${ process.env.NEXT_PUBLIC_NETWORK_NAME } explorer`),
-      logo_url: getAbsoluteAssetUrl(configuredLogo) || (isDakota ? `${ dakotaLogoOrigin }/assets/dakota/dakota-rabbit-logo.svg` : undefined),
+      title: bannerConfig.text || (isDakota ? 'Cryft Network Explorer' : `${ process.env.NEXT_PUBLIC_NETWORK_NAME } explorer`),
+      logo_url: getAbsoluteAssetUrl(configuredLogo) || (isDakota ? `${ dakotaLogoOrigin }/assets/cryft/cryft-cards-mark.svg` : undefined),
       background: bannerConfig.background?.[0] || (isDakota ? 'linear-gradient(135deg, #06231d 0%, #0a473b 56%, #0d817b 100%)' : undefined),
       title_color: bannerConfig.text_color?.[0] || (isDakota ? '#f2fbf8' : undefined),
       invert_logo: !process.env.NEXT_PUBLIC_NETWORK_LOGO_DARK && !isDakota,

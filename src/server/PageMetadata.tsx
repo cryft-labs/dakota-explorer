@@ -34,9 +34,9 @@ const PageMetadata = <Pathname extends Route['pathname']>(props: Props<Pathname>
       <meta property="og:title" content={ opengraph.title }/>
       { opengraph.description && <meta property="og:description" content={ opengraph.description }/> }
       { opengraph.imageUrl && <meta property="og:image" content={ opengraph.imageUrl }/> }
-      { opengraph.imageUrl && <meta property="og:image:alt" content="Dakota Cards Explorer"/> }
+      { opengraph.imageUrl && <meta property="og:image:alt" content="Cryft Cards Explorer"/> }
       { canonical && <meta property="og:url" content={ canonical }/> }
-      <meta property="og:site_name" content="Dakota Cards Explorer"/>
+      <meta property="og:site_name" content="Cryft Cards Explorer"/>
       <meta property="og:type" content="website"/>
 
       { /* Twitter Meta Tags */ }
@@ -45,7 +45,7 @@ const PageMetadata = <Pathname extends Route['pathname']>(props: Props<Pathname>
       <meta name="twitter:title" content={ opengraph.title }/>
       { opengraph.description && <meta name="twitter:description" content={ opengraph.description }/> }
       { opengraph.imageUrl && <meta property="twitter:image" content={ opengraph.imageUrl }/> }
-      { opengraph.imageUrl && <meta name="twitter:image:alt" content="Dakota Cards Explorer"/> }
+      { opengraph.imageUrl && <meta name="twitter:image:alt" content="Cryft Cards Explorer"/> }
       { canonical && <meta name="twitter:url" content={ canonical }/> }
 
       { jsonLdContent && (
