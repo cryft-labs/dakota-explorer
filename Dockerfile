@@ -10,13 +10,23 @@ RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
 ### Install all workspace dependencies in one place
 WORKDIR /app
 RUN apk add git
-# Cryft: fetch the packages from the lockfile alone first, so this (slow) layer is reused until the dependencies
-# change; the install after the source copy then only links from the store (--offline) and runs the hooks
-# (postinstall: chakra typegen, which reads the theme source).
-COPY pnpm-lock.yaml pnpm-workspace.yaml ./
-RUN pnpm fetch --frozen-lockfile
+# Cryft: install from the manifests alone, scripts off, so this (slow) layer is reused until a dependency changes.
+# The hooks need the source, so they run after the copy: the dependencies' allowed build scripts (pnpm rebuild;
+# allowBuilds in pnpm-workspace.yaml) and the root postinstall (chakra typegen of the theme). The root `prepare`
+# (husky) is skipped, as before: there is no .git in the build.
+COPY pnpm-lock.yaml pnpm-workspace.yaml package.json ./
+COPY src/toolkit/package/package.json ./src/toolkit/package/
+COPY deploy/tools/envs-validator/package.json ./deploy/tools/envs-validator/
+COPY deploy/tools/feature-reporter/package.json ./deploy/tools/feature-reporter/
+COPY deploy/tools/favicon-generator/package.json ./deploy/tools/favicon-generator/
+COPY deploy/tools/sitemap-generator/package.json ./deploy/tools/sitemap-generator/
+COPY deploy/tools/multichain-config-generator/package.json ./deploy/tools/multichain-config-generator/
+COPY deploy/tools/essential-dapps-chains-config-generator/package.json ./deploy/tools/essential-dapps-chains-config-generator/
+COPY deploy/tools/llms-txt-generator/package.json ./deploy/tools/llms-txt-generator/
+COPY deploy/tools/affected-tests/package.json ./deploy/tools/affected-tests/
+RUN pnpm install --frozen-lockfile --ignore-scripts
 COPY . .
-RUN pnpm install --frozen-lockfile --offline
+RUN pnpm rebuild && pnpm run postinstall
 
 
 # *****************************
