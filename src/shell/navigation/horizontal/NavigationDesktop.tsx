@@ -19,6 +19,7 @@ import config from 'src/config';
 
 import { Button } from 'src/toolkit/chakra/button';
 import { PopoverBody, PopoverContent, PopoverRoot, PopoverTrigger } from 'src/toolkit/chakra/popover';
+import { latexBrand, latexBrandHover } from 'src/toolkit/theme/latex';
 
 import NavigationPromoBanner from '../promo-banner/NavigationPromoBanner';
 import useNavItems, { isGroupItem } from '../useNavItems';
@@ -57,10 +58,10 @@ const DakotaNavigatorMenu = () => {
           color="button.solid.text"
           bg="button.solid.bg"
           borderWidth="0"
-          boxShadow="none"
+          { ...latexBrand }
           _hover={{
-            color: 'white',
-            bg: 'button.solid.bg.hover',
+            ...latexBrandHover,
+            color: 'button.solid.text',
           }}
         >
           Navigator
@@ -72,7 +73,7 @@ const DakotaNavigatorMenu = () => {
         p={ 0 }
         borderRadius="12px"
         borderColor={{ _light: 'rgba(11, 125, 137, 0.16)', _dark: 'rgba(53, 194, 207, 0.18)' }}
-        bg={{ _light: 'rgba(255, 255, 255, 0.96)', _dark: 'rgba(7, 26, 23, 0.98)' }}
+        bg={{ _light: 'rgba(255, 255, 255, 0.96)', _dark: 'rgba(34, 34, 34, 0.98)' }}
         boxShadow={{ _light: '0 18px 48px rgba(11, 125, 137, 0.16)', _dark: '0 18px 54px rgba(0, 0, 0, 0.36)' }}
         backdropFilter="blur(12px)"
       >
@@ -133,7 +134,7 @@ const NavigationDesktop = () => {
       position="sticky"
       top={ 0 }
       zIndex="sticky"
-      bg={{ _light: 'rgba(255, 255, 255, 0.86)', _dark: 'rgba(7, 26, 23, 0.92)' }}
+      bg={{ _light: 'rgba(255, 255, 255, 0.86)', _dark: 'rgba(34, 34, 34, 0.92)' }}
       borderBottomWidth="1px"
       borderColor={{ _light: 'rgba(11, 125, 137, 0.16)', _dark: 'rgba(53, 194, 207, 0.16)' }}
       borderRadius={{ base: 0, lg: '0 0 40px 40px' }}

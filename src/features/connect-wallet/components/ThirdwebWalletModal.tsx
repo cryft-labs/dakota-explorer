@@ -280,7 +280,7 @@ const WalletConnectPrompt = ({ label, uri, onCancel }: WalletConnectPromptProps)
         aspectRatio={ 1 }
         p={ 2 }
         bg="white"
-        color="#020d0b"
+        color="#0a1f22"
         borderWidth="1px"
         borderColor="rgba(11, 125, 137, 0.22)"
         borderRadius="md"
@@ -848,7 +848,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
         borderRadius="md"
         px={ 4 }
         py={ 3 }
-        bg={{ _light: 'rgba(240, 253, 250, 0.72)', _dark: 'rgba(14, 48, 53, 0.54)' }}
+        bg={{ _light: 'rgba(240, 250, 252, 0.72)', _dark: 'rgba(14, 48, 53, 0.54)' }}
       >
         <Flex alignItems="center" gap={ 3 }>
           <AddressIdenticon size={ 42 } hash={ displayedAddress }/>
@@ -924,7 +924,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
         isolation="isolate"
         transform={ dragOffset > 0 ? { base: `translate3d(0, ${ dragOffset }px, 0)`, lg: 'none' } : undefined }
         transition={ isDragging ? 'none' : 'transform 180ms ease-out' }
-        bg={{ _light: 'rgba(255, 255, 255, 0.98)', _dark: 'rgba(7, 30, 25, 0.98)' }}
+        bg={{ _light: 'rgba(255, 255, 255, 0.98)', _dark: 'rgba(10, 31, 34, 0.98)' }}
         borderWidth="1px"
         borderColor={{ _light: 'rgba(11, 125, 137, 0.2)', _dark: 'rgba(53, 194, 207, 0.2)' }}
         borderTopLeftRadius="md"

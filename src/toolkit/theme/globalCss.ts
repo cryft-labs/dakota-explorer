@@ -6,6 +6,7 @@ import addressEntity from './globals/address-entity';
 import entity from './globals/entity';
 import recaptcha from './globals/recaptcha';
 import scrollbar from './globals/scrollbar';
+import { LATEX_VARS_DARK, LATEX_VARS_LIGHT } from './latex';
 
 const webkitAutofillOverrides = {
   WebkitTextFillColor: 'var(--chakra-colors-input-fg)',
@@ -20,6 +21,8 @@ const webkitAutofillRules = {
 };
 
 const globalCss: SystemConfig['globalCss'] = {
+  ':root': LATEX_VARS_LIGHT,
+  '.dark': LATEX_VARS_DARK,
   html: {
     bg: 'global.body.bg',
   },

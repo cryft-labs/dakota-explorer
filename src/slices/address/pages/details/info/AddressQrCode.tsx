@@ -22,7 +22,7 @@ const SVG_OPTIONS = {
   margin: 0,
 };
 
-const QR_DIALOG_INK_COLOR = '#020d0b';
+const QR_DIALOG_INK_COLOR = '#0a1f22';
 
 interface Props {
   className?: string;

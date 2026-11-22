@@ -33,8 +33,8 @@ const LatestBlocksItem = ({ block, isLoading, animation }: Props) => {
     <Box
       animation={ animation }
       borderRadius="md"
-      border="1px solid"
-      borderColor="border.divider"
+      bgImage="var(--latex-face)"
+      boxShadow="var(--latex-lift)"
       p={ 3 }
     >
       <Flex alignItems="center" overflow="hidden" w="100%" mb={ 3 }>

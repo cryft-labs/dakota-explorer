@@ -72,7 +72,7 @@ const Burger = ({ isMarketplaceAppPage }: Props) => {
         </IconButton>
       </DrawerTrigger>
       <DrawerContent
-        bg={{ _light: 'rgba(255, 255, 255, 0.96)', _dark: 'rgba(7, 26, 23, 0.98)' }}
+        bg={{ _light: 'rgba(255, 255, 255, 0.96)', _dark: 'rgba(34, 34, 34, 0.98)' }}
         borderRightWidth="1px"
         borderColor={{ _light: 'rgba(11, 125, 137, 0.14)', _dark: 'rgba(53, 194, 207, 0.16)' }}
         boxShadow={{ _light: '18px 0 44px rgba(11, 125, 137, 0.14)', _dark: '18px 0 52px rgba(0, 0, 0, 0.42)' }}
@@ -171,7 +171,7 @@ const Burger = ({ isMarketplaceAppPage }: Props) => {
             mt="auto"
             pt="18px"
             pb="2px"
-            bg={{ _light: 'rgba(255, 255, 255, 0.96)', _dark: 'rgba(7, 26, 23, 0.98)' }}
+            bg={{ _light: 'rgba(255, 255, 255, 0.96)', _dark: 'rgba(34, 34, 34, 0.98)' }}
             borderTopWidth="1px"
             borderColor={{ _light: 'rgba(11, 125, 137, 0.14)', _dark: 'rgba(53, 194, 207, 0.16)' }}
           >

@@ -49,7 +49,7 @@ const HeaderMobile = ({ hideSearchButton, onGoToSearchResults }: Props) => {
   return (
     <Box
       ref={ ref }
-      bg={{ _light: 'rgba(255, 255, 255, 0.88)', _dark: 'rgba(7, 26, 23, 0.94)' }}
+      bg={{ _light: 'rgba(255, 255, 255, 0.88)', _dark: 'rgba(34, 34, 34, 0.94)' }}
       display={{ base: 'block', lg: 'none' }}
       position="sticky"
       top={ 0 }

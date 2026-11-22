@@ -2,6 +2,8 @@
 
 import { defineRecipe } from '@chakra-ui/react';
 
+import { latexBrand, latexBrandHover, latexRaisedSm, ON_BRAND } from '../latex';
+
 export const recipe = defineRecipe({
   base: {
     display: 'flex',
@@ -19,10 +21,10 @@ export const recipe = defineRecipe({
       solid: {
         bg: 'button.solid.bg',
         color: 'button.solid.text',
-        boxShadow: 'none',
+        ...latexBrand,
         _hover: {
-          bg: 'button.solid.bg.hover',
-          color: 'white',
+          ...latexBrandHover,
+          color: 'button.solid.text',
         },
         _loading: {
           opacity: 1,
@@ -33,8 +35,8 @@ export const recipe = defineRecipe({
           },
         },
         _expanded: {
-          bg: 'button.solid.bg.hover',
-          color: 'white',
+          ...latexBrandHover,
+          color: 'button.solid.text',
         },
       },
       solid_danger: {
@@ -60,11 +62,12 @@ export const recipe = defineRecipe({
         borderStyle: 'solid',
         bg: 'transparent',
         color: 'button.outline.fg',
-        borderColor: 'button.outline.fg',
+        borderColor: 'transparent',
+        ...latexRaisedSm,
         _hover: {
-          bg: 'button.solid.bg.hover',
+          ...latexBrandHover,
           color: 'button.solid.text',
-          borderColor: 'button.solid.bg.hover',
+          borderColor: 'transparent',
         },
         _loading: {
           opacity: 1,
@@ -141,10 +144,10 @@ export const recipe = defineRecipe({
         bg: 'button.icon_background.bg',
         color: 'button.header.fg',
         border: 'none',
+        ...latexRaisedSm,
         _hover: {
-          bg: 'hover',
-          color: 'white',
-          transform: 'translateY(-1px)',
+          ...latexBrandHover,
+          color: ON_BRAND,
         },
         _loading: {
           opacity: 1,
@@ -157,9 +160,11 @@ export const recipe = defineRecipe({
         _selected: {
           bg: 'button.header.bg.selected',
           color: 'button.header.fg.selected',
+          bgImage: 'none',
+          boxShadow: 'var(--latex-sink-sm)',
           _hover: {
-            bg: 'hover',
-            color: 'white',
+            ...latexBrandHover,
+            color: ON_BRAND,
           },
           _expanded: {
             color: 'hover',
@@ -219,6 +224,8 @@ export const recipe = defineRecipe({
         _selected: {
           bg: 'selected.control.bg',
           color: 'selected.control.text',
+          bgImage: 'var(--latex-face)',
+          boxShadow: 'var(--latex-lift-sm)',
           _hover: {
             bg: 'selected.control.bg',
             color: 'selected.control.text',

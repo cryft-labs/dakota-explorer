@@ -138,6 +138,8 @@ export const recipe = defineSlotRecipe({
           bg: 'transparent',
           _selected: {
             bg: 'selected.control.bg',
+            bgImage: 'var(--latex-face)',
+            boxShadow: 'var(--latex-lift-sm)',
             color: { _light: 'selected.control.text', _dark: '#FFFFFF' },
             _hover: {
               color: { _light: 'selected.control.text', _dark: '#FFFFFF' },
@@ -168,6 +170,8 @@ export const recipe = defineSlotRecipe({
           borderRadius: 'base',
           _selected: {
             bg: 'selected.control.bg',
+            bgImage: 'var(--latex-face)',
+            boxShadow: 'var(--latex-lift-sm)',
             color: { _light: 'selected.control.text', _dark: '#FFFFFF' },
             borderColor: 'transparent',
             _hover: {
@@ -194,6 +198,8 @@ export const recipe = defineSlotRecipe({
           _selected: {
             color: 'selected.control.text',
             bg: 'selected.control.bg',
+            bgImage: 'var(--latex-face)',
+            boxShadow: 'var(--latex-lift-sm)',
             borderColor: 'selected.control.bg',
             _hover: {
               color: 'selected.control.text',

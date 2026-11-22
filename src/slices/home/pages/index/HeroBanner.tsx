@@ -204,6 +204,7 @@ const HeroBanner = () => {
               borderWidth="1px"
               borderColor={{ _light: 'rgba(11, 125, 137, 0.26)', _dark: 'rgba(53, 194, 207, 0.28)' }}
               bg={{ _light: 'rgba(11, 125, 137, 0.08)', _dark: 'rgba(53, 194, 207, 0.16)' }}
+              boxShadow="var(--latex-lift-sm)"
               color="text.primary"
               fontSize="12px"
               lineHeight="16px"

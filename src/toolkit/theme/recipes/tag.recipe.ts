@@ -107,6 +107,7 @@ export const recipe = defineSlotRecipe({
         root: {
           bgColor: 'tag.root.subtle.bg',
           color: 'tag.root.subtle.fg',
+          boxShadow: 'var(--latex-lift-sm)',
         },
       },
       clickable: {

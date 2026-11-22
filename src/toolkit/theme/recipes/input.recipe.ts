@@ -59,7 +59,9 @@ export const recipe = defineRecipe({
 
     variant: {
       outline: {
-        bg: 'input.bg',
+        // Cryft latex: where words are typed is pressed into the page (borders that say something are kept)
+        bg: 'var(--latex-well)',
+        boxShadow: 'var(--latex-sink)',
         borderWidth: '2px',
         borderColor: 'input.border.filled',
         focusVisibleRing: 'none',
@@ -80,7 +82,7 @@ export const recipe = defineRecipe({
         },
         _focus: {
           borderColor: 'input.border.focus',
-          boxShadow: 'size.md',
+          boxShadow: 'var(--latex-sink)',
           _hover: {
             borderColor: 'input.border.focus',
           },
