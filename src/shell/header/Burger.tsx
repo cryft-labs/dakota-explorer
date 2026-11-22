@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
-import { chakra } from '@chakra-ui/react';
+import { chakra, Flex } from '@chakra-ui/react';
 import React from 'react';
-import { LuBookOpen, LuChevronDown, LuExternalLink, LuGlobe } from 'react-icons/lu';
 
 import NavigationMobile from 'src/shell/navigation/mobile/NavigationMobile';
 
@@ -11,10 +10,13 @@ import TestnetBadge from 'src/slices/chain/TestnetBadge';
 
 import RollupStageBadge from 'src/features/rollup/common/components/RollupStageBadge';
 
+import SpriteIcon from 'src/sprite/SpriteIcon';
+
 import { Button } from 'src/toolkit/chakra/button';
 import { DrawerBody, DrawerContent, DrawerRoot, DrawerTrigger } from 'src/toolkit/chakra/drawer';
 import { IconButton } from 'src/toolkit/chakra/icon-button';
 import { useDisclosure } from 'src/toolkit/hooks/useDisclosure';
+import { latexBrand, latexBrandHover } from 'src/toolkit/theme/latex';
 
 import DakotaThemeToggle from './DakotaThemeToggle';
 
@@ -23,8 +25,8 @@ interface Props {
 }
 
 const DAKOTA_PLATFORM_LINKS = [
-  { label: 'Cryft Cards', url: 'https://cryft.app', icon: LuGlobe },
-  { label: 'How it works', url: 'https://cryft.app/how', icon: LuBookOpen },
+  { label: 'Cryft Cards', url: 'https://cryft.app', icon: 'globe' as const },
+  { label: 'How it works', url: 'https://cryft.app/how', icon: 'docs' as const },
 ] as const;
 const DAKOTA_NAVIGATOR_MENU_ID = 'dakota-mobile-navigator-links';
 
@@ -80,42 +82,46 @@ const Burger = ({ isMarketplaceAppPage }: Props) => {
         <DrawerBody display="flex" flexDirection="column" overflowX="hidden" overflowY="auto" px="24px" py="20px">
           <NetworkLogo/>
           <chakra.nav aria-label="Cryft platform links">
-            <Button
-              aria-controls={ DAKOTA_NAVIGATOR_MENU_ID }
-              aria-expanded={ isNavigatorOpen }
-              aria-label="Toggle Cryft platform navigator"
-              onClick={ handleNavigatorToggle }
-              h="38px"
-              w="100%"
-              mt="18px"
-              px="14px"
-              display="inline-flex"
-              alignItems="center"
-              justifyContent="space-between"
-              gap="6px"
-              borderRadius="base"
-              fontSize="14px"
-              lineHeight="20px"
-              fontWeight={ 700 }
-              whiteSpace="nowrap"
-              color="button.solid.text"
-              bg="button.solid.bg"
-              borderWidth="0"
-              boxShadow="none"
-              _hover={{
-                color: 'white',
-                bg: 'button.solid.bg.hover',
-              }}
-            >
-              <chakra.span>Navigator</chakra.span>
-              <chakra.span
+            { /* Chad 2026-11-22: the light/dark toggle sits right of the long Navigator button */ }
+            <Flex mt="18px" gap="10px" alignItems="center">
+              <Button
+                aria-controls={ DAKOTA_NAVIGATOR_MENU_ID }
+                aria-expanded={ isNavigatorOpen }
+                aria-label="Toggle Cryft platform navigator"
+                onClick={ handleNavigatorToggle }
+                h="38px"
+                flex="1"
+                minW={ 0 }
+                px="14px"
                 display="inline-flex"
-                transform={ isNavigatorOpen ? 'rotate(180deg)' : 'rotate(0deg)' }
-                transition="transform 0.2s ease"
+                alignItems="center"
+                justifyContent="space-between"
+                gap="6px"
+                borderRadius="base"
+                fontSize="14px"
+                lineHeight="20px"
+                fontWeight={ 700 }
+                whiteSpace="nowrap"
+                color="button.solid.text"
+                bg="button.solid.bg"
+                borderWidth="0"
+                { ...latexBrand }
+                _hover={{
+                  ...latexBrandHover,
+                  color: 'button.solid.text',
+                }}
               >
-                <LuChevronDown size={ 16 } strokeWidth={ 2.25 }/>
-              </chakra.span>
-            </Button>
+                <chakra.span>Navigator</chakra.span>
+                <chakra.span
+                  display="inline-flex"
+                  transform={ isNavigatorOpen ? 'rotate(180deg)' : 'rotate(0deg)' }
+                  transition="transform 0.2s ease"
+                >
+                  <SpriteIcon name="arrows/east-mini" boxSize="16px" transform="rotate(-90deg)" aria-hidden/>
+                </chakra.span>
+              </Button>
+              <DakotaThemeToggle/>
+            </Flex>
             <chakra.ul
               id={ DAKOTA_NAVIGATOR_MENU_ID }
               display={ isNavigatorOpen ? 'flex' : 'none' }
@@ -127,8 +133,6 @@ const Burger = ({ isMarketplaceAppPage }: Props) => {
               p={ 0 }
             >
               { DAKOTA_PLATFORM_LINKS.map((link) => {
-                const LinkIcon = link.icon;
-
                 return (
                   <chakra.li key={ link.label }>
                     <chakra.a
@@ -152,9 +156,9 @@ const Burger = ({ isMarketplaceAppPage }: Props) => {
                         color: 'white',
                       }}
                     >
-                      <LinkIcon size={ 20 } strokeWidth={ 2.1 }/>
+                      <SpriteIcon name={ link.icon } boxSize="20px" aria-hidden/>
                       <chakra.span flex="1">{ link.label }</chakra.span>
-                      <LuExternalLink size={ 15 } strokeWidth={ 2 }/>
+                      <SpriteIcon name="link_external" boxSize="15px" aria-hidden/>
                     </chakra.a>
                   </chakra.li>
                 );
@@ -164,19 +168,6 @@ const Burger = ({ isMarketplaceAppPage }: Props) => {
           <TestnetBadge alignSelf="flex-start" mb={ 2 }/>
           <RollupStageBadge alignSelf="flex-start" mb={ 2 }/>
           <NavigationMobile onNavLinkClick={ onClose } isMarketplaceAppPage={ isMarketplaceAppPage }/>
-          <chakra.div
-            position="sticky"
-            bottom={ 0 }
-            zIndex={ 1 }
-            mt="auto"
-            pt="18px"
-            pb="2px"
-            bg={{ _light: 'rgba(255, 255, 255, 0.96)', _dark: 'rgba(34, 34, 34, 0.98)' }}
-            borderTopWidth="1px"
-            borderColor={{ _light: 'rgba(11, 125, 137, 0.14)', _dark: 'rgba(53, 194, 207, 0.16)' }}
-          >
-            <DakotaThemeToggle mode="button"/>
-          </chakra.div>
         </DrawerBody>
       </DrawerContent>
     </DrawerRoot>

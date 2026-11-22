@@ -2,18 +2,19 @@
 
 import { Box } from '@chakra-ui/react';
 import React from 'react';
-import { LuMoon, LuSun } from 'react-icons/lu';
 
 import { COLOR_THEMES, type ColorThemeId } from 'src/shell/top-bar/settings/color-theme/config';
 import { getThemeHexWithOverrides } from 'src/shell/top-bar/settings/color-theme/utils';
 
 import * as cookies from 'src/shared/storage/cookies';
+import SpriteIcon from 'src/sprite/SpriteIcon';
 
 import { Button } from 'src/toolkit/chakra/button';
 import type { ColorMode } from 'src/toolkit/chakra/color-mode';
 import { useColorMode } from 'src/toolkit/chakra/color-mode';
 import { IconButton } from 'src/toolkit/chakra/icon-button';
 import { Tooltip } from 'src/toolkit/chakra/tooltip';
+import { latexBrandHover, latexRaisedSm, ON_BRAND } from 'src/toolkit/theme/latex';
 
 type Props = {
   className?: string;
@@ -45,7 +46,7 @@ const DakotaThemeToggle = ({ className, mode = 'icon' }: Props) => {
   const { colorMode, setColorMode } = useColorMode();
   const isDark = colorMode === 'dark';
   const nextColorMode: ColorMode = isDark ? 'light' : 'dark';
-  const ThemeIcon = isDark ? LuSun : LuMoon;
+  const themeIconName = isDark ? 'sun' : 'moon';
   const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
   const buttonText = isDark ? 'Light Mode' : 'Dark Mode';
 
@@ -85,7 +86,8 @@ const DakotaThemeToggle = ({ className, mode = 'icon' }: Props) => {
     cookies.setDakotaSharedThemeMode(nextColorMode);
   }, [ nextColorMode, syncThemeMode ]);
 
-  const icon = <ThemeIcon size={ 20 } strokeWidth={ 2.15 }/>;
+  // The explorer's own icon set (the sprite), as every other icon on the site
+  const icon = <SpriteIcon name={ themeIconName } boxSize={ 5 } aria-hidden/>;
 
   if (mode === 'button') {
     return (
@@ -132,13 +134,10 @@ const DakotaThemeToggle = ({ className, mode = 'icon' }: Props) => {
         borderRadius="full"
         color="text.secondary"
         bg="button.icon_background.bg"
-        transition="all 0.3s ease"
-        boxShadow="none"
+        { ...latexRaisedSm }
         _hover={{
-          bg: 'hover',
-          color: 'white',
-          boxShadow: '0 10px 28px rgba(53, 194, 207, 0.26)',
-          transform: 'rotate(18deg)',
+          ...latexBrandHover,
+          color: ON_BRAND,
         }}
       >
         { icon }

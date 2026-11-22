@@ -2,7 +2,6 @@
 
 import { Box, chakra, Flex, Separator } from '@chakra-ui/react';
 import React from 'react';
-import { LuBookOpen, LuChevronDown, LuExternalLink, LuGlobe } from 'react-icons/lu';
 
 import DakotaThemeToggle from 'src/shell/header/DakotaThemeToggle';
 
@@ -16,6 +15,7 @@ import RewardsButton from 'src/features/rewards/components/RewardsButton';
 import RollupStageBadge from 'src/features/rollup/common/components/RollupStageBadge';
 
 import config from 'src/config';
+import SpriteIcon from 'src/sprite/SpriteIcon';
 
 import { Button } from 'src/toolkit/chakra/button';
 import { PopoverBody, PopoverContent, PopoverRoot, PopoverTrigger } from 'src/toolkit/chakra/popover';
@@ -34,8 +34,8 @@ const DAKOTA_HEADER_MAX_WIDTH = '1200px';
 const DAKOTA_HEADER_GAP = '10px';
 const DAKOTA_HEADER_SECTION_GAP = '16px';
 const DAKOTA_NAVIGATOR_LINKS = [
-  { label: 'Cryft Cards', url: 'https://cryft.app', icon: LuGlobe },
-  { label: 'How it works', url: 'https://cryft.app/how', icon: LuBookOpen },
+  { label: 'Cryft Cards', url: 'https://cryft.app', icon: 'globe' as const },
+  { label: 'How it works', url: 'https://cryft.app/how', icon: 'docs' as const },
 ] as const;
 
 const DakotaNavigatorMenu = () => {
@@ -65,7 +65,7 @@ const DakotaNavigatorMenu = () => {
           }}
         >
           Navigator
-          <LuChevronDown size={ 16 } strokeWidth={ 2.25 }/>
+          <SpriteIcon name="arrows/east-mini" boxSize="16px" transform="rotate(-90deg)" aria-hidden/>
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -80,8 +80,6 @@ const DakotaNavigatorMenu = () => {
         <PopoverBody p={ 2 }>
           <Flex flexDir="column" gap={ 1 }>
             { DAKOTA_NAVIGATOR_LINKS.map((item) => {
-              const LinkIcon = item.icon;
-
               return (
                 <chakra.a
                   key={ item.label }
@@ -103,9 +101,9 @@ const DakotaNavigatorMenu = () => {
                     textDecoration: 'none',
                   }}
                 >
-                  <LinkIcon size={ 18 } strokeWidth={ 2.1 }/>
+                  <SpriteIcon name={ item.icon } boxSize="18px" aria-hidden/>
                   <chakra.span flex="1">{ item.label }</chakra.span>
-                  <LuExternalLink size={ 14 } strokeWidth={ 2 }/>
+                  <SpriteIcon name="link_external" boxSize="14px" aria-hidden/>
                 </chakra.a>
               );
             }) }
