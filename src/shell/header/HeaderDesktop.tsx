@@ -26,7 +26,7 @@ const HeaderDesktop = ({ renderSearchBar }: Props) => {
       alignItems="center"
       justifyContent="center"
       gap={ 4 }
-      bg={{ _light: 'rgba(255, 255, 255, 0.78)', _dark: 'rgba(16, 38, 33, 0.78)' }}
+      bg={{ _light: 'rgba(255, 255, 255, 0.78)', _dark: 'rgba(47, 49, 54, 0.78)' }}
       borderWidth="1px"
       borderColor="border.divider"
       borderRadius="md"

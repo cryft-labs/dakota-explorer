@@ -128,7 +128,7 @@ const AddressTokens = ({ shouldRender = true, isQueryEnabled = true }: Props) =>
       <Box ref={ scrollRef }></Box>
       <Box
         bg={{ _light: 'rgba(255, 255, 255, 0.78)', _dark: 'rgba(5, 28, 24, 0.82)' }}
-        borderColor={{ _light: 'rgba(15, 118, 110, 0.16)', _dark: 'rgba(52, 211, 153, 0.14)' }}
+        borderColor={{ _light: 'rgba(11, 125, 137, 0.16)', _dark: 'rgba(53, 194, 207, 0.14)' }}
         borderRadius="12px"
         borderWidth="1px"
         overflow="hidden"

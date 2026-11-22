@@ -282,7 +282,7 @@ const WalletConnectPrompt = ({ label, uri, onCancel }: WalletConnectPromptProps)
         bg="white"
         color="#020d0b"
         borderWidth="1px"
-        borderColor="rgba(15, 118, 110, 0.22)"
+        borderColor="rgba(11, 125, 137, 0.22)"
         borderRadius="md"
         overflow="hidden"
         css={{ '& svg': { display: 'block', width: '100%', height: '100%' } }}
@@ -290,7 +290,7 @@ const WalletConnectPrompt = ({ label, uri, onCancel }: WalletConnectPromptProps)
         { qr ? (
           <Box w="full" h="full" dangerouslySetInnerHTML={{ __html: qr }}/>
         ) : (
-          <Text role="status" color="#315b53" fontSize="sm" px={ 4 }>
+          <Text role="status" color="#2f5a60" fontSize="sm" px={ 4 }>
             { qrError || 'Preparing secure pairing code...' }
           </Text>
         ) }
@@ -848,7 +848,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
         borderRadius="md"
         px={ 4 }
         py={ 3 }
-        bg={{ _light: 'rgba(240, 253, 250, 0.72)', _dark: 'rgba(16, 55, 47, 0.54)' }}
+        bg={{ _light: 'rgba(240, 253, 250, 0.72)', _dark: 'rgba(14, 48, 53, 0.54)' }}
       >
         <Flex alignItems="center" gap={ 3 }>
           <AddressIdenticon size={ 42 } hash={ displayedAddress }/>
@@ -926,12 +926,12 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
         transition={ isDragging ? 'none' : 'transform 180ms ease-out' }
         bg={{ _light: 'rgba(255, 255, 255, 0.98)', _dark: 'rgba(7, 30, 25, 0.98)' }}
         borderWidth="1px"
-        borderColor={{ _light: 'rgba(15, 118, 110, 0.2)', _dark: 'rgba(52, 211, 153, 0.2)' }}
+        borderColor={{ _light: 'rgba(11, 125, 137, 0.2)', _dark: 'rgba(53, 194, 207, 0.2)' }}
         borderTopLeftRadius="md"
         borderTopRightRadius="md"
         borderBottomLeftRadius={{ base: 0, lg: 'md' }}
         borderBottomRightRadius={{ base: 0, lg: 'md' }}
-        boxShadow={{ _light: '0 24px 70px rgba(15, 118, 110, 0.18)', _dark: '0 28px 80px rgba(0, 0, 0, 0.5)' }}
+        boxShadow={{ _light: '0 24px 70px rgba(11, 125, 137, 0.18)', _dark: '0 28px 80px rgba(0, 0, 0, 0.5)' }}
         backdropFilter="blur(18px)"
       >
         { renderedView === 'connect' && emailStep === 'verify' && !walletConnectPrompt && (
@@ -950,11 +950,11 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
             px={ 4 }
             py={ 2.5 }
             color="white"
-            bg={{ _light: 'rgba(15, 118, 110, 0.98)', _dark: 'rgba(11, 86, 69, 0.98)' }}
+            bg={{ _light: 'rgba(11, 125, 137, 0.98)', _dark: 'rgba(7, 90, 102, 0.98)' }}
             borderWidth="1px"
-            borderColor={{ _light: 'rgba(13, 148, 136, 0.35)', _dark: 'rgba(52, 211, 153, 0.35)' }}
+            borderColor={{ _light: 'rgba(13, 148, 136, 0.35)', _dark: 'rgba(53, 194, 207, 0.35)' }}
             borderRadius="md"
-            boxShadow={{ _light: '0 12px 30px rgba(15, 118, 110, 0.2)', _dark: '0 14px 34px rgba(0, 0, 0, 0.42)' }}
+            boxShadow={{ _light: '0 12px 30px rgba(11, 125, 137, 0.2)', _dark: '0 14px 34px rgba(0, 0, 0, 0.42)' }}
             pointerEvents="none"
             animation={ verificationNoticeReveal + ' 260ms cubic-bezier(0.22, 1, 0.36, 1) both' }
           >
@@ -991,7 +991,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
             w="40px"
             h="4px"
             borderRadius="full"
-            bg={{ _light: 'rgba(15, 118, 110, 0.28)', _dark: 'rgba(255, 255, 255, 0.3)' }}
+            bg={{ _light: 'rgba(11, 125, 137, 0.28)', _dark: 'rgba(255, 255, 255, 0.3)' }}
           />
         </Box>
         <DakotaStarfield ambientInset="0" glimmerInset="0"/>

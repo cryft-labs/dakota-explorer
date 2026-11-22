@@ -64,8 +64,8 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
     // ELEMENTS
     address: {
       highlighted: {
-        bg: { value: { _light: '#E6F7F3', _dark: '#113B32' } },
-        border: { value: { _light: '#A7F3D0', _dark: '#34D399' } },
+        bg: { value: { _light: '#E2F4F6', _dark: '#26444A' } },
+        border: { value: { _light: '#A9DDE3', _dark: '#35C2CF' } },
       },
     },
 
@@ -74,7 +74,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
       solid: {
         bg: {
           DEFAULT: { value: { _light: '{colors.theme.button.primary._light}', _dark: '{colors.theme.button.primary._dark}' } },
-          hover: { value: { _light: '#0D6F66', _dark: '#0F766E' } },
+          hover: { value: { _light: '#075A66', _dark: '#6FD6DF' } },
         },
         text: {
           DEFAULT: { value: { _light: '{colors.theme.button.primary.text._light}', _dark: '{colors.theme.button.primary.text._dark}' } },
@@ -90,7 +90,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
           DEFAULT: { value: '{colors.text.primary}' },
         },
         bg: {
-          DEFAULT: { value: { _light: '#EEF8F4', _dark: '#102621' } },
+          DEFAULT: { value: { _light: '#EEF7F8', _dark: '#2F3136' } },
         },
       },
       dropdown: {
@@ -104,15 +104,15 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
       header: {
         fg: {
           DEFAULT: { value: { _light: '#2A3547', _dark: '#94A3B8' } },
-          selected: { value: { _light: '#0F766E', _dark: '#FFFFFF' } },
-          highlighted: { value: { _light: '#0F766E', _dark: '#FFFFFF' } },
+          selected: { value: { _light: '#075A66', _dark: '#FFFFFF' } },
+          highlighted: { value: { _light: '#075A66', _dark: '#FFFFFF' } },
         },
         bg: {
-          selected: { value: { _light: '#E6F7F3', _dark: '#113B32' } },
-          highlighted: { value: { _light: '#ECFDF5', _dark: '#064E3B' } },
+          selected: { value: { _light: '#E2F4F6', _dark: '#26444A' } },
+          highlighted: { value: { _light: '#EEF8F9', _dark: '#1D4E55' } },
         },
         border: {
-          DEFAULT: { value: { _light: '#D5E6E0', _dark: '#334155' } },
+          DEFAULT: { value: { _light: '#D5E3E6', _dark: '#334155' } },
         },
       },
       segmented: {
@@ -122,7 +122,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
       },
       icon_background: {
         bg: {
-          DEFAULT: { value: { _light: '#EEF8F4', _dark: '#102621' } },
+          DEFAULT: { value: { _light: '#EEF7F8', _dark: '#2F3136' } },
         },
       },
       pagination: {
@@ -130,7 +130,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
           DEFAULT: { value: '{colors.text.primary}' },
         },
         border: {
-          DEFAULT: { value: { _light: '#D5E6E0', _dark: '#334155' } },
+          DEFAULT: { value: { _light: '#D5E3E6', _dark: '#334155' } },
         },
       },
       hero: {
@@ -149,8 +149,8 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
           },
           selected: {
             value: {
-              _light: heroBannerButton?._selected?.background?.[0] || '#E6F7F3',
-              _dark: heroBannerButton?._selected?.background?.[1] || heroBannerButton?._selected?.background?.[0] || '#113B32',
+              _light: heroBannerButton?._selected?.background?.[0] || '#E2F4F6',
+              _dark: heroBannerButton?._selected?.background?.[1] || heroBannerButton?._selected?.background?.[0] || '#26444A',
             },
           },
         },
@@ -190,7 +190,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
         DEFAULT: { value: '{colors.text.secondary}' },
       },
       underlaid: {
-        bg: { value: { _light: '#E6F7F3', _dark: '#102621' } },
+        bg: { value: { _light: '#E2F4F6', _dark: '#2F3136' } },
       },
       subtle: {
         DEFAULT: { value: '{colors.text.primary}' },
@@ -220,7 +220,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
     },
     popover: {
       DEFAULT: {
-        bg: { value: { _light: '{colors.white}', _dark: '#102621' } },
+        bg: { value: { _light: '{colors.white}', _dark: '#2F3136' } },
         shadow: { value: { _light: 'rgba(145, 158, 171, 0.24)', _dark: 'rgba(0, 0, 0, 0.38)' } },
       },
     },
@@ -285,11 +285,11 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
       },
       bg: {
         DEFAULT: { value: '{colors.alert.bg.info}' },
-        info: { value: { _light: '#E6F7F3', _dark: '#113B32' } },
+        info: { value: { _light: '#E2F4F6', _dark: '#26444A' } },
         warning: { value: { _light: '{colors.orange.100}', _dark: '{colors.orange.900}' } },
         success: { value: '{colors.alert.bg.success}' },
         error: { value: '{colors.alert.bg.error}' },
-        loading: { value: { _light: '#E6F7F3', _dark: '#113B32' } },
+        loading: { value: { _light: '#E2F4F6', _dark: '#26444A' } },
       },
     },
     input: {
@@ -299,14 +299,14 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
       },
       bg: {
         DEFAULT: { value: '{colors.bg.primary}' },
-        readOnly: { value: { _light: '#E6F2EE', _dark: '#1C3A33' } },
+        readOnly: { value: { _light: '#E6F1F3', _dark: '#1F3B40' } },
       },
       border: {
-        DEFAULT: { value: { _light: '#D5E6E0', _dark: '#334155' } },
-        hover: { value: { _light: '#A7F3D0', _dark: '#2DD4BF' } },
+        DEFAULT: { value: { _light: '#D5E3E6', _dark: '#334155' } },
+        hover: { value: { _light: '#A9DDE3', _dark: '#6FD6DF' } },
         focus: { value: '{colors.hover}' },
-        filled: { value: { _light: '#D5E6E0', _dark: '#334155' } },
-        readOnly: { value: { _light: '#E6F2EE', _dark: '#1C3A33' } },
+        filled: { value: { _light: '#D5E3E6', _dark: '#334155' } },
+        readOnly: { value: { _light: '#E6F1F3', _dark: '#1F3B40' } },
         error: { value: '{colors.red.500}' },
       },
       placeholder: {
@@ -326,7 +326,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
     },
     dialog: {
       bg: {
-        DEFAULT: { value: { _light: '{colors.white}', _dark: '#102621' } },
+        DEFAULT: { value: { _light: '{colors.white}', _dark: '#2F3136' } },
       },
       fg: {
         DEFAULT: { value: '{colors.text.primary}' },
@@ -334,7 +334,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
     },
     drawer: {
       bg: {
-        DEFAULT: { value: { _light: '{colors.white}', _dark: '#102621' } },
+        DEFAULT: { value: { _light: '{colors.white}', _dark: '#2F3136' } },
       },
     },
     select: {
@@ -386,11 +386,11 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
         fg: { value: { _light: '{colors.orange.500}', _dark: '{colors.orange.100}' } },
       },
       blue: {
-        bg: { value: { _light: '#E6F7F3', _dark: '#113B32' } },
-        fg: { value: { _light: '#0F766E', _dark: '#34D399' } },
+        bg: { value: { _light: '#E2F4F6', _dark: '#26444A' } },
+        fg: { value: { _light: '#075A66', _dark: '#35C2CF' } },
       },
       blue_alt: {
-        bg: { value: { _light: '#E6F7F3', _dark: '#113B32' } },
+        bg: { value: { _light: '#E2F4F6', _dark: '#26444A' } },
         fg: { value: { _light: '{colors.blackAlpha.800}', _dark: '{colors.whiteAlpha.800}' } },
       },
       yellow: {
@@ -424,8 +424,8 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
           fg: { value: { _light: '{colors.red.600}', _dark: '{colors.red.200}' } },
         },
         blue: {
-          bg: { value: { _light: '#CCFBF1', _dark: '#134E4A' } },
-          fg: { value: { _light: '#0F766E', _dark: '#99F6E4' } },
+          bg: { value: { _light: '#CDEDF0', _dark: '#1D4E55' } },
+          fg: { value: { _light: '#075A66', _dark: '#9BE3EA' } },
         },
         yellow: {
           bg: { value: { _light: '{colors.yellow.100}', _dark: '{colors.yellow.800}' } },
@@ -464,7 +464,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
           fg: { value: { _light: '{colors.blackAlpha.800}', _dark: '{colors.whiteAlpha.800}' } },
         },
         filter: {
-          bg: { value: { _light: '#E6F7F3', _dark: '#113B32' } },
+          bg: { value: { _light: '#E2F4F6', _dark: '#26444A' } },
         },
         select: {
           bg: {
@@ -476,8 +476,8 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
     },
     table: {
       header: {
-        bg: { value: { _light: '#E6F7F3', _dark: '#113B32' } },
-        fg: { value: { _light: '#2A3547', _dark: '#B7E4D5' } },
+        bg: { value: { _light: '#E2F4F6', _dark: '#26444A' } },
+        fg: { value: { _light: '#2A3547', _dark: '#B7DFE4' } },
       },
     },
     checkbox: {

@@ -7,26 +7,26 @@ import React from 'react';
 
 const AMBIENT_BACKGROUND = {
   _light: [
-    'radial-gradient(ellipse at 50% 0%, rgba(15, 118, 110, 0.08) 0%, transparent 38%)',
-    'radial-gradient(ellipse at 16% 36%, rgba(15, 118, 110, 0.06) 0%, transparent 34%)',
-    'radial-gradient(ellipse at 86% 24%, rgba(45, 212, 191, 0.06) 0%, transparent 32%)',
+    'radial-gradient(ellipse at 50% 0%, rgba(11, 125, 137, 0.08) 0%, transparent 38%)',
+    'radial-gradient(ellipse at 16% 36%, rgba(11, 125, 137, 0.06) 0%, transparent 34%)',
+    'radial-gradient(ellipse at 86% 24%, rgba(53, 194, 207, 0.06) 0%, transparent 32%)',
   ].join(', '),
   _dark: [
-    'radial-gradient(ellipse at 50% 0%, rgba(52, 211, 153, 0.13) 0%, transparent 38%)',
-    'radial-gradient(ellipse at 16% 36%, rgba(52, 211, 153, 0.1) 0%, transparent 34%)',
-    'radial-gradient(ellipse at 86% 24%, rgba(45, 212, 191, 0.1) 0%, transparent 32%)',
+    'radial-gradient(ellipse at 50% 0%, rgba(53, 194, 207, 0.13) 0%, transparent 38%)',
+    'radial-gradient(ellipse at 16% 36%, rgba(53, 194, 207, 0.1) 0%, transparent 34%)',
+    'radial-gradient(ellipse at 86% 24%, rgba(53, 194, 207, 0.1) 0%, transparent 32%)',
   ].join(', '),
 };
 
 const STARFIELD_BACKGROUND = {
   _light: [
     'radial-gradient(circle, rgba(255, 255, 255, 0.72) 0 1px, transparent 1.9px)',
-    'radial-gradient(circle, rgba(52, 211, 153, 0.68) 0 1px, transparent 2px)',
+    'radial-gradient(circle, rgba(53, 194, 207, 0.68) 0 1px, transparent 2px)',
     'radial-gradient(circle, rgba(255, 255, 255, 0.52) 0 0.85px, transparent 1.7px)',
   ].join(', '),
   _dark: [
     'radial-gradient(circle, rgba(255, 255, 255, 0.72) 0 1px, transparent 1.9px)',
-    'radial-gradient(circle, rgba(52, 211, 153, 0.68) 0 1px, transparent 2px)',
+    'radial-gradient(circle, rgba(53, 194, 207, 0.68) 0 1px, transparent 2px)',
     'radial-gradient(circle, rgba(255, 255, 255, 0.52) 0 0.85px, transparent 1.7px)',
   ].join(', '),
 };
@@ -34,34 +34,34 @@ const STARFIELD_BACKGROUND = {
 const GLEAM_BACKGROUND = {
   _light: [
     'radial-gradient(circle, rgba(255, 255, 255, 0.92) 0 1.35px, transparent 2.6px)',
-    'radial-gradient(circle, rgba(15, 118, 110, 0.74) 0 1.2px, transparent 2.5px)',
+    'radial-gradient(circle, rgba(11, 125, 137, 0.74) 0 1.2px, transparent 2.5px)',
   ].join(', '),
   _dark: [
     'radial-gradient(circle, rgba(255, 255, 255, 0.92) 0 1.35px, transparent 2.6px)',
-    'radial-gradient(circle, rgba(52, 211, 153, 0.74) 0 1.2px, transparent 2.5px)',
+    'radial-gradient(circle, rgba(53, 194, 207, 0.74) 0 1.2px, transparent 2.5px)',
   ].join(', '),
 };
 
 const GLIMMER_BACKGROUND = {
   _light: [
     'radial-gradient(circle at 14% 20%, rgba(255, 255, 255, 0.95) 0 1px, transparent 2px)',
-    'radial-gradient(circle at 34% 12%, rgba(52, 211, 153, 0.9) 0 1px, transparent 2px)',
+    'radial-gradient(circle at 34% 12%, rgba(53, 194, 207, 0.9) 0 1px, transparent 2px)',
     'radial-gradient(circle at 68% 24%, rgba(255, 255, 255, 0.85) 0 1px, transparent 2px)',
-    'radial-gradient(circle at 86% 16%, rgba(15, 118, 110, 0.8) 0 1px, transparent 2px)',
+    'radial-gradient(circle at 86% 16%, rgba(11, 125, 137, 0.8) 0 1px, transparent 2px)',
     'radial-gradient(circle at 76% 48%, rgba(255, 255, 255, 0.7) 0 1px, transparent 2px)',
-    'radial-gradient(circle at 18% 74%, rgba(52, 211, 153, 0.72) 0 1px, transparent 2px)',
+    'radial-gradient(circle at 18% 74%, rgba(53, 194, 207, 0.72) 0 1px, transparent 2px)',
     'radial-gradient(circle at 58% 82%, rgba(255, 255, 255, 0.78) 0 1px, transparent 2px)',
-    'radial-gradient(circle at 88% 70%, rgba(15, 118, 110, 0.64) 0 1px, transparent 2px)',
+    'radial-gradient(circle at 88% 70%, rgba(11, 125, 137, 0.64) 0 1px, transparent 2px)',
   ].join(','),
   _dark: [
     'radial-gradient(circle at 14% 20%, rgba(255, 255, 255, 0.9) 0 1px, transparent 2px)',
-    'radial-gradient(circle at 34% 12%, rgba(52, 211, 153, 0.88) 0 1px, transparent 2px)',
+    'radial-gradient(circle at 34% 12%, rgba(53, 194, 207, 0.88) 0 1px, transparent 2px)',
     'radial-gradient(circle at 68% 24%, rgba(255, 255, 255, 0.78) 0 1px, transparent 2px)',
-    'radial-gradient(circle at 86% 16%, rgba(52, 211, 153, 0.74) 0 1px, transparent 2px)',
+    'radial-gradient(circle at 86% 16%, rgba(53, 194, 207, 0.74) 0 1px, transparent 2px)',
     'radial-gradient(circle at 76% 48%, rgba(255, 255, 255, 0.66) 0 1px, transparent 2px)',
-    'radial-gradient(circle at 18% 74%, rgba(52, 211, 153, 0.68) 0 1px, transparent 2px)',
+    'radial-gradient(circle at 18% 74%, rgba(53, 194, 207, 0.68) 0 1px, transparent 2px)',
     'radial-gradient(circle at 58% 82%, rgba(255, 255, 255, 0.72) 0 1px, transparent 2px)',
-    'radial-gradient(circle at 88% 70%, rgba(52, 211, 153, 0.62) 0 1px, transparent 2px)',
+    'radial-gradient(circle at 88% 70%, rgba(53, 194, 207, 0.62) 0 1px, transparent 2px)',
   ].join(','),
 };
 
@@ -247,7 +247,7 @@ const DakotaStarfield = ({ ambientInset = '-18px', glimmerInset = '-10px' }: Pro
         backgroundPosition={ GLIMMER_START_POSITION }
         animation={ GLIMMER_ANIMATION }
         filter={{
-          _light: 'drop-shadow(0 0 6px rgba(15, 118, 110, 0.14))',
+          _light: 'drop-shadow(0 0 6px rgba(11, 125, 137, 0.14))',
           _dark: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.26))',
         }}
         mixBlendMode={{ _light: 'normal', _dark: 'screen' }}

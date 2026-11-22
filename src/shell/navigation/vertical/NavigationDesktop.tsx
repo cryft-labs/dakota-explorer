@@ -64,7 +64,7 @@ const NavigationDesktop = () => {
       alignItems="stretch"
       borderRight="1px solid"
       borderColor="border.divider"
-      bg={{ _light: 'rgba(255, 255, 255, 0.58)', _dark: 'rgba(16, 38, 33, 0.66)' }}
+      bg={{ _light: 'rgba(255, 255, 255, 0.58)', _dark: 'rgba(47, 49, 54, 0.66)' }}
       backdropFilter="blur(12px)"
       px={{ lg: isExpanded ? 6 : 4, xl: isCollapsed ? 4 : 6 }}
       pt={ 12 }

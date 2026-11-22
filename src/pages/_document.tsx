@@ -67,6 +67,9 @@ class MyDocument extends Document {
             </>
           ) }
 
+          <meta name="theme-color" content="#F6FBFC" media="(prefers-color-scheme: light)"/>
+          <meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"/>
+
           { /* FAVICON */ }
           <link rel="icon" type="image/svg+xml" href={ DAKOTA_FAVICON_SRC }/>
           <link rel="shortcut icon" href={ DAKOTA_FAVICON_SRC }/>

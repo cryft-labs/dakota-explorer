@@ -38,17 +38,17 @@ const dakotaHeroPanelReveal = keyframes`
 const DAKOTA_PANEL_REVEAL_ANIMATION = `${ dakotaHeroPanelReveal } 540ms ease-out both`;
 
 export const BACKGROUND_DEFAULT = [
-  'linear-gradient(135deg, rgba(15, 118, 110, 0.12) 0%, rgba(255, 255, 255, 0.98) 58%, rgba(45, 212, 191, 0.08) 100%)',
+  'linear-gradient(135deg, rgba(11, 125, 137, 0.12) 0%, rgba(255, 255, 255, 0.98) 58%, rgba(53, 194, 207, 0.08) 100%)',
   'linear-gradient(rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.98))',
 ].join(', ');
 
 const BACKGROUND_DARK_DEFAULT = [
-  'linear-gradient(135deg, rgba(52, 211, 153, 0.12) 0%, rgba(9, 31, 28, 0.96) 58%, rgba(45, 212, 191, 0.08) 100%)',
-  'linear-gradient(rgba(9, 31, 28, 0.96), rgba(9, 31, 28, 0.96))',
+  'linear-gradient(135deg, rgba(53, 194, 207, 0.12) 0%, rgba(34, 34, 34, 0.96) 58%, rgba(53, 194, 207, 0.08) 100%)',
+  'linear-gradient(rgba(34, 34, 34, 0.96), rgba(34, 34, 34, 0.96))',
 ].join(', ');
 
 const TEXT_COLOR_DEFAULT = { _light: '#1F2937', _dark: 'rgba(244, 248, 247, 0.96)' };
-const BORDER_DEFAULT = { _light: '1px solid rgba(15, 118, 110, 0.18)', _dark: '1px solid rgba(52, 211, 153, 0.18)' };
+const BORDER_DEFAULT = { _light: '1px solid rgba(11, 125, 137, 0.18)', _dark: '1px solid rgba(53, 194, 207, 0.18)' };
 
 const HERO_SUBTEXT = [
   'Search Cryft Network blocks, transactions, tokens, addresses, and smart contracts across the Cryft Cards ecosystem.',
@@ -110,8 +110,8 @@ const HeroBanner = () => {
       isolation="isolate"
       overflow="hidden"
       boxShadow={{
-        _light: '0 18px 58px rgba(15, 118, 110, 0.08)',
-        _dark: '0 18px 58px rgba(0, 0, 0, 0.28), 0 0 34px rgba(52, 211, 153, 0.06)',
+        _light: '0 18px 58px rgba(11, 125, 137, 0.08)',
+        _dark: '0 18px 58px rgba(0, 0, 0, 0.28), 0 0 34px rgba(53, 194, 207, 0.06)',
       }}
       backdropFilter="blur(18px) saturate(145%)"
       animation={ DAKOTA_PANEL_REVEAL_ANIMATION }
@@ -140,7 +140,7 @@ const HeroBanner = () => {
           lineHeight="1.2"
           fontWeight={ 900 }
           letterSpacing="0.16em"
-          color={{ _light: '#0F766E', _dark: '#34D399' }}
+          color={{ _light: '#0B7D89', _dark: '#35C2CF' }}
         >
           Network explorer
         </Text>
@@ -202,8 +202,8 @@ const HeroBanner = () => {
               justifyContent="center"
               borderRadius="full"
               borderWidth="1px"
-              borderColor={{ _light: 'rgba(15, 118, 110, 0.26)', _dark: 'rgba(52, 211, 153, 0.28)' }}
-              bg={{ _light: 'rgba(15, 118, 110, 0.08)', _dark: 'rgba(52, 211, 153, 0.16)' }}
+              borderColor={{ _light: 'rgba(11, 125, 137, 0.26)', _dark: 'rgba(53, 194, 207, 0.28)' }}
+              bg={{ _light: 'rgba(11, 125, 137, 0.08)', _dark: 'rgba(53, 194, 207, 0.16)' }}
               color="text.primary"
               fontSize="12px"
               lineHeight="16px"

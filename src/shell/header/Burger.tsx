@@ -74,8 +74,8 @@ const Burger = ({ isMarketplaceAppPage }: Props) => {
       <DrawerContent
         bg={{ _light: 'rgba(255, 255, 255, 0.96)', _dark: 'rgba(7, 26, 23, 0.98)' }}
         borderRightWidth="1px"
-        borderColor={{ _light: 'rgba(15, 118, 110, 0.14)', _dark: 'rgba(52, 211, 153, 0.16)' }}
-        boxShadow={{ _light: '18px 0 44px rgba(15, 118, 110, 0.14)', _dark: '18px 0 52px rgba(0, 0, 0, 0.42)' }}
+        borderColor={{ _light: 'rgba(11, 125, 137, 0.14)', _dark: 'rgba(53, 194, 207, 0.16)' }}
+        boxShadow={{ _light: '18px 0 44px rgba(11, 125, 137, 0.14)', _dark: '18px 0 52px rgba(0, 0, 0, 0.42)' }}
       >
         <DrawerBody display="flex" flexDirection="column" overflowX="hidden" overflowY="auto" px="24px" py="20px">
           <NetworkLogo/>
@@ -173,7 +173,7 @@ const Burger = ({ isMarketplaceAppPage }: Props) => {
             pb="2px"
             bg={{ _light: 'rgba(255, 255, 255, 0.96)', _dark: 'rgba(7, 26, 23, 0.98)' }}
             borderTopWidth="1px"
-            borderColor={{ _light: 'rgba(15, 118, 110, 0.14)', _dark: 'rgba(52, 211, 153, 0.16)' }}
+            borderColor={{ _light: 'rgba(11, 125, 137, 0.14)', _dark: 'rgba(53, 194, 207, 0.16)' }}
           >
             <DakotaThemeToggle mode="button"/>
           </chakra.div>

@@ -57,7 +57,7 @@ export const recipe = defineRecipe({
         },
         '&:is([data-state=checked], [data-state=indeterminate])': {
           bg: 'selected.option.bg',
-          color: 'white',
+          color: { _light: 'white', _dark: '#0A2226' },
           borderColor: 'selected.option.bg',
           _hover: {
             bg: 'hover',

@@ -11,7 +11,7 @@ const DEFAULT_THEME_COLORS = {
       // so we use hex values instead
       // but it is not the case for other colors
       _light: { value: '#F6FBFC' },
-      _dark: { value: '#071A17' },
+      _dark: { value: '#222222' },
     },
   },
   text: {
@@ -25,24 +25,24 @@ const DEFAULT_THEME_COLORS = {
     },
   },
   hover: {
-    _light: { value: '#0F766E' },
-    _dark: { value: '#2DD4BF' },
+    _light: { value: '#075A66' },
+    _dark: { value: '#6FD6DF' },
   },
   selected: {
     control: {
       text: {
-        _light: { value: '#0F766E' },
+        _light: { value: '#075A66' },
         _dark: { value: '#FFFFFF' },
       },
       bg: {
-        _light: { value: '#E6F7F3' },
-        _dark: { value: '#113B32' },
+        _light: { value: '#E2F4F6' },
+        _dark: { value: '#26444A' },
       },
     },
     option: {
       bg: {
-        _light: { value: '#0F766E' },
-        _dark: { value: '#34D399' },
+        _light: { value: '#0B7D89' },
+        _dark: { value: '#35C2CF' },
       },
     },
   },
@@ -58,46 +58,47 @@ const DEFAULT_THEME_COLORS = {
   },
   button: {
     primary: {
-      _light: { value: '#0F766E' },
-      _dark: { value: '#115E59' },
+      _light: { value: '#0B7D89' },
+      _dark: { value: '#35C2CF' },
       text: {
+        // Cryft Cards: white type on the teal (4.9:1), dark type on the bright teal (8.1:1)
         _light: { value: '{colors.white}' },
-        _dark: { value: '{colors.white}' },
+        _dark: { value: '#0A2226' },
       },
     },
   },
   link: {
     primary: {
-      _light: { value: '#0F766E' },
-      _dark: { value: '#34D399' },
+      _light: { value: '#0B7D89' },
+      _dark: { value: '#35C2CF' },
     },
   },
   graph: {
     line: {
-      _light: { value: '#14B8A6' },
-      _dark: { value: '#34D399' },
+      _light: { value: '#0B7D89' },
+      _dark: { value: '#35C2CF' },
     },
     gradient: {
       start: {
-        _light: { value: 'rgba(20, 184, 166, 0.24)' },
-        _dark: { value: 'rgba(52, 211, 153, 0.22)' },
+        _light: { value: 'rgba(11, 125, 137, 0.24)' },
+        _dark: { value: 'rgba(53, 194, 207, 0.22)' },
       },
       stop: {
-        _light: { value: 'rgba(20, 184, 166, 0)' },
-        _dark: { value: 'rgba(52, 211, 153, 0)' },
+        _light: { value: 'rgba(11, 125, 137, 0)' },
+        _dark: { value: 'rgba(53, 194, 207, 0)' },
       },
     },
   },
   navigation: {
     bg: {
       selected: {
-        _light: { value: '#E6F7F3' },
-        _dark: { value: '#113B32' },
+        _light: { value: '#E2F4F6' },
+        _dark: { value: '#26444A' },
       },
     },
     text: {
       selected: {
-        _light: { value: '#0F766E' },
+        _light: { value: '#075A66' },
         _dark: { value: '#FFFFFF' },
       },
     },
@@ -105,19 +106,19 @@ const DEFAULT_THEME_COLORS = {
   stats: {
     bg: {
       _light: { value: '#FFFFFF' },
-      _dark: { value: '#102621' },
+      _dark: { value: '#2F3136' },
     },
   },
   topbar: {
     bg: {
       _light: { value: 'rgba(255, 255, 255, 0.82)' },
-      _dark: { value: 'rgba(16, 38, 33, 0.82)' },
+      _dark: { value: 'rgba(47, 49, 54, 0.82)' },
     },
   },
   tabs: {
     text: {
       primary: {
-        _light: { value: '#0F766E' },
+        _light: { value: '#0B7D89' },
         _dark: { value: '#FFFFFF' },
       },
     },

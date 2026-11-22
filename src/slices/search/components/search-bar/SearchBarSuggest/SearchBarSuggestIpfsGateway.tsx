@@ -26,7 +26,7 @@ const SearchBarSuggestIpfsGateway = ({ href, searchTerm, onClick }: Props) => {
       borderRadius="base"
       bgColor={{ _light: 'white', _dark: 'dialog.bg' }}
       _hover={{
-        bgColor: { _light: '#E6F7F3', _dark: '#113B32' },
+        bgColor: { _light: '#E2F4F6', _dark: '#26444A' },
         borderColor: 'hover',
       }}
       aria-label="Open IPFS CID in IPFS gateway"

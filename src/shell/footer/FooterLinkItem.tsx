@@ -76,15 +76,15 @@ const FooterLinkItem = ({ icon, iconSize, iconUrl, text, url, isLoading }: Props
       textStyle="xs"
       columnGap={ 2 }
       borderWidth="1px"
-      borderColor={{ _light: 'rgba(15, 118, 110, 0.18)', _dark: 'rgba(52, 211, 153, 0.18)' }}
+      borderColor={{ _light: 'rgba(11, 125, 137, 0.18)', _dark: 'rgba(53, 194, 207, 0.18)' }}
       borderRadius="base"
       bg={{ _light: 'rgba(255, 255, 255, 0.44)', _dark: 'rgba(7, 26, 23, 0.46)' }}
       color="text.secondary"
       fontWeight={ 600 }
       _hover={{
         color: 'text.primary',
-        bg: { _light: 'rgba(52, 211, 153, 0.1)', _dark: 'rgba(52, 211, 153, 0.1)' },
-        borderColor: { _light: 'rgba(15, 118, 110, 0.34)', _dark: 'rgba(52, 211, 153, 0.34)' },
+        bg: { _light: 'rgba(53, 194, 207, 0.1)', _dark: 'rgba(53, 194, 207, 0.1)' },
+        borderColor: { _light: 'rgba(11, 125, 137, 0.34)', _dark: 'rgba(53, 194, 207, 0.34)' },
         textDecoration: 'none',
       }}
     >

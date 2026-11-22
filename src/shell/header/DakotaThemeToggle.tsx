@@ -137,7 +137,7 @@ const DakotaThemeToggle = ({ className, mode = 'icon' }: Props) => {
         _hover={{
           bg: 'hover',
           color: 'white',
-          boxShadow: '0 10px 28px rgba(52, 211, 153, 0.26)',
+          boxShadow: '0 10px 28px rgba(53, 194, 207, 0.26)',
           transform: 'rotate(18deg)',
         }}
       >

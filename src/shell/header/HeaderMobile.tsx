@@ -58,10 +58,10 @@ const HeaderMobile = ({ hideSearchButton, onGoToSearchResults }: Props) => {
       height="74px"
       minH="74px"
       borderBottomWidth="1px"
-      borderColor={{ _light: 'rgba(15, 118, 110, 0.16)', _dark: 'rgba(52, 211, 153, 0.16)' }}
+      borderColor={{ _light: 'rgba(11, 125, 137, 0.16)', _dark: 'rgba(53, 194, 207, 0.16)' }}
       borderRadius="0 0 40px 40px"
       backdropFilter="blur(12px)"
-      boxShadow={{ _light: '0 14px 38px rgba(15, 118, 110, 0.1)', _dark: '0 18px 48px rgba(0, 0, 0, 0.34)' }}
+      boxShadow={{ _light: '0 14px 38px rgba(11, 125, 137, 0.1)', _dark: '0 18px 48px rgba(0, 0, 0, 0.34)' }}
       overflow="hidden"
     >
       <Flex

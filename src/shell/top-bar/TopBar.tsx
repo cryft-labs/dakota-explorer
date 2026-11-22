@@ -54,7 +54,7 @@ const TopBarContent = () => {
       borderBottomWidth="1px"
       borderColor="border.divider"
       backdropFilter="blur(12px)"
-      boxShadow="0 6px 20px rgba(15, 118, 110, 0.06)"
+      boxShadow="0 6px 20px rgba(11, 125, 137, 0.06)"
     >
       <Flex
         minH="36px"

@@ -18,7 +18,7 @@ const IconFallback = () => {
       name="networks/icon-placeholder"
       w="30px"
       h="30px"
-      color={{ base: 'teal.700', _dark: 'green.300' }}
+      color={{ base: '#0B7D89', _dark: '#35C2CF' }}
       aria-label="Network icon placeholder"
     />
   );

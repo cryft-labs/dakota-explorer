@@ -114,7 +114,7 @@ const Footer = () => {
   }, []);
 
   const renderProjectInfo = React.useCallback((gridArea?: GridProps['gridArea']) => {
-    const logoColor = { base: 'teal.700', _dark: 'green.300' };
+    const logoColor = { base: '#0B7D89', _dark: '#35C2CF' };
 
     return (
       <Box gridArea={ gridArea }>
@@ -203,7 +203,7 @@ const Footer = () => {
               px={ 3 }
               py={ 2 }
               borderWidth="1px"
-              borderColor={{ _light: 'rgba(15, 118, 110, 0.18)', _dark: 'rgba(52, 211, 153, 0.18)' }}
+              borderColor={{ _light: 'rgba(11, 125, 137, 0.18)', _dark: 'rgba(53, 194, 207, 0.18)' }}
               borderRadius="base"
               bg={{ _light: 'rgba(255, 255, 255, 0.44)', _dark: 'rgba(7, 26, 23, 0.46)' }}
             >
@@ -224,7 +224,7 @@ const Footer = () => {
     as: 'footer',
     borderTopWidth: '1px',
     borderTopColor: 'border.divider',
-    bg: { _light: 'rgba(255, 255, 255, 0.58)', _dark: 'rgba(16, 38, 33, 0.66)' },
+    bg: { _light: 'rgba(255, 255, 255, 0.58)', _dark: 'rgba(47, 49, 54, 0.66)' },
     backdropFilter: 'blur(12px)',
   };
 

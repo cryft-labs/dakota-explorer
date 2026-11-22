@@ -105,7 +105,7 @@ const AdaptiveTabsList = (props: Props) => {
       borderRadius="12px"
       borderWidth="1px"
       borderStyle="solid"
-      borderColor={{ _light: 'rgba(15, 118, 110, 0.16)', _dark: 'rgba(52, 211, 153, 0.14)' }}
+      borderColor={{ _light: 'rgba(11, 125, 137, 0.16)', _dark: 'rgba(53, 194, 207, 0.14)' }}
       backdropFilter="blur(18px)"
       columnGap={ 1 }
       marginBottom={ 6 }

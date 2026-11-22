@@ -20,7 +20,7 @@ const LogoFallback = () => {
       name="networks/logo-placeholder"
       width="120px"
       height="24px"
-      color={{ base: 'teal.700', _dark: 'green.300' }}
+      color={{ base: '#0B7D89', _dark: '#35C2CF' }}
       aria-label="Network logo placeholder"
     />
   );

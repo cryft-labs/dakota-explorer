@@ -71,9 +71,9 @@ const DakotaNavigatorMenu = () => {
         w="220px"
         p={ 0 }
         borderRadius="12px"
-        borderColor={{ _light: 'rgba(15, 118, 110, 0.16)', _dark: 'rgba(52, 211, 153, 0.18)' }}
+        borderColor={{ _light: 'rgba(11, 125, 137, 0.16)', _dark: 'rgba(53, 194, 207, 0.18)' }}
         bg={{ _light: 'rgba(255, 255, 255, 0.96)', _dark: 'rgba(7, 26, 23, 0.98)' }}
-        boxShadow={{ _light: '0 18px 48px rgba(15, 118, 110, 0.16)', _dark: '0 18px 54px rgba(0, 0, 0, 0.36)' }}
+        boxShadow={{ _light: '0 18px 48px rgba(11, 125, 137, 0.16)', _dark: '0 18px 54px rgba(0, 0, 0, 0.36)' }}
         backdropFilter="blur(12px)"
       >
         <PopoverBody p={ 2 }>
@@ -98,7 +98,7 @@ const DakotaNavigatorMenu = () => {
                   fontWeight={ 700 }
                   _hover={{
                     color: 'text.primary',
-                    bg: { _light: 'rgba(15, 118, 110, 0.06)', _dark: 'rgba(52, 211, 153, 0.1)' },
+                    bg: { _light: 'rgba(11, 125, 137, 0.06)', _dark: 'rgba(53, 194, 207, 0.1)' },
                     textDecoration: 'none',
                   }}
                 >
@@ -135,10 +135,10 @@ const NavigationDesktop = () => {
       zIndex="sticky"
       bg={{ _light: 'rgba(255, 255, 255, 0.86)', _dark: 'rgba(7, 26, 23, 0.92)' }}
       borderBottomWidth="1px"
-      borderColor={{ _light: 'rgba(15, 118, 110, 0.16)', _dark: 'rgba(52, 211, 153, 0.16)' }}
+      borderColor={{ _light: 'rgba(11, 125, 137, 0.16)', _dark: 'rgba(53, 194, 207, 0.16)' }}
       borderRadius={{ base: 0, lg: '0 0 40px 40px' }}
       backdropFilter="blur(12px)"
-      boxShadow={{ _light: '0 16px 42px rgba(15, 118, 110, 0.1)', _dark: '0 18px 54px rgba(0, 0, 0, 0.34)' }}
+      boxShadow={{ _light: '0 16px 42px rgba(11, 125, 137, 0.1)', _dark: '0 18px 54px rgba(0, 0, 0, 0.34)' }}
       overflow="hidden"
     >
       <Box

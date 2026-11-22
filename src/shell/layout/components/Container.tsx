@@ -23,14 +23,14 @@ const DAKOTA_BACKGROUND_NOISE = [
 ].join('');
 
 const DAKOTA_STARFIELD_BACKGROUND = [
-  'radial-gradient(ellipse at 50% 0%, rgba(52, 211, 153, 0.13) 0%, transparent 38%)',
-  'radial-gradient(ellipse at 16% 36%, rgba(15, 118, 110, 0.1) 0%, transparent 34%)',
-  'radial-gradient(ellipse at 86% 24%, rgba(45, 212, 191, 0.1) 0%, transparent 32%)',
+  'radial-gradient(ellipse at 50% 0%, rgba(53, 194, 207, 0.13) 0%, transparent 38%)',
+  'radial-gradient(ellipse at 16% 36%, rgba(11, 125, 137, 0.1) 0%, transparent 34%)',
+  'radial-gradient(ellipse at 86% 24%, rgba(53, 194, 207, 0.1) 0%, transparent 32%)',
   'radial-gradient(circle, rgba(255, 255, 255, 0.72) 0 1px, transparent 1.9px)',
-  'radial-gradient(circle, rgba(52, 211, 153, 0.68) 0 1px, transparent 2px)',
+  'radial-gradient(circle, rgba(53, 194, 207, 0.68) 0 1px, transparent 2px)',
   'radial-gradient(circle, rgba(255, 255, 255, 0.52) 0 0.85px, transparent 1.7px)',
   'radial-gradient(circle, rgba(255, 255, 255, 0.92) 0 1.35px, transparent 2.6px)',
-  'radial-gradient(circle, rgba(15, 118, 110, 0.74) 0 1.2px, transparent 2.5px)',
+  'radial-gradient(circle, rgba(11, 125, 137, 0.74) 0 1.2px, transparent 2.5px)',
 ].join(', ');
 
 const dakotaExplorerStarGleam = keyframes`
