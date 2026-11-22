@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
-// Cryft Cards explorer footer (network details, ecosystem links).
+// Cryft Cards explorer footer: network details and the ecosystem links.
 
 import type { GridProps, HTMLChakraProps } from '@chakra-ui/react';
 import { Box, Grid, Flex, Text, VStack, HStack } from '@chakra-ui/react';
