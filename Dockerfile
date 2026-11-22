@@ -10,8 +10,13 @@ RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
 ### Install all workspace dependencies in one place
 WORKDIR /app
 RUN apk add git
+# Cryft: fetch the packages from the lockfile alone first, so this (slow) layer is reused until the dependencies
+# change; the install after the source copy then only links from the store (--offline) and runs the hooks
+# (postinstall: chakra typegen, which reads the theme source).
+COPY pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm fetch --frozen-lockfile
 COPY . .
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --offline
 
 
 # *****************************
@@ -50,7 +55,9 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # Build app for production
 ENV NODE_OPTIONS="--max-old-space-size=8192"
 RUN pnpm routes:generate
-RUN pnpm run build
+# Cryft: Next.js keeps its build cache between image builds (a cache mount, never in the image), so a small change
+# rebuilds only what it touches.
+RUN --mount=type=cache,id=cryft-explorer-next-cache,target=/app/.next/cache pnpm run build
 
 
 ### FEATURE REPORTER
