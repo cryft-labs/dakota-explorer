@@ -2,7 +2,7 @@
 // Cryft Cards explorer footer: the network's details and the ecosystem links.
 
 import type { GridProps, HTMLChakraProps } from '@chakra-ui/react';
-import { Box, Grid, Flex, Text, VStack, HStack } from '@chakra-ui/react';
+import { Box, Grid, Flex, Text, VStack, HStack, VisuallyHidden } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
@@ -46,6 +46,27 @@ const DAKOTA_LINKS = [
     url: 'https://cryft.app/how',
   },
 ];
+
+// Who made it (Chad, 2026-11-23: "add the made with love note to all site and the explorer"; cryft-cards-web
+// src/ui/made-by.js): one quiet line at the foot of every page, read by a screen reader as words, never as an emoji's name.
+const MADE_BY = 'Made with ❤️ by CryftCreator';
+
+const MadeBy = () => (
+  <Box
+    as="p"
+    m={ 0 }
+    px={ 4 }
+    pb={{ base: 4, lg: 6 }}
+    textAlign="center"
+    fontSize="12px"
+    lineHeight="16px"
+    color="text.secondary"
+    userSelect="none"
+  >
+    <span aria-hidden="true">{ MADE_BY }</span>
+    <VisuallyHidden>Made with love by CryftCreator</VisuallyHidden>
+  </Box>
+);
 
 const Footer = () => {
 
@@ -302,6 +323,7 @@ const Footer = () => {
             { renderNetworkDetails() }
           </Grid>
         </Grid>
+        <MadeBy/>
       </Box>
     );
   }
@@ -341,6 +363,7 @@ const Footer = () => {
           { renderNetworkDetails() }
         </Grid>
       </Grid>
+      <MadeBy/>
     </Box>
   );
 };
