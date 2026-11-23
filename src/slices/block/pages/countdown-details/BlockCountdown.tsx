@@ -6,7 +6,6 @@ import React from 'react';
 
 import useApiQuery from 'src/api/hooks/useApiQuery';
 
-import CapybaraRunner from 'src/features/easter-eggs/components/runner/CapybaraRunner';
 import { useMultichainContext } from 'src/features/multichain/context';
 
 import dayjs from 'src/shared/date-and-time/dayjs';
@@ -30,11 +29,8 @@ import BlockCountdownTimer from './BlockCountdownTimer';
 import createGoogleCalendarLink from './create-google-calendar-link';
 import createIcsFileBlob from './create-ics-file-blob';
 
-type Props = {
-  hideCapybaraRunner?: boolean;
-};
-
-const BlockCountdown = ({ hideCapybaraRunner }: Props) => {
+// Cryft: no Blockscout easter-egg game here (it promised a "special prize" Cryft does not give)
+const BlockCountdown = () => {
   const multichainContext = useMultichainContext();
   const router = useRouter();
   const height = getQueryParamString(router.query.height);
@@ -146,7 +142,6 @@ const BlockCountdown = ({ hideCapybaraRunner }: Props) => {
           <StatsWidget label="Remaining blocks" value={ data.result.RemainingBlock } icon="apps"/>
           <StatsWidget label="Current block" value={ data.result.CurrentBlock } icon="block"/>
         </Grid>
-        { !hideCapybaraRunner && <CapybaraRunner/> }
       </Flex>
     </Center>
   );

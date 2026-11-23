@@ -33,8 +33,8 @@ import { getApiVersionUrl } from './get-api-version-url';
 
 const MAX_LINKS_COLUMNS = 4;
 
-const FRONT_VERSION_URL = `https://github.com/blockscout/frontend/tree/${ config.shell.footer.frontendVersion }`;
-const FRONT_COMMIT_URL = `https://github.com/blockscout/frontend/commit/${ config.shell.footer.frontendCommit }`;
+// Cryft: the frontend is cryft-labs/dakota-explorer (a Blockscout fork); its build tag is a deploy label, so the commit is shown
+const FRONT_COMMIT_URL = `https://github.com/cryft-labs/dakota-explorer/commit/${ config.shell.footer.frontendCommit }`;
 
 const DAKOTA_LINKS = [
   {
@@ -70,12 +70,8 @@ const Footer = () => {
   ], []);
 
   const frontendLink = (() => {
-    if (config.shell.footer.frontendVersion) {
-      return <Link href={ FRONT_VERSION_URL } external noIcon>{ config.shell.footer.frontendVersion }</Link>;
-    }
-
     if (config.shell.footer.frontendCommit) {
-      return <Link href={ FRONT_COMMIT_URL } external noIcon>{ config.shell.footer.frontendCommit }</Link>;
+      return <Link href={ FRONT_COMMIT_URL } external noIcon>{ config.shell.footer.frontendCommit.slice(0, 7) }</Link>;
     }
 
     return null;

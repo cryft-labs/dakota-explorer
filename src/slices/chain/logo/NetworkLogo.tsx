@@ -46,7 +46,7 @@ const NetworkLogo = ({ className }: Props) => {
         gap="10px"
         color="text.primary"
         minW={ 0 }
-        w="220px"
+        w={{ base: 'auto', lg: '220px' }}
         h="72px"
         _hover={{ textDecoration: 'none', color: 'text.primary' }}
       >
@@ -58,7 +58,8 @@ const NetworkLogo = ({ className }: Props) => {
           fallback={ <LogoFallback/> }
           objectFit="contain"
         />
-        <Box minW={ 0 }>
+        { /* Cryft: on the narrowest phones (under 360px) the mark alone, so the header's buttons keep their room */ }
+        <Box minW={ 0 } css={{ '@media (max-width: 359px)': { display: 'none' } }}>
           <Text m={ 0 } fontWeight={ 700 } lineHeight="1.05" fontSize="14px" color="text.primary" whiteSpace="nowrap">
             Cryft Cards
           </Text>

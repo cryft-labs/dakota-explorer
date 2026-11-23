@@ -277,6 +277,11 @@ const SearchResultsPageContent = () => {
           </Box>
           { resultsCount === 0 && regexp.BLOCK_HEIGHT.test(debouncedSearchTerm) &&
             <SearchBarSuggestBlockCountdown blockHeight={ debouncedSearchTerm } mt={ -4 }/> }
+          { resultsCount === 0 && !regexp.BLOCK_HEIGHT.test(debouncedSearchTerm) && (
+            <Box textStyle="sm" color="text.secondary" mt={ -2 } mb={ 6 }>
+              Try a full address (0x…), a transaction hash, a block number, a token or contract name or symbol, or an IPFS CID.
+            </Box>
+          ) }
         </>
       );
     })();

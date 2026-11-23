@@ -31,14 +31,14 @@ test.describe('short period until the block', () => {
   });
 
   test('desktop', async({ render }) => {
-    const component = await render(<BlockCountdown hideCapybaraRunner/>, { hooksConfig });
+    const component = await render(<BlockCountdown/>, { hooksConfig });
     await expect(component).toHaveScreenshot();
   });
 
   test.describe('mobile', () => {
     test.use({ viewport: pwConfig.viewport.mobile });
     test('base view', async({ render }) => {
-      const component = await render(<BlockCountdown hideCapybaraRunner/>, { hooksConfig });
+      const component = await render(<BlockCountdown/>, { hooksConfig });
       await expect(component).toHaveScreenshot();
     });
   });
@@ -70,14 +70,14 @@ test.describe('long period until the block', () => {
   });
 
   test('desktop', async({ render }) => {
-    const component = await render(<BlockCountdown hideCapybaraRunner/>, { hooksConfig });
+    const component = await render(<BlockCountdown/>, { hooksConfig });
     await expect(component).toHaveScreenshot();
   });
 
   test.describe('mobile', () => {
     test.use({ viewport: pwConfig.viewport.mobile });
     test('base view', async({ render }) => {
-      const component = await render(<BlockCountdown hideCapybaraRunner/>, { hooksConfig });
+      const component = await render(<BlockCountdown/>, { hooksConfig });
       await expect(component).toHaveScreenshot();
     });
   });

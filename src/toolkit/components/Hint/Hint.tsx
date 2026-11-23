@@ -25,6 +25,7 @@ export const Hint = React.memo(({ label, tooltipProps, isLoading, boxSize = 5, .
       { ...tooltipProps }
     >
       <IconButton
+        css={{ '@media (pointer: coarse)': { position: 'relative', '&::after': { content: '""', position: 'absolute', inset: '-4px' } } }}
         aria-label="hint"
         boxSize={ boxSize }
         loadingSkeleton={ isLoading }

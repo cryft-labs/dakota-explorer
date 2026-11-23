@@ -15,6 +15,8 @@ export const LATEX_VARS_LIGHT = {
   '--latex-rim': 'inset 0 1px 1px rgba(255, 255, 255, 0.9), inset 0 -1px 2px rgba(16, 64, 70, 0.05)',
   '--latex-lift': '-5px -5px 14px var(--latex-hi), 6px 8px 18px var(--latex-lo), var(--latex-rim)',
   '--latex-lift-sm': '-3px -3px 8px var(--latex-hi), 3px 5px 10px var(--latex-lo), inset 0 1px 1px rgba(255, 255, 255, 0.9)',
+  // small shapes in tight places (tags in table cells): the same light and shade, kept within ~3px
+  '--latex-lift-xs': '-1px -1px 2px var(--latex-hi), 1px 2px 3px var(--latex-lo), inset 0 1px 1px rgba(255, 255, 255, 0.9)',
   '--latex-well': '#eef4f3',
   // The chosen option (cryft.app --latex-selected*): pressed in, tinted with the brand rubber (brand 55% / deep, 15% into
   // the well = #CCE0E1), its words in the brand text colour (#075A66 on it: 5.8:1)
@@ -37,6 +39,7 @@ export const LATEX_VARS_DARK = {
   '--latex-rim': 'inset 0 1px 1px rgba(255, 255, 255, 0.07), inset 0 -1px 2px rgba(0, 0, 0, 0.3)',
   '--latex-lift': '-5px -5px 14px var(--latex-hi), 6px 8px 18px var(--latex-lo), var(--latex-rim)',
   '--latex-lift-sm': '-3px -3px 8px var(--latex-hi), 3px 5px 10px var(--latex-lo), inset 0 1px 1px rgba(255, 255, 255, 0.07)',
+  '--latex-lift-xs': '-1px -1px 2px var(--latex-hi), 1px 2px 3px var(--latex-lo), inset 0 1px 1px rgba(255, 255, 255, 0.07)',
   '--latex-well': '#1e1f21',
   // brand 55% / deep, 22% into the well = #1F3C40; #35C2CF on it: 5.5:1
   '--latex-selected': '#1F3C40',

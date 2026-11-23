@@ -4,6 +4,7 @@ import { defaultsDeep } from 'es-toolkit/compat';
 
 import config from 'src/config';
 
+// Cryft: teal words (links, tabs) are #0A6F7A in light, AA on every tinted surface (5.2:1 on the softest); fills stay #0B7D89
 const DEFAULT_THEME_COLORS = {
   bg: {
     primary: {
@@ -69,7 +70,7 @@ const DEFAULT_THEME_COLORS = {
   },
   link: {
     primary: {
-      _light: { value: '#0B7D89' },
+      _light: { value: '#0A6F7A' },
       _dark: { value: '#35C2CF' },
     },
   },
@@ -118,7 +119,7 @@ const DEFAULT_THEME_COLORS = {
   tabs: {
     text: {
       primary: {
-        _light: { value: '#0B7D89' },
+        _light: { value: '#0A6F7A' },
         _dark: { value: '#FFFFFF' },
       },
     },

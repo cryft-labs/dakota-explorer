@@ -75,7 +75,7 @@ const TopBarStats = () => {
             </Skeleton>
             { data.coin_price_change_percentage && !(isMobile && Boolean(config.shell.topBar.chainMenu.items)) && (
               <Skeleton loading={ isPlaceholderData }>
-                <chakra.span color={ Number(data.coin_price_change_percentage) >= 0 ? 'green.500' : 'red.500' }>
+                <chakra.span color={ Number(data.coin_price_change_percentage) >= 0 ? 'text.success' : 'red.500' }>
                   { Number(data.coin_price_change_percentage).toFixed(2) }%
                 </chakra.span>
               </Skeleton>

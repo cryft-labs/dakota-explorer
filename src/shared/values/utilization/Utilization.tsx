@@ -17,7 +17,7 @@ const WIDTH = 50;
 
 const Utilization = ({ value, colorScheme = 'green', isLoading, ...rest }: Props, ref: React.Ref<HTMLDivElement>) => {
   const valueString = (clamp(value * 100 || 0, 0, 100)).toLocaleString(undefined, { maximumFractionDigits: 2 }) + '%';
-  const color = colorScheme === 'gray' ? 'text.secondary' : 'green.500';
+  const color = colorScheme === 'gray' ? 'text.secondary' : 'text.success';
 
   return (
     <Flex alignItems="center" columnGap={ 2 } { ...rest } ref={ ref }>

@@ -47,7 +47,8 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
       primary: { value: { _light: '{colors.theme.text.primary._light}', _dark: '{colors.theme.text.primary._dark}' } },
       secondary: { value: { _light: '{colors.theme.text.secondary._light}', _dark: '{colors.theme.text.secondary._dark}' } },
       error: { value: '{colors.red.500}' },
-      success: { value: { _light: '{colors.green.500}', _dark: '{colors.green.200}' } },
+      // Cryft: words in the success green read at AA on every light surface (green.700: 4.9:1 on the selected tint, 6.4:1 on the page)
+      success: { value: { _light: '{colors.green.700}', _dark: '{colors.green.200}' } },
     },
     bg: {
       primary: { value: { _light: '{colors.theme.bg.primary._light}', _dark: '{colors.theme.bg.primary._dark}' } },
@@ -367,7 +368,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
       },
       green: {
         bg: { value: { _light: '{colors.green.50}', _dark: '{colors.green.800}' } },
-        fg: { value: { _light: '{colors.green.500}', _dark: '{colors.green.200}' } },
+        fg: { value: { _light: '{colors.green.700}', _dark: '{colors.green.200}' } },
       },
       red: {
         bg: { value: { _light: '{colors.red.50}', _dark: '{colors.red.800}' } },
@@ -417,7 +418,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
         },
         green: {
           bg: { value: { _light: '{colors.green.100}', _dark: '{colors.green.800}' } },
-          fg: { value: { _light: '{colors.green.600}', _dark: '{colors.green.200}' } },
+          fg: { value: { _light: '{colors.green.700}', _dark: '{colors.green.200}' } },
         },
         red: {
           bg: { value: { _light: '{colors.red.100}', _dark: '{colors.red.800}' } },

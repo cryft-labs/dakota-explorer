@@ -51,6 +51,7 @@ const CopyToClipboard = (props: Props) => {
       borderRadius="base"
       loadingSkeleton={ isLoading }
       variant="icon_secondary"
+      css={{ '@media (pointer: coarse)': { position: 'relative', '&::after': { content: '""', position: 'absolute', inset: '-4px' } } }}
       size="2xs"
       { ...rest }
     >
