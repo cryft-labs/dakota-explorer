@@ -2,7 +2,7 @@
 
 import { defineRecipe } from '@chakra-ui/react';
 
-import { latexBrand, latexBrandHover, latexRaisedSm, ON_BRAND } from '../latex';
+import { latexBrand, latexBrandHover, latexRaisedSm, latexSelected, ON_BRAND } from '../latex';
 
 export const recipe = defineRecipe({
   base: {
@@ -158,13 +158,11 @@ export const recipe = defineRecipe({
           },
         },
         _selected: {
-          bg: 'button.header.bg.selected',
-          color: 'button.header.fg.selected',
           bgImage: 'none',
-          boxShadow: 'var(--latex-sink-sm)',
+          ...latexSelected,
           _hover: {
-            ...latexBrandHover,
-            color: ON_BRAND,
+            ...latexSelected,
+            bgImage: 'none',
           },
           _expanded: {
             color: 'hover',

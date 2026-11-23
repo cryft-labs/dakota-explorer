@@ -16,6 +16,11 @@ export const LATEX_VARS_LIGHT = {
   '--latex-lift': '-5px -5px 14px var(--latex-hi), 6px 8px 18px var(--latex-lo), var(--latex-rim)',
   '--latex-lift-sm': '-3px -3px 8px var(--latex-hi), 3px 5px 10px var(--latex-lo), inset 0 1px 1px rgba(255, 255, 255, 0.9)',
   '--latex-well': '#eef4f3',
+  // The chosen option (cryft.app --latex-selected*): pressed in, tinted with the brand rubber (brand 55% / deep, 15% into
+  // the well = #CCE0E1), its words in the brand text colour (#075A66 on it: 5.8:1)
+  '--latex-selected': '#CCE0E1',
+  '--latex-selected-press': 'inset 2px 3px 7px rgba(16, 64, 70, 0.2), inset -2px -2px 6px rgba(255, 255, 255, 0.85)',
+  '--latex-selected-text': '#075A66',
   '--latex-sink': 'inset 3px 4px 8px rgba(16, 64, 70, 0.13), inset -3px -3px 8px rgba(255, 255, 255, 0.95)',
   '--latex-sink-sm': 'inset 2px 2px 5px rgba(16, 64, 70, 0.14), inset -2px -2px 5px rgba(255, 255, 255, 0.9)',
   '--latex-press': 'inset 3px 4px 9px rgba(16, 64, 70, 0.18), inset -3px -3px 8px rgba(255, 255, 255, 0.8)',
@@ -33,6 +38,10 @@ export const LATEX_VARS_DARK = {
   '--latex-lift': '-5px -5px 14px var(--latex-hi), 6px 8px 18px var(--latex-lo), var(--latex-rim)',
   '--latex-lift-sm': '-3px -3px 8px var(--latex-hi), 3px 5px 10px var(--latex-lo), inset 0 1px 1px rgba(255, 255, 255, 0.07)',
   '--latex-well': '#1e1f21',
+  // brand 55% / deep, 22% into the well = #1F3C40; #35C2CF on it: 5.5:1
+  '--latex-selected': '#1F3C40',
+  '--latex-selected-press': 'inset 2px 3px 7px rgba(0, 0, 0, 0.6), inset -2px -2px 6px rgba(255, 255, 255, 0.05)',
+  '--latex-selected-text': '#35C2CF',
   '--latex-sink': 'inset 3px 4px 9px rgba(0, 0, 0, 0.6), inset -3px -3px 8px rgba(255, 255, 255, 0.045)',
   '--latex-sink-sm': 'inset 2px 2px 5px rgba(0, 0, 0, 0.6), inset -2px -2px 5px rgba(255, 255, 255, 0.04)',
   '--latex-press': 'inset 3px 4px 9px rgba(0, 0, 0, 0.65), inset -3px -3px 8px rgba(255, 255, 255, 0.04)',
@@ -66,6 +75,21 @@ export const latexBrand = {
   transition: MOTION,
   _active: { boxShadow: 'var(--latex-brand-press)', transform: 'translateY(1px)' },
   _motionReduce: NO_MOTION,
+};
+
+// The chosen option, one look wherever it is chosen from (cryft.app, Chad 2026-11-22): pressed in, tinted with the
+// brand rubber, its words in the brand text colour; hovering never washes over it, a press pushes it further in. The bar
+// it sits on is the same in every dark colour theme (Dim, Midnight, Dark), so the look is too.
+const SELECTED_EASE = 'background-color 0.18s ease, box-shadow 0.18s ease, color 0.18s ease';
+export const latexSelected = {
+  bg: 'var(--latex-selected)',
+  boxShadow: 'var(--latex-selected-press)',
+  color: 'var(--latex-selected-text)',
+};
+export const latexChoosable = {
+  transition: SELECTED_EASE,
+  _active: { boxShadow: 'var(--latex-press)' },
+  _motionReduce: { transition: 'none' },
 };
 
 export const latexSunk = {

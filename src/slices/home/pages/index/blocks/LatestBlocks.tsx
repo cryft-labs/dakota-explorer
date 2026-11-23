@@ -63,7 +63,21 @@ const LatestBlocks = () => {
 
       return (
         <>
-          <VStack gap={ 2 } mb={ 3 } overflow="hidden" alignItems="stretch">
+          { /* The clip hides a new block sliding in; it is set back by the cards' latex shadow (--latex-lift reaches
+              ~20px up and left, ~26px down and right) so the shadow is drawn whole, and the margins undo it in the layout */ }
+          <VStack
+            gap={ 2 }
+            overflow="hidden"
+            alignItems="stretch"
+            pt="20px"
+            pl="20px"
+            pr="26px"
+            pb="28px"
+            mt="-20px"
+            ml="-20px"
+            mr="-26px"
+            mb="calc(var(--chakra-spacing-3) - 28px)"
+          >
             { dataToShow.map(((block, index) => (
               <LatestBlocksItem
                 key={ block.height + (blocksQuery.isPlaceholderData ? String(index) : '') }

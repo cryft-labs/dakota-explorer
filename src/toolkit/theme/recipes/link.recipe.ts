@@ -2,6 +2,8 @@
 
 import { defineRecipe } from '@chakra-ui/react';
 
+import { latexChoosable, latexSelected } from '../latex';
+
 export const recipe = defineRecipe({
   base: {
     gap: 0,
@@ -59,20 +61,25 @@ export const recipe = defineRecipe({
         lineHeight: '1',
         color: 'link.navigation.fg',
         bg: 'transparent',
+        ...latexChoosable,
         _hover: {
           color: 'link.navigation.fg.hover',
           textDecoration: 'none',
         },
+        // Cryft latex: the chosen item is pressed into the bar (cryft.app's --latex-selected)
         _selected: {
-          color: 'link.navigation.fg.selected',
-          bg: 'link.navigation.bg.selected',
+          ...latexSelected,
           _hover: {
-            color: 'link.navigation.fg.selected',
-            bg: 'link.navigation.bg.selected',
+            ...latexSelected,
+            textDecoration: 'none',
+          },
+          _active: {
+            boxShadow: 'var(--latex-press)',
           },
         },
         _active: {
           color: 'link.navigation.fg.active',
+          boxShadow: 'var(--latex-press)',
         },
       },
       plain: {
