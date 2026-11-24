@@ -59,7 +59,7 @@ export const getDefaultAttributes = () => ({
   secure: config.app.protocol === 'https',
 });
 
-const SHARED_COOKIE_DOMAINS = [ 'cryft.cards', 'dakota.cards' ];
+const SHARED_COOKIE_DOMAINS = [ 'cryft.cards' ];
 
 function getDakotaCookieDomain(hostname: string): string | undefined {
   const domain = SHARED_COOKIE_DOMAINS.find((item) => hostname === item || hostname.endsWith(`.${ item }`));

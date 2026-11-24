@@ -16,7 +16,7 @@ const appOrigin = [
   appHost,
   appPort && `:${ appPort }`,
 ].filter(Boolean).join('');
-const isDakota = (appHost?.endsWith('.dakota.cards') || appHost?.endsWith('.cryft.cards')) || process.env.NEXT_PUBLIC_APP_INSTANCE?.startsWith('dakota');
+const isDakota = appHost?.endsWith('.cryft.cards') || process.env.NEXT_PUBLIC_APP_INSTANCE?.startsWith('dakota');
 const dakotaImageFile = path.resolve(process.cwd(), 'public/static/dakota_og_image.png');
 const configuredLogo = process.env.NEXT_PUBLIC_NETWORK_LOGO_DARK ?? process.env.NEXT_PUBLIC_NETWORK_LOGO;
 const configuredBanner = process.env.NEXT_PUBLIC_HOMEPAGE_HERO_BANNER_CONFIG;

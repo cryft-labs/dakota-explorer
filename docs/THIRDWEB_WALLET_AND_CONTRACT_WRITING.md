@@ -29,7 +29,7 @@ phrase, admin credential, or server secret in a `NEXT_PUBLIC_*` variable.
 In the Thirdweb dashboard, restrict the client to the origins that use it:
 
 ```text
-https://explore.dakota.cards
+https://explore.cryft.cards
 http://localhost:3010
 ```
 
@@ -93,7 +93,7 @@ remove_env NEXT_PUBLIC_WALLET_CONNECT_FEATURED_WALLET_IDS
 set_env NEXT_PUBLIC_NETWORK_NAME '"Dakota Network"'
 set_env NEXT_PUBLIC_NETWORK_SHORT_NAME "Dakota"
 set_env NEXT_PUBLIC_NETWORK_ID "112311"
-set_env NEXT_PUBLIC_NETWORK_RPC_URL "https://rpc1.dakota.cards"
+set_env NEXT_PUBLIC_NETWORK_RPC_URL "https://rpc.cryft.cards"
 set_env NEXT_PUBLIC_NETWORK_CURRENCY_NAME '"Dakota Coin"'
 set_env NEXT_PUBLIC_NETWORK_CURRENCY_SYMBOL "KOTA"
 set_env NEXT_PUBLIC_NETWORK_CURRENCY_DECIMALS "18"
@@ -158,7 +158,7 @@ chain settings:
 
 ```bash
 curl -sS \
-  "https://explore.dakota.cards/assets/envs.js?bust=$(date +%s)" \
+  "https://explore.cryft.cards/assets/envs.js?bust=$(date +%s)" \
   | grep -E \
     'NEXT_PUBLIC_THIRDWEB_CLIENT_ID|NEXT_PUBLIC_WEB3_WALLETS|NEXT_PUBLIC_NETWORK_ID|NEXT_PUBLIC_NETWORK_RPC_URL|NEXT_PUBLIC_NETWORK_CURRENCY_SYMBOL'
 ```
@@ -169,7 +169,7 @@ Expected values include:
 NEXT_PUBLIC_THIRDWEB_CLIENT_ID: "0e4af511c829602455e0dc651b354649"
 NEXT_PUBLIC_WEB3_WALLETS: "none"
 NEXT_PUBLIC_NETWORK_ID: "112311"
-NEXT_PUBLIC_NETWORK_RPC_URL: "https://rpc1.dakota.cards"
+NEXT_PUBLIC_NETWORK_RPC_URL: "https://rpc.cryft.cards"
 NEXT_PUBLIC_NETWORK_CURRENCY_SYMBOL: "KOTA"
 ```
 
@@ -177,7 +177,7 @@ Also confirm that the obsolete Reown key is not present:
 
 ```bash
 if curl -sS \
-  "https://explore.dakota.cards/assets/envs.js?bust=$(date +%s)" \
+  "https://explore.cryft.cards/assets/envs.js?bust=$(date +%s)" \
   | grep -q 'NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID'; then
   echo "ERROR: Obsolete Reown configuration is still present."
   exit 1
@@ -216,9 +216,9 @@ by the public frontend:
 
 ```bash
 curl -sS \
-  -H 'Origin: https://explore.dakota.cards' \
+  -H 'Origin: https://explore.cryft.cards' \
   -H 'Content-Type: application/json' \
-  https://explore.dakota.cards/api/eth-rpc \
+  https://explore.cryft.cards/api/eth-rpc \
   --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}' \
   | jq .
 ```
@@ -237,9 +237,9 @@ Test a real contract read:
 
 ```bash
 curl -sS \
-  -H 'Origin: https://explore.dakota.cards' \
+  -H 'Origin: https://explore.cryft.cards' \
   -H 'Content-Type: application/json' \
-  https://explore.dakota.cards/api/eth-rpc \
+  https://explore.cryft.cards/api/eth-rpc \
   --data '{
     "jsonrpc": "2.0",
     "method": "eth_call",
@@ -264,7 +264,7 @@ the explorer's read and simulation stages can fail. Correct the
 Open a verified contract page, for example:
 
 ```text
-https://explore.dakota.cards/address/0x0000000000000000000000000000000000001111
+https://explore.cryft.cards/address/0x0000000000000000000000000000000000001111
 ```
 
 Then:
@@ -297,10 +297,10 @@ wallets. If an injected wallet does not add the chain automatically, use:
 
 ```text
 Network name: Dakota Network
-Default RPC URL: https://rpc1.dakota.cards
+Default RPC URL: https://rpc.cryft.cards
 Chain ID: 112311
 Currency symbol: KOTA
-Block explorer URL: https://explore.dakota.cards
+Block explorer URL: https://explore.cryft.cards
 ```
 
 Thirdweb in-app wallets created through Google, Apple, or email do not require
@@ -312,7 +312,7 @@ The connected wallet signs locally, but the Dakota RPC must accept submitted
 transactions:
 
 ```bash
-curl -sS https://rpc1.dakota.cards \
+curl -sS https://rpc.cryft.cards \
   -H 'Content-Type: application/json' \
   --data '{
     "jsonrpc": "2.0",
