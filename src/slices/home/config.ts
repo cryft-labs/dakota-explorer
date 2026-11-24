@@ -24,7 +24,8 @@ const homePageStats: Array<HomeStatsWidgetId> = (() => {
 })();
 
 const config = Object.freeze({
-  charts: parseEnvJson<Array<ChainIndicatorId>>(getEnvValue('NEXT_PUBLIC_HOMEPAGE_CHARTS')) || [],
+  // Cryft: the daily transactions chart unless the env names others ([] turns charts off)
+  charts: parseEnvJson<Array<ChainIndicatorId>>(getEnvValue('NEXT_PUBLIC_HOMEPAGE_CHARTS')) || [ 'daily_txs' ],
   stats: homePageStats,
   heroBanner: parseEnvJson<HeroBannerConfig>(getEnvValue('NEXT_PUBLIC_HOMEPAGE_HERO_BANNER_CONFIG')),
   highlights: getExternalAssetFilePath('NEXT_PUBLIC_HOMEPAGE_HIGHLIGHTS_CONFIG'),
