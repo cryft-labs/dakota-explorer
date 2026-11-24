@@ -153,7 +153,7 @@ const Footer = () => {
           </Link>
         </Flex>
         <Text mt={ 3 } fontSize="xs">
-          Cryft Network Blockchain Explorer helps inspect Cryft Network blocks, transactions,
+          Cryft Network Explorer helps inspect Cryft Network blocks, transactions,
           tokens, addresses, smart contracts, and IPFS CIDs across the Cryft Cards ecosystem.
         </Text>
         <VStack mt={ 6 } alignItems="start" textStyle="xs" gap={ 1 }>

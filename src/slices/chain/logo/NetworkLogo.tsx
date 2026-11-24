@@ -54,7 +54,7 @@ const NetworkLogo = ({ className }: Props) => {
           w="48px"
           h="48px"
           src={ DAKOTA_MARK_SRC }
-          alt="Cryft Cards Explorer logo mark"
+          alt="Cryft Network Explorer logo mark"
           fallback={ <LogoFallback/> }
           objectFit="contain"
         />

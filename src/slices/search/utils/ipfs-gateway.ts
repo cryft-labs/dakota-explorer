@@ -9,7 +9,7 @@ const IPFS_GATEWAY_ENV_NAMES = [
   'NEXT_PUBLIC_IPFS_GATEWAY_URL',
 ];
 
-const DAKOTA_IPFS_GATEWAY_DEFAULT = 'https://cryft.network/ipfs/';
+const DAKOTA_IPFS_GATEWAY_DEFAULT = 'https://gateway.cryft.cards/ipfs/';
 
 // Keep CID matching intentionally strict enough that regular explorer searches
 // do not get mistaken for IPFS content.

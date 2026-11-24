@@ -33,16 +33,16 @@ const OG_ROOT_PAGE = {
   image: config.metadata.og.imageUrl,
 };
 
-const DESCRIPTION_DEFAULT = 'Use the Cryft Network Blockchain Explorer to search transactions and IPFS CIDs, verify smart contracts, analyze addresses, and access Cryft Network blockchain data through explorer APIs.';
+const DESCRIPTION_DEFAULT = 'Use the Cryft Network Explorer to search transactions and IPFS CIDs, verify smart contracts, analyze addresses, and access Cryft Network blockchain data through explorer APIs.';
 
 export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
   '/': {
     metadata: {
       title: {
-        'default': 'Cryft Cards | Blockchain and Network Explorer',
+        'default': 'Cryft Network Explorer',
       },
       description: {
-        'default': 'Explore the Cryft Network Blockchain Explorer. Search transactions, addresses, tokens, blocks, smart contracts, and IPFS CIDs across the Cryft Cards ecosystem.',
+        'default': 'Explore the Cryft Network Explorer. Search transactions, addresses, tokens, blocks, smart contracts, and IPFS CIDs across the Cryft Cards ecosystem.',
       },
     },
     og: OG_ROOT_PAGE,
@@ -50,7 +50,7 @@ export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
   '/txs': {
     metadata: {
       title: {
-        'default': '%chain_name% transactions - %chain_name% explorer',
+        'default': '%chain_name% transactions - %chain_explorer_title%',
       },
       description: {
         'default': 'Browse %chain_name% transactions. Track transaction status, fees, and details in real time.',
@@ -61,7 +61,7 @@ export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
   '/internal-txs': {
     metadata: {
       title: {
-        'default': '%chain_name% internal transactions - %chain_name% explorer',
+        'default': '%chain_name% internal transactions - %chain_explorer_title%',
       },
       description: {
         'default': 'Browse contract internal transactions on %chain_name%.',
@@ -167,7 +167,7 @@ export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
   '/verified-contracts': {
     metadata: {
       title: {
-        'default': 'Verified %chain_name% contracts lookup - %chain_name% explorer',
+        'default': 'Verified %chain_name% contracts lookup - %chain_explorer_title%',
       },
       description: {
         'default': 'Browse verified smart contracts on %chain_name%.',
@@ -199,7 +199,7 @@ export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
   '/tokens': {
     metadata: {
       title: {
-        'default': 'Tokens list - %chain_name% explorer',
+        'default': 'Tokens list - %chain_explorer_title%',
       },
       description: {
         'default': 'Browse all tokens on %chain_name%. Search for ERC-20, ERC-721, and ERC-1155 tokens by name, symbol, or address.',
@@ -354,7 +354,7 @@ export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
   '/withdrawals': {
     metadata: {
       title: {
-        'default': '%chain_name% withdrawals - track on %chain_name% explorer',
+        'default': '%chain_name% withdrawals - track on %chain_explorer_title%',
       },
       description: {
         'default': 'Track %chain_name% withdrawals. Monitor withdrawal status, amounts, and timestamps.',
@@ -386,7 +386,7 @@ export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
   '/deposits': {
     metadata: {
       title: {
-        'default': '%chain_name% deposits - track on %chain_name% explorer',
+        'default': '%chain_name% deposits - track on %chain_explorer_title%',
       },
       description: {
         'default': 'Track %chain_name% deposits. Monitor deposit status, amounts, and timestamps.',
@@ -460,7 +460,7 @@ export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
   '/ops': {
     metadata: {
       title: {
-        'default': 'User operations on %chain_name% - %chain_name% explorer',
+        'default': 'User operations on %chain_name% - %chain_explorer_title%',
       },
       description: {
         'default': 'Browse %chain_name% user operations (ERC-4337). Track account abstraction activity in real time.',
@@ -491,7 +491,7 @@ export const TEMPLATE_MAP: Record<Route['pathname'], RouteTemplateRecord> = {
   '/name-services': {
     metadata: {
       title: {
-        'default': '%chain_name% name services - %chain_name% explorer',
+        'default': '%chain_name% name services - %chain_explorer_title%',
       },
       description: {
         'default': 'Explore name services on %chain_name%. Resolve domains and discover address-to-name mappings.',

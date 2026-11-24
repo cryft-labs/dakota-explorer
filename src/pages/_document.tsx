@@ -72,7 +72,8 @@ class MyDocument extends Document {
 
           { /* FAVICON */ }
           <link rel="icon" type="image/svg+xml" href={ DAKOTA_FAVICON_SRC }/>
-          <link rel="shortcut icon" href={ DAKOTA_FAVICON_SRC }/>
+          <link rel="icon" href="/favicon.ico" sizes="48x48"/>
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180"/>
           <link rel="preload" as="image" href={ svgSprite.href }/>
 
           { usercentrics && (

@@ -3,10 +3,10 @@
 exports[`address route > enhanced data 1`] = `
 {
   "canonical": "http://localhost:3000/address/0xd789a607CEac2f0E14867de4EB15b15C9FFB5859",
-  "description": "View the account balance, transactions, and other data for duck.eth on the Blockscout Blockchain Explorer",
+  "description": "View the account balance, transactions, and other data for duck.eth on the Blockscout Explorer",
   "jsonLd": undefined,
   "opengraph": {
-    "description": "View the account balance, transactions, and other data for duck.eth on the Blockscout Blockchain Explorer",
+    "description": "View the account balance, transactions, and other data for duck.eth on the Blockscout Explorer",
     "imageUrl": "http://localhost:3000/static/og_image.png",
     "title": "Blockscout address details for duck.eth",
   },
@@ -51,12 +51,12 @@ exports[`static route 1`] = `
   "description": "Browse Blockscout transactions. Track transaction status, fees, and details in real time.",
   "jsonLd": undefined,
   "opengraph": {
-    "description": "Cryft Network Blockchain Explorer for searching transactions, blocks, addresses, tokens, smart contracts, validator activity, and IPFS CIDs across the Cryft Cards ecosystem.",
+    "description": "Cryft Network Explorer for searching transactions, blocks, addresses, tokens, smart contracts, validator activity, and IPFS CIDs across the Cryft Cards ecosystem.",
     "imageUrl": "http://localhost:3000/static/og_image.png",
-    "title": "Blockscout transactions - Blockscout explorer",
+    "title": "Blockscout transactions - Blockscout Explorer",
   },
   "robots": "index,follow",
-  "title": "Blockscout transactions - Blockscout explorer",
+  "title": "Blockscout transactions - Blockscout Explorer",
 }
 `;
 

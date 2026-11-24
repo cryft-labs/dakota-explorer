@@ -62,6 +62,10 @@ const globalCss: SystemConfig['globalCss'] = {
   select: {
     ...webkitAutofillRules,
   },
+  // Touch screens: inputs at 16px or more, so focusing one never zooms the page (pinch zoom stays on).
+  '@media (pointer: coarse)': {
+    'input, textarea, select': { fontSize: 'max(16px, 1em)' },
+  },
   ...recaptcha,
   ...scrollbar,
   ...entity,

@@ -64,7 +64,7 @@ export default function useWalletThirdweb({ source, onConnect }: Params): Result
     const chain = wallet.getChain() ?? thirdwebChain;
 
     if (!connector || !account) {
-      throw new Error('The Cryft Cards Explorer wallet connector is unavailable');
+      throw new Error('The Cryft Network Explorer wallet connector is unavailable');
     }
 
     const hasSameAccount = wagmiAccount.address?.toLowerCase() === account.address.toLowerCase();

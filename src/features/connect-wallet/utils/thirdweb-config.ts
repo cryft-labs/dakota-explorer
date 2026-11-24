@@ -53,7 +53,7 @@ export const createThirdwebInAppWallet = (redirectUrl?: string) => inAppWallet({
 export const thirdwebInAppWallet = createThirdwebInAppWallet();
 
 export const thirdwebAppMetadata = {
-  name: 'Cryft Cards | Network Explorer',
+  name: 'Cryft Network Explorer',
   description: 'Cryft Network blockchain and network explorer',
   url: config.app.baseUrl,
   logoUrl: config.chain.icon.default,

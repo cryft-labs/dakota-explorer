@@ -2,8 +2,6 @@ import config from 'src/config';
 import dedent from 'dedent';
 import { layerLabels } from 'src/features/rollup/common/utils/layer';
 
-const MCP_SERVER_URL = 'https://mcp.blockscout.com';
-
 export function generateStandard(): string {
     const chainName = config.chain.name ?? '';
     const chainId = config.chain.id ?? '';
@@ -300,7 +298,7 @@ export function generateStandard(): string {
     ` : '{blank}';
 
     const MAIN_TEMPLATE = dedent`
-        # Blockscout - ${chainName}
+        # Cryft Network Explorer - ${chainName}
 
         Blockscout is a human-friendly blockchain explorer for EVM-compatible networks. It lets users browse blocks, transactions, addresses, tokens (ERC-20/721/1155), logs, contract ABIs, and decoded contract interactions. While the site is primarily designed for people, all rendered information is backed by API endpoints that machines can consume. Large Language Models should prefer the LLM-ready endpoints listed below to retrieve precise, structured data.
 
@@ -310,96 +308,49 @@ export function generateStandard(): string {
 
         ## General LLM-ready Data
 
-        The links below lead to the REST API of the Blockscout MCP server, they are considered as LLM-ready. More detail: https://github.com/blockscout/mcp-server/blob/main/API.md
+        The links below are this explorer's own REST API (Blockscout API v2), read-only and JSON. Limits: 10 requests a second per client (burst 100); a 429 carries \`Retry-After\`.
 
         ### Specific Block Info
 
         \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/get_block_info?chain_id=${chainId}&number_or_hash={block_number_or_hash}&include_transactions=false'
+        curl --request GET --url '${coreApiUrl}/api/v2/blocks/{block_number_or_hash}'
+        curl --request GET --url '${coreApiUrl}/api/v2/blocks/{block_number_or_hash}/transactions'
         \`\`\`
 
-        ### Specific Transaction Info
+        ### Transaction Info, Logs and Summary
 
         \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/get_transaction_info?chain_id=${chainId}&transaction_hash={transaction_hash}'
+        curl --request GET --url '${coreApiUrl}/api/v2/transactions/{transaction_hash}'
+        curl --request GET --url '${coreApiUrl}/api/v2/transactions/{transaction_hash}/logs'
+        curl --request GET --url '${coreApiUrl}/api/v2/transactions/{transaction_hash}/token-transfers'
+        curl --request GET --url '${coreApiUrl}/api/v2/transactions/{transaction_hash}/summary'
         \`\`\`
 
-        ### Get Transaction Logs
+        ### Address Info, Transactions and Token Transfers
 
         \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/get_transaction_logs?chain_id=${chainId}&transaction_hash={transaction_hash}'
+        curl --request GET --url '${coreApiUrl}/api/v2/addresses/{account_address}'
+        curl --request GET --url '${coreApiUrl}/api/v2/addresses/{account_address}/transactions'
+        curl --request GET --url '${coreApiUrl}/api/v2/addresses/{account_address}/token-transfers'
         \`\`\`
 
-        ### Transaction Summary
+        ### Tokens and NFTs Held by Address
 
         \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/transaction_summary?chain_id=${chainId}&transaction_hash={transaction_hash}'
+        curl --request GET --url '${coreApiUrl}/api/v2/addresses/{account_address}/tokens'
+        curl --request GET --url '${coreApiUrl}/api/v2/addresses/{account_address}/nft'
         \`\`\`
 
-        ### Specific Account info
+        ### Search (token symbol, address, hash, name)
 
         \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/get_address_info?chain_id=${chainId}&address={account_address}'
+        curl --request GET --url '${coreApiUrl}/api/v2/search?q={query}'
         \`\`\`
 
-        ### Get Address by ENS name
+        ### Smart Contract Source and ABI
 
         \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/get_address_by_ens_name?name={ens_name}'
-        \`\`\`
-
-        ### Get Transactions By Address
-
-        \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/get_transactions_by_address?chain_id=${chainId}&address={account_address}&age_from={YYYY-MM-DDTHH:MM:SS.00Z}&age_to={YYYY-MM-DDTHH:MM:SS.00Z}&methods={4_bytes_method_signature_optional}'
-        \`\`\`
-
-        ### Get Token Transfers by Address
-
-        \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/get_token_transfers_by_address?chain_id=${chainId}&address={account_address}&age_from={YYYY-MM-DDTHH:MM:SS.00Z}&age_to={YYYY-MM-DDTHH:MM:SS.00Z}&token={token_contract_address_optional}'
-        \`\`\`
-
-        ### Get ERC20 Tokens By Address
-
-        \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/get_tokens_by_address?chain_id=${chainId}&address={account_address}'
-        \`\`\`
-
-        ### Get NFT Tokens By Address
-
-        \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/nft_tokens_by_address?chain_id=${chainId}&address={account_address}'
-        \`\`\`
-
-        ### Lookup Token By Symbol
-
-        \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/lookup_token_by_symbol?chain_id=${chainId}&symbol={token_symbol}'
-        \`\`\`
-
-        ### Get Contract ABI
-
-        \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/get_contract_abi?chain_id=${chainId}&address={contract_address}'
-        \`\`\`
-
-        ### Read Contract Data
-
-        \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/read_contract?chain_id=${chainId}&address={contract_address}&abi={string_encoded_function_abi}&function_name={function_name}&args={string_encoded_arguments_list}'
-        \`\`\`
-
-        ### Get Source Files Tree of Verified Contract
-
-        \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/inspect_contract_code?chain_id=${chainId}&address={contract_address}'
-        \`\`\`
-
-        ### Inspect Specific Source File of Verified Contract
-
-        \`\`\`bash
-        curl --request GET --url '${MCP_SERVER_URL}/v1/inspect_contract_code?chain_id=${chainId}&address={contract_address}&file_name={file_name}'
+        curl --request GET --url '${coreApiUrl}/api/v2/smart-contracts/{contract_address}'
         \`\`\`
 
         ## Miscellaneous Blockchain Data
@@ -451,16 +402,8 @@ export function generateStandard(): string {
         ${CHAIN_SPECIFIC_TEMPLATE}
         ## Additional Info
 
-        **Recommendation**: For programmatic access and LLM workflows, prefer the MCP Server endpoints (HTTP, not SSE).
-
-        - MCP landing: [${MCP_SERVER_URL}](${MCP_SERVER_URL})
-        - MCP server root: [${MCP_SERVER_URL}/mcp/](${MCP_SERVER_URL}/mcp/)
-
-        ### Other Blockscout instances (lookup by chain id or name):
-
-        \`\`\`bash
-        curl --request GET --url 'https://chains.blockscout.com/api/chains'
-        \`\`\`
+        - API reference: ${config.app.baseUrl}/api-docs
+        - Explorer: ${config.app.baseUrl}
     `;
 
     return MAIN_TEMPLATE.replace('{blank}\n', '');

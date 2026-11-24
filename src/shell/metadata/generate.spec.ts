@@ -52,7 +52,7 @@ describe('crawler metadata', () => {
     expect(result.jsonLd).toMatchObject({
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: 'Cryft Cards Explorer',
+      name: 'Cryft Network Explorer',
       url: 'http://localhost:3000',
     });
   });

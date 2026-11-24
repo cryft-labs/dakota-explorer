@@ -25,10 +25,10 @@ export function generateStructuredData<Pathname extends Route['pathname']>(param
     return {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: 'Cryft Cards Explorer',
+      name: 'Cryft Network Explorer',
       alternateName: [
-        'Cryft Network Explorer',
-        'Cryft Cards Blockchain and Network Explorer',
+        'Cryft Cards Explorer',
+        'Cryft Network Blockchain Explorer',
       ],
       url: config.app.baseUrl,
       description: config.metadata.og.description,
