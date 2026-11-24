@@ -14,6 +14,11 @@ const webkitAutofillOverrides = {
   transition: 'background-color 5000s ease-in-out 0s',
 };
 
+// Touch screens: inputs at 16px or more, so focusing one never zooms the page (pinch zoom stays on).
+const touchInputSize = {
+  '@media (pointer: coarse)': { fontSize: 'max(16px, 1em)' },
+};
+
 const webkitAutofillRules = {
   '&:-webkit-autofill': webkitAutofillOverrides,
   '&:-webkit-autofill:hover': webkitAutofillOverrides,
@@ -55,16 +60,15 @@ const globalCss: SystemConfig['globalCss'] = {
       margin: 0,
     },
     ...webkitAutofillRules,
+    ...touchInputSize,
   },
   textarea: {
     ...webkitAutofillRules,
+    ...touchInputSize,
   },
   select: {
     ...webkitAutofillRules,
-  },
-  // Touch screens: inputs at 16px or more, so focusing one never zooms the page (pinch zoom stays on).
-  '@media (pointer: coarse)': {
-    'input, textarea, select': { fontSize: 'max(16px, 1em)' },
+    ...touchInputSize,
   },
   ...recaptcha,
   ...scrollbar,
