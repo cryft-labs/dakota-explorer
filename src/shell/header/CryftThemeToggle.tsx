@@ -21,11 +21,11 @@ type Props = {
   mode?: 'icon' | 'button';
 };
 
-const DAKOTA_LIGHT_THEME_ID: ColorThemeId = 'light';
-const DAKOTA_DARK_THEME_ID: ColorThemeId = 'midnight';
+const CRYFT_LIGHT_THEME_ID: ColorThemeId = 'light';
+const CRYFT_DARK_THEME_ID: ColorThemeId = 'midnight';
 
-function getDakotaThemeId(colorMode: ColorMode): ColorThemeId {
-  return colorMode === 'light' ? DAKOTA_LIGHT_THEME_ID : DAKOTA_DARK_THEME_ID;
+function getCryftThemeId(colorMode: ColorMode): ColorThemeId {
+  return colorMode === 'light' ? CRYFT_LIGHT_THEME_ID : CRYFT_DARK_THEME_ID;
 }
 
 function applyThemeVariables(colorMode: ColorMode, themeId: ColorThemeId) {
@@ -42,7 +42,7 @@ function applyThemeVariables(colorMode: ColorMode, themeId: ColorThemeId) {
   window.document.documentElement.style.setProperty(varNameBg, varValue);
 }
 
-const DakotaThemeToggle = ({ className, mode = 'icon' }: Props) => {
+const CryftThemeToggle = ({ className, mode = 'icon' }: Props) => {
   const { colorMode, setColorMode } = useColorMode();
   const isDark = colorMode === 'dark';
   const nextColorMode: ColorMode = isDark ? 'light' : 'dark';
@@ -51,7 +51,7 @@ const DakotaThemeToggle = ({ className, mode = 'icon' }: Props) => {
   const buttonText = isDark ? 'Light Mode' : 'Dark Mode';
 
   const syncThemeMode = React.useCallback((nextMode: ColorMode) => {
-    const syncedThemeId = getDakotaThemeId(nextMode);
+    const syncedThemeId = getCryftThemeId(nextMode);
 
     setColorMode(nextMode);
     applyThemeVariables(nextMode, syncedThemeId);
@@ -61,11 +61,11 @@ const DakotaThemeToggle = ({ className, mode = 'icon' }: Props) => {
   }, [ setColorMode ]);
 
   React.useEffect(() => {
-    const sharedColorMode = cookies.getDakotaSharedThemeMode();
+    const sharedColorMode = cookies.getCryftSharedThemeMode();
 
     if (sharedColorMode) {
       syncThemeMode(sharedColorMode);
-      return cookies.subscribeDakotaSharedThemeMode(syncThemeMode);
+      return cookies.subscribeCryftSharedThemeMode(syncThemeMode);
     }
 
     const cookieColorMode = cookies.get(cookies.NAMES.COLOR_MODE) as ColorMode | undefined;
@@ -74,16 +74,16 @@ const DakotaThemeToggle = ({ className, mode = 'icon' }: Props) => {
     const cookieThemeIsValid = Boolean(
       cookieColorTheme && COLOR_THEMES.some((theme) => theme.id === cookieColorTheme && theme.colorMode === initialColorMode),
     );
-    const initialThemeId = cookieThemeIsValid && cookieColorTheme ? cookieColorTheme : getDakotaThemeId(initialColorMode);
+    const initialThemeId = cookieThemeIsValid && cookieColorTheme ? cookieColorTheme : getCryftThemeId(initialColorMode);
 
     applyThemeVariables(initialColorMode, initialThemeId);
 
-    return cookies.subscribeDakotaSharedThemeMode(syncThemeMode);
+    return cookies.subscribeCryftSharedThemeMode(syncThemeMode);
   }, [ colorMode, syncThemeMode ]);
 
   const handleClick = React.useCallback(() => {
     syncThemeMode(nextColorMode);
-    cookies.setDakotaSharedThemeMode(nextColorMode);
+    cookies.setCryftSharedThemeMode(nextColorMode);
   }, [ nextColorMode, syncThemeMode ]);
 
   // The explorer's own icon set (the sprite), as every other icon on the site
@@ -146,4 +146,4 @@ const DakotaThemeToggle = ({ className, mode = 'icon' }: Props) => {
   );
 };
 
-export default React.memo(DakotaThemeToggle);
+export default React.memo(CryftThemeToggle);

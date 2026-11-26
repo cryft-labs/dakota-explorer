@@ -10,7 +10,7 @@ import { getEnvValue, getExternalAssetFilePath, parseEnvJson } from 'src/config/
 import { urlValidator } from 'src/toolkit/components/forms/validators/url';
 
 const DEFAULT_CURRENCY_DECIMALS = 18;
-const DAKOTA_BRAND_ASSET = '/assets/cryft/cryft-cards-mark.svg';
+const CRYFT_BRAND_ASSET = '/assets/cryft/cryft-cards-mark.svg';
 
 const rollupType = getEnvValue('NEXT_PUBLIC_ROLLUP_TYPE') as RollupType;
 
@@ -50,12 +50,12 @@ const chain = Object.freeze({
     symbol: getEnvValue('NEXT_PUBLIC_NETWORK_SECONDARY_COIN_SYMBOL'),
   },
   logo: {
-    'default': getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_LOGO') || DAKOTA_BRAND_ASSET,
-    dark: getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_LOGO_DARK') || DAKOTA_BRAND_ASSET,
+    'default': getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_LOGO') || CRYFT_BRAND_ASSET,
+    dark: getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_LOGO_DARK') || CRYFT_BRAND_ASSET,
   },
   icon: {
-    'default': getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_ICON') || DAKOTA_BRAND_ASSET,
-    dark: getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_ICON_DARK') || DAKOTA_BRAND_ASSET,
+    'default': getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_ICON') || CRYFT_BRAND_ASSET,
+    dark: getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_ICON_DARK') || CRYFT_BRAND_ASSET,
   },
   rpcUrls,
   isTestnet: getEnvValue('NEXT_PUBLIC_IS_TESTNET') === 'true',

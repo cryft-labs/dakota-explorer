@@ -28,7 +28,7 @@ import {
   thirdwebClient,
 } from 'src/features/connect-wallet/utils/thirdweb-config';
 
-import DakotaStarfield from 'src/shared/components/DakotaStarfield';
+import CryftStarfield from 'src/shared/components/CryftStarfield';
 import getErrorMessage from 'src/shared/errors/get-error-message';
 import SpriteIcon from 'src/sprite/SpriteIcon';
 
@@ -994,7 +994,7 @@ const ThirdwebWalletModal = ({ view, onClose, onConnected }: ModalProps) => {
             bg={{ _light: 'rgba(11, 125, 137, 0.28)', _dark: 'rgba(255, 255, 255, 0.3)' }}
           />
         </Box>
-        <DakotaStarfield ambientInset="0" glimmerInset="0"/>
+        <CryftStarfield ambientInset="0" glimmerInset="0"/>
         <DialogHeader
           position="relative"
           zIndex={ 3 }

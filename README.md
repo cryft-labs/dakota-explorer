@@ -6,7 +6,7 @@
     <span> blockchain explorer</span>
 </p>
 
-## Dakota deployment status
+## Cryft deployment status
 
 The owner authorized merging the reviewed deployment changes into main on
 September 11, 2026. Commit `ca603ae` pins the Node 24 image and restricts runtime

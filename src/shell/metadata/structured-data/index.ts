@@ -17,7 +17,7 @@ interface Params<Pathname extends Route['pathname']> {
   apiData: ApiData<Pathname>;
 }
 
-export const STRUCTURED_DATA_SCRIPT_ID = 'dakota-explorer-structured-data';
+export const STRUCTURED_DATA_SCRIPT_ID = 'cryft-explorer-structured-data';
 
 export function generateStructuredData<Pathname extends Route['pathname']>(params: Params<Pathname>): StructuredData | undefined {
 

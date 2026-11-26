@@ -17,7 +17,7 @@ interface Props {
   onSelect?: () => void;
 }
 
-const DAKOTA_SHARED_THEME_IDS: Record<ColorMode, ColorThemeId> = {
+const CRYFT_SHARED_THEME_IDS: Record<ColorMode, ColorThemeId> = {
   light: 'light',
   dark: 'midnight',
 };
@@ -45,11 +45,11 @@ const SettingsColorTheme = ({ onSelect }: Props) => {
     cookies.set(cookies.NAMES.COLOR_MODE, nextTheme.colorMode);
     cookies.set(cookies.NAMES.COLOR_THEME, themeId);
     window.localStorage.setItem(cookies.NAMES.COLOR_MODE, nextTheme.colorMode);
-    cookies.setDakotaSharedThemeMode(nextTheme.colorMode);
+    cookies.setCryftSharedThemeMode(nextTheme.colorMode);
   }, [ setColorMode ]);
 
   React.useEffect(() => {
-    const sharedColorMode = cookies.getDakotaSharedThemeMode() as ColorMode | undefined;
+    const sharedColorMode = cookies.getCryftSharedThemeMode() as ColorMode | undefined;
     const cookieColorMode = cookies.get(cookies.NAMES.COLOR_MODE) as ColorMode | undefined;
     const cookieColorTheme = cookies.get(cookies.NAMES.COLOR_THEME) as ColorThemeId | undefined;
 
@@ -72,7 +72,7 @@ const SettingsColorTheme = ({ onSelect }: Props) => {
     let nextColorTheme = getDefaultColorTheme(nextColorMode);
 
     if (sharedColorMode) {
-      nextColorTheme = DAKOTA_SHARED_THEME_IDS[sharedColorMode];
+      nextColorTheme = CRYFT_SHARED_THEME_IDS[sharedColorMode];
     } else if (cookieThemeIsValid && cookieColorTheme) {
       nextColorTheme = cookieColorTheme;
     }

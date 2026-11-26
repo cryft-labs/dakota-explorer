@@ -3,7 +3,7 @@
 import { Box, chakra, Flex, Separator } from '@chakra-ui/react';
 import React from 'react';
 
-import DakotaThemeToggle from 'src/shell/header/DakotaThemeToggle';
+import CryftThemeToggle from 'src/shell/header/CryftThemeToggle';
 
 import NetworkLogo from 'src/slices/chain/logo/NetworkLogo';
 import TestnetBadge from 'src/slices/chain/TestnetBadge';
@@ -27,24 +27,24 @@ import NavLink from './NavLink';
 import NavLinkGroup from './NavLinkGroup';
 
 const accountFeature = config.features.account;
-const DAKOTA_HEADER_HEIGHT = '74px';
-const DAKOTA_HEADER_ACTION_HEIGHT = '38px';
-const DAKOTA_HEADER_ICON_SIZE = '40px';
-const DAKOTA_HEADER_MAX_WIDTH = '1200px';
-const DAKOTA_HEADER_GAP = '10px';
-const DAKOTA_HEADER_SECTION_GAP = '16px';
-const DAKOTA_NAVIGATOR_LINKS = [
+const CRYFT_HEADER_HEIGHT = '74px';
+const CRYFT_HEADER_ACTION_HEIGHT = '38px';
+const CRYFT_HEADER_ICON_SIZE = '40px';
+const CRYFT_HEADER_MAX_WIDTH = '1200px';
+const CRYFT_HEADER_GAP = '10px';
+const CRYFT_HEADER_SECTION_GAP = '16px';
+const CRYFT_NAVIGATOR_LINKS = [
   { label: 'Cryft Cards', url: 'https://cryft.app', icon: 'globe' as const },
   { label: 'How it works', url: 'https://cryft.app/how', icon: 'docs' as const },
 ] as const;
 
-const DakotaNavigatorMenu = () => {
+const CryftNavigatorMenu = () => {
   return (
     <PopoverRoot positioning={{ placement: 'bottom', offset: { mainAxis: 8 } }}>
       <PopoverTrigger>
         <Button
           aria-label="Open Cryft platform navigator"
-          h={ DAKOTA_HEADER_ACTION_HEIGHT }
+          h={ CRYFT_HEADER_ACTION_HEIGHT }
           px="14px"
           display="inline-flex"
           alignItems="center"
@@ -79,7 +79,7 @@ const DakotaNavigatorMenu = () => {
       >
         <PopoverBody p={ 2 }>
           <Flex flexDir="column" gap={ 1 }>
-            { DAKOTA_NAVIGATOR_LINKS.map((item) => {
+            { CRYFT_NAVIGATOR_LINKS.map((item) => {
               return (
                 <chakra.a
                   key={ item.label }
@@ -144,49 +144,49 @@ const NavigationDesktop = () => {
         display={{ base: 'none', lg: 'grid' }}
         gridTemplateColumns="minmax(190px, 1fr) auto minmax(190px, 1fr)"
         alignItems="center"
-        columnGap={ DAKOTA_HEADER_SECTION_GAP }
-        minH={ DAKOTA_HEADER_HEIGHT }
+        columnGap={ CRYFT_HEADER_SECTION_GAP }
+        minH={ CRYFT_HEADER_HEIGHT }
         px="24px"
         py={ 0 }
-        maxW={ DAKOTA_HEADER_MAX_WIDTH }
+        maxW={ CRYFT_HEADER_MAX_WIDTH }
         m="0 auto"
       >
-        <Flex alignItems="center" justifyContent="flex-start" gap={ DAKOTA_HEADER_GAP } minW={ 0 }>
+        <Flex alignItems="center" justifyContent="flex-start" gap={ CRYFT_HEADER_GAP } minW={ 0 }>
           <NetworkLogo/>
           <TestnetBadge/>
           <RollupStageBadge/>
         </Flex>
 
         <chakra.nav minW={ 0 } display="flex" justifyContent="center">
-          <Flex as="ul" columnGap={ DAKOTA_HEADER_GAP } alignItems="center" flexWrap="nowrap">
+          <Flex as="ul" columnGap={ CRYFT_HEADER_GAP } alignItems="center" flexWrap="nowrap">
             { mainNavItems.map((item) => {
               if (isGroupItem(item)) {
-                return <NavLinkGroup key={ item.text } item={ item } height={ DAKOTA_HEADER_ACTION_HEIGHT }/>;
+                return <NavLinkGroup key={ item.text } item={ item } height={ CRYFT_HEADER_ACTION_HEIGHT }/>;
               } else {
-                return <NavLink key={ item.text } item={ item } noIcon height={ DAKOTA_HEADER_ACTION_HEIGHT }/>;
+                return <NavLink key={ item.text } item={ item } noIcon height={ CRYFT_HEADER_ACTION_HEIGHT }/>;
               }
             }) }
             { accountNavGroup && (
               <>
                 <Separator orientation="vertical" mx="4px" h={ 4 }/>
-                <NavLinkGroup key={ accountNavGroup.text } item={ accountNavGroup } height={ DAKOTA_HEADER_ACTION_HEIGHT }/>
+                <NavLinkGroup key={ accountNavGroup.text } item={ accountNavGroup } height={ CRYFT_HEADER_ACTION_HEIGHT }/>
               </>
             ) }
           </Flex>
         </chakra.nav>
 
         <Flex
-          gap={ DAKOTA_HEADER_GAP }
+          gap={ CRYFT_HEADER_GAP }
           alignItems="center"
           justifyContent="flex-end"
-          minH={ DAKOTA_HEADER_ICON_SIZE }
+          minH={ CRYFT_HEADER_ICON_SIZE }
           minW={ 0 }
         >
           <Flex alignItems="center" gap="6px">
-            <DakotaNavigatorMenu/>
+            <CryftNavigatorMenu/>
           </Flex>
           <Flex alignItems="center" gap="4px">
-            <DakotaThemeToggle/>
+            <CryftThemeToggle/>
             <CsvExportDownloads/>
           </Flex>
           <NavigationPromoBanner/>

@@ -9,7 +9,7 @@ const IPFS_GATEWAY_ENV_NAMES = [
   'NEXT_PUBLIC_IPFS_GATEWAY_URL',
 ];
 
-const DAKOTA_IPFS_GATEWAY_DEFAULT = 'https://gateway.cryft.cards/ipfs/';
+const CRYFT_IPFS_GATEWAY_DEFAULT = 'https://gateway.cryft.cards/ipfs/';
 
 // Keep CID matching intentionally strict enough that regular explorer searches
 // do not get mistaken for IPFS content.
@@ -22,7 +22,7 @@ function getIpfsGatewayBaseUrl() {
   const runtimeGateway = IPFS_GATEWAY_ENV_NAMES
     .map((envName) => getEnvValue(envName)?.trim())
     .find(Boolean);
-  const gateway = runtimeGateway || DAKOTA_IPFS_GATEWAY_DEFAULT;
+  const gateway = runtimeGateway || CRYFT_IPFS_GATEWAY_DEFAULT;
 
   return gateway && regexp.URL_PREFIX.test(gateway) ? gateway.replace(/\/+$/, '') : undefined;
 }

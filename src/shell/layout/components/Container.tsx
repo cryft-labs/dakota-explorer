@@ -11,7 +11,7 @@ interface Props {
 
 const ENCODED_SVG_TAG_START = '%3C';
 
-const DAKOTA_BACKGROUND_NOISE = [
+const CRYFT_BACKGROUND_NOISE = [
   'url("data:image/svg+xml,',
   `${ ENCODED_SVG_TAG_START }svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27140%27 height=%27140%27 viewBox=%270 0 140 140%27%3E`,
   `${ ENCODED_SVG_TAG_START }filter id=%27n%27%3E`,
@@ -22,7 +22,7 @@ const DAKOTA_BACKGROUND_NOISE = [
   '%3C/svg%3E")',
 ].join('');
 
-const DAKOTA_STARFIELD_BACKGROUND = [
+const CRYFT_STARFIELD_BACKGROUND = [
   'radial-gradient(ellipse at 50% 0%, rgba(53, 194, 207, 0.13) 0%, transparent 38%)',
   'radial-gradient(ellipse at 16% 36%, rgba(11, 125, 137, 0.1) 0%, transparent 34%)',
   'radial-gradient(ellipse at 86% 24%, rgba(53, 194, 207, 0.1) 0%, transparent 32%)',
@@ -33,7 +33,7 @@ const DAKOTA_STARFIELD_BACKGROUND = [
   'radial-gradient(circle, rgba(11, 125, 137, 0.74) 0 1.2px, transparent 2.5px)',
 ].join(', ');
 
-const dakotaExplorerStarGleam = keyframes`
+const cryftExplorerStarGleam = keyframes`
   0%, 100% {
     filter: drop-shadow(0 0 0 transparent);
     opacity: 0.28;
@@ -50,7 +50,7 @@ const dakotaExplorerStarGleam = keyframes`
   }
 `;
 
-const DAKOTA_EXPLORER_STAR_GLEAM_ANIMATION = `${ dakotaExplorerStarGleam } 5.2s ease-in-out infinite`;
+const CRYFT_EXPLORER_STAR_GLEAM_ANIMATION = `${ cryftExplorerStarGleam } 5.2s ease-in-out infinite`;
 
 const Container = ({ children, className }: Props) => {
   return (
@@ -66,7 +66,7 @@ const Container = ({ children, className }: Props) => {
         content: '""',
         position: 'fixed',
         inset: 0,
-        backgroundImage: DAKOTA_STARFIELD_BACKGROUND,
+        backgroundImage: CRYFT_STARFIELD_BACKGROUND,
         backgroundRepeat: 'repeat',
         backgroundSize: {
           base: '100% 100%, 100% 100%, 100% 100%, 86px 86px, 132px 132px, 218px 218px, 190px 190px, 260px 260px',
@@ -75,7 +75,7 @@ const Container = ({ children, className }: Props) => {
         backgroundPosition: '0 0, 0 0, 0 0, 13px 10px, 62px 36px, 121px 82px, 33px 34px, 174px 90px',
         mixBlendMode: { base: 'normal', _dark: 'screen' },
         opacity: { base: 0.24, _dark: 0.44 },
-        animation: DAKOTA_EXPLORER_STAR_GLEAM_ANIMATION,
+        animation: CRYFT_EXPLORER_STAR_GLEAM_ANIMATION,
         pointerEvents: 'none',
         zIndex: 0,
         _motionReduce: {
@@ -86,7 +86,7 @@ const Container = ({ children, className }: Props) => {
         content: '""',
         position: 'fixed',
         inset: 0,
-        backgroundImage: DAKOTA_BACKGROUND_NOISE,
+        backgroundImage: CRYFT_BACKGROUND_NOISE,
         backgroundRepeat: 'repeat',
         backgroundSize: '140px 140px',
         mixBlendMode: { base: 'multiply', _dark: 'screen' },

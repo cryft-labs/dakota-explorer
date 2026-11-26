@@ -36,7 +36,7 @@ const MAX_LINKS_COLUMNS = 4;
 // Cryft: the frontend is cryft-labs/dakota-explorer (a Blockscout fork); its build tag is a deploy label, so the commit is shown
 const FRONT_COMMIT_URL = `https://github.com/cryft-labs/dakota-explorer/commit/${ config.shell.footer.frontendCommit }`;
 
-const DAKOTA_LINKS = [
+const CRYFT_LINKS = [
   {
     text: 'Cryft Cards',
     url: 'https://cryft.app',
@@ -82,7 +82,7 @@ const Footer = () => {
   const NETWORK_DETAILS = React.useMemo(() => [
     {
       label: 'Chain ID',
-      value: config.chain.id || '112311',
+      value: config.chain.id || '113211',
     },
     {
       label: 'Ticker',
@@ -185,7 +185,7 @@ const Footer = () => {
     );
   }, [ apiVersionUrl, backendVersionData?.backend_version, frontendLink, onionDomain ]);
 
-  const renderDakotaLinks = React.useCallback((isLoading?: boolean) => {
+  const renderCryftLinks = React.useCallback((isLoading?: boolean) => {
     return (
       <Box>
         <Skeleton
@@ -198,7 +198,7 @@ const Footer = () => {
           Cryft ecosystem
         </Skeleton>
         <VStack gap={ 2 } alignItems="stretch">
-          { DAKOTA_LINKS.map(link => <FooterLinkItem { ...link } key={ link.text } isLoading={ isLoading }/>) }
+          { CRYFT_LINKS.map(link => <FooterLinkItem { ...link } key={ link.text } isLoading={ isLoading }/>) }
         </VStack>
       </Box>
     );
@@ -301,7 +301,7 @@ const Footer = () => {
             justifyContent={{ lg: 'flex-end' }}
             mt={{ base: 8, lg: 0 }}
           >
-            { renderDakotaLinks(isPlaceholderData) }
+            { renderCryftLinks(isPlaceholderData) }
             { (linksData || []).slice(0, linkGroupsCount - 1).map(linkGroup => (
               <Box key={ linkGroup.title }>
                 <Skeleton
@@ -359,7 +359,7 @@ const Footer = () => {
           justifyContent={{ lg: 'flex-end' }}
           mt={{ base: 8, lg: 0 }}
         >
-          { renderDakotaLinks() }
+          { renderCryftLinks() }
           { renderNetworkDetails() }
         </Grid>
       </Grid>

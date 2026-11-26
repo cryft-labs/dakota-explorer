@@ -6,14 +6,14 @@ import config from 'src/config';
 
 import { isBrowser } from 'src/toolkit/utils/isBrowser';
 
-export type DakotaSharedThemeMode = 'light' | 'dark';
+export type CryftSharedThemeMode = 'light' | 'dark';
 
-export const DAKOTA_SHARED_THEME_MODE_KEY = 'dakota.themeMode.v1';
-export const DAKOTA_SHARED_STATE_CHANNEL = 'dakota.sharedState.v1';
-export const DAKOTA_SHARED_STATE_EVENT = 'dakota-shared-state-change';
+export const CRYFT_SHARED_THEME_MODE_KEY = 'cryft.themeMode.v1';
+export const CRYFT_SHARED_STATE_CHANNEL = 'cryft.sharedState.v1';
+export const CRYFT_SHARED_STATE_EVENT = 'cryft-shared-state-change';
 
-const DAKOTA_SHARED_COOKIE_MAX_AGE_DAYS = 365;
-const DAKOTA_SHARED_STATE_POLL_INTERVAL_MS = 750;
+const CRYFT_SHARED_COOKIE_MAX_AGE_DAYS = 365;
+const CRYFT_SHARED_STATE_POLL_INTERVAL_MS = 750;
 
 /**
  * All cookie names that can be used in the application.
@@ -27,7 +27,7 @@ export enum NAMES {
   TXS_SORT = 'txs_sort',
   COLOR_MODE = 'chakra-ui-color-mode',
   COLOR_THEME = 'chakra-ui-color-theme',
-  DAKOTA_SHARED_THEME_MODE = 'dakota_theme_mode',
+  CRYFT_SHARED_THEME_MODE = 'cryft_theme_mode',
   ADDRESS_IDENTICON_TYPE = 'address_identicon_type',
   ADDRESS_FORMAT = 'address_format',
   TIME_FORMAT = 'time_format',
@@ -61,30 +61,30 @@ export const getDefaultAttributes = () => ({
 
 const SHARED_COOKIE_DOMAINS = [ 'cryft.cards' ];
 
-function getDakotaCookieDomain(hostname: string): string | undefined {
+function getCryftCookieDomain(hostname: string): string | undefined {
   const domain = SHARED_COOKIE_DOMAINS.find((item) => hostname === item || hostname.endsWith(`.${ item }`));
   return domain ? `.${ domain }` : undefined;
 }
 
-function getDakotaSharedThemeAttributes(): Cookies.CookieAttributes {
+function getCryftSharedThemeAttributes(): Cookies.CookieAttributes {
   const hostname = isBrowser() ? window.location.hostname.toLowerCase() : (config.app.host ?? '').toLowerCase();
   const secure = isBrowser() ? window.location.protocol === 'https:' : config.app.protocol === 'https';
 
   return {
     path: '/',
     sameSite: 'lax',
-    expires: DAKOTA_SHARED_COOKIE_MAX_AGE_DAYS,
+    expires: CRYFT_SHARED_COOKIE_MAX_AGE_DAYS,
     secure,
-    ...(getDakotaCookieDomain(hostname) ? { domain: getDakotaCookieDomain(hostname) } : {}),
+    ...(getCryftCookieDomain(hostname) ? { domain: getCryftCookieDomain(hostname) } : {}),
   };
 }
 
-export function normalizeDakotaSharedThemeMode(value: unknown): DakotaSharedThemeMode | undefined {
+export function normalizeCryftSharedThemeMode(value: unknown): CryftSharedThemeMode | undefined {
   return value === 'dark' || value === 'light' ? value : undefined;
 }
 
-export function getDakotaSharedThemeMode(serverCookie?: string): DakotaSharedThemeMode | undefined {
-  const cookieMode = normalizeDakotaSharedThemeMode(get(NAMES.DAKOTA_SHARED_THEME_MODE, serverCookie));
+export function getCryftSharedThemeMode(serverCookie?: string): CryftSharedThemeMode | undefined {
+  const cookieMode = normalizeCryftSharedThemeMode(get(NAMES.CRYFT_SHARED_THEME_MODE, serverCookie));
 
   if (cookieMode) {
     return cookieMode;
@@ -95,56 +95,56 @@ export function getDakotaSharedThemeMode(serverCookie?: string): DakotaSharedThe
   }
 
   try {
-    return normalizeDakotaSharedThemeMode(window.localStorage.getItem(DAKOTA_SHARED_THEME_MODE_KEY));
+    return normalizeCryftSharedThemeMode(window.localStorage.getItem(CRYFT_SHARED_THEME_MODE_KEY));
   } catch {}
 
   return undefined;
 }
 
-function publishDakotaSharedThemeChange(mode: DakotaSharedThemeMode) {
+function publishCryftSharedThemeChange(mode: CryftSharedThemeMode) {
   if (!isBrowser()) {
     return;
   }
 
   const detail = { topic: 'theme', value: mode };
-  window.dispatchEvent(new CustomEvent(DAKOTA_SHARED_STATE_EVENT, { detail }));
+  window.dispatchEvent(new CustomEvent(CRYFT_SHARED_STATE_EVENT, { detail }));
 
   try {
-    const channel = new BroadcastChannel(DAKOTA_SHARED_STATE_CHANNEL);
+    const channel = new BroadcastChannel(CRYFT_SHARED_STATE_CHANNEL);
     channel.postMessage(detail);
     channel.close();
   } catch {}
 }
 
-export function setDakotaSharedThemeMode(mode: DakotaSharedThemeMode) {
+export function setCryftSharedThemeMode(mode: CryftSharedThemeMode) {
   if (!isBrowser()) {
     return;
   }
 
-  const normalizedMode = normalizeDakotaSharedThemeMode(mode);
+  const normalizedMode = normalizeCryftSharedThemeMode(mode);
 
   if (!normalizedMode) {
     return;
   }
 
-  set(NAMES.DAKOTA_SHARED_THEME_MODE, normalizedMode, getDakotaSharedThemeAttributes());
+  set(NAMES.CRYFT_SHARED_THEME_MODE, normalizedMode, getCryftSharedThemeAttributes());
 
   try {
-    window.localStorage.setItem(DAKOTA_SHARED_THEME_MODE_KEY, normalizedMode);
+    window.localStorage.setItem(CRYFT_SHARED_THEME_MODE_KEY, normalizedMode);
   } catch {}
 
-  publishDakotaSharedThemeChange(normalizedMode);
+  publishCryftSharedThemeChange(normalizedMode);
 }
 
-export function subscribeDakotaSharedThemeMode(onChange: (mode: DakotaSharedThemeMode) => void) {
+export function subscribeCryftSharedThemeMode(onChange: (mode: CryftSharedThemeMode) => void) {
   if (!isBrowser()) {
     return () => undefined;
   }
 
-  let currentMode = getDakotaSharedThemeMode();
+  let currentMode = getCryftSharedThemeMode();
 
   const notifyIfChanged = () => {
-    const nextMode = getDakotaSharedThemeMode();
+    const nextMode = getCryftSharedThemeMode();
 
     if (nextMode && nextMode !== currentMode) {
       currentMode = nextMode;
@@ -161,7 +161,7 @@ export function subscribeDakotaSharedThemeMode(onChange: (mode: DakotaSharedThem
   };
 
   const handleStorageEvent = (event: StorageEvent) => {
-    if (event.key === DAKOTA_SHARED_THEME_MODE_KEY || event.key === null) {
+    if (event.key === CRYFT_SHARED_THEME_MODE_KEY || event.key === null) {
       notifyIfChanged();
     }
   };
@@ -169,7 +169,7 @@ export function subscribeDakotaSharedThemeMode(onChange: (mode: DakotaSharedThem
   let channel: BroadcastChannel | undefined;
 
   try {
-    channel = new BroadcastChannel(DAKOTA_SHARED_STATE_CHANNEL);
+    channel = new BroadcastChannel(CRYFT_SHARED_STATE_CHANNEL);
     channel.addEventListener('message', (event) => {
       if (event.data?.topic === 'theme') {
         notifyIfChanged();
@@ -177,13 +177,13 @@ export function subscribeDakotaSharedThemeMode(onChange: (mode: DakotaSharedThem
     });
   } catch {}
 
-  window.addEventListener(DAKOTA_SHARED_STATE_EVENT, handleSharedStateEvent);
+  window.addEventListener(CRYFT_SHARED_STATE_EVENT, handleSharedStateEvent);
   window.addEventListener('storage', handleStorageEvent);
 
-  const interval = window.setInterval(notifyIfChanged, DAKOTA_SHARED_STATE_POLL_INTERVAL_MS);
+  const interval = window.setInterval(notifyIfChanged, CRYFT_SHARED_STATE_POLL_INTERVAL_MS);
 
   return () => {
-    window.removeEventListener(DAKOTA_SHARED_STATE_EVENT, handleSharedStateEvent);
+    window.removeEventListener(CRYFT_SHARED_STATE_EVENT, handleSharedStateEvent);
     window.removeEventListener('storage', handleStorageEvent);
     window.clearInterval(interval);
     channel?.close();

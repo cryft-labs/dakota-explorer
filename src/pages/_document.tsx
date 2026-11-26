@@ -13,7 +13,7 @@ import * as svgSprite from 'src/sprite/SpriteIcon';
 
 const marketplaceFeature = config.features.marketplace;
 const usercentrics = config.services.usercentrics;
-const DAKOTA_FAVICON_SRC = '/assets/cryft/cryft-cards-mark.svg';
+const CRYFT_FAVICON_SRC = '/assets/cryft/cryft-cards-mark.svg';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -71,7 +71,7 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"/>
 
           { /* FAVICON */ }
-          <link rel="icon" type="image/svg+xml" href={ DAKOTA_FAVICON_SRC }/>
+          <link rel="icon" type="image/svg+xml" href={ CRYFT_FAVICON_SRC }/>
           <link rel="icon" href="/favicon.ico" sizes="48x48"/>
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180"/>
           <link rel="preload" as="image" href={ svgSprite.href }/>

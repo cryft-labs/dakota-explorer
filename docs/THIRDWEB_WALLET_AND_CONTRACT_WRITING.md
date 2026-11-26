@@ -2,7 +2,7 @@
 
 <!-- cspell:ignore Eeuo ltnp -->
 
-Contract writing is enabled by the Dakota Network Explorer frontend. Thirdweb
+Contract writing is enabled by the Cryft Network Explorer frontend. Thirdweb
 provides the wallet connection experience, and the official Thirdweb Wagmi
 adapter makes the connected account available to the explorer's existing Wagmi
 contract interaction flow.
@@ -17,7 +17,7 @@ NEXT_PUBLIC_THIRDWEB_CLIENT_ID=0e4af511c829602455e0dc651b354649
 Do not add `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID`. That variable belonged to
 the previous Reown integration and is not used by the Thirdweb-enabled frontend.
 
-`NEXT_PUBLIC_WEB3_WALLETS=none` may remain in the Dakota configuration. It only
+`NEXT_PUBLIC_WEB3_WALLETS=none` may remain in the Cryft configuration. It only
 disables Blockscout's separate add-network and add-token browser-extension
 helpers; it does not disable Thirdweb wallet connection or contract writing.
 
@@ -43,7 +43,7 @@ Create a timestamped backup before changing the existing environment:
 ```bash
 THIRDWEB_CLIENT_ID='0e4af511c829602455e0dc651b354649'
 TS="$(date +%Y%m%d-%H%M%S)"
-BACKUP_DIR="/srv/backups/dakota-enable-thirdweb-${TS}"
+BACKUP_DIR="/srv/backups/cryft-enable-thirdweb-${TS}"
 
 sudo mkdir -p "${BACKUP_DIR}"
 sudo cp -a \
@@ -89,12 +89,12 @@ set_env NEXT_PUBLIC_WEB3_WALLETS "none"
 remove_env NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID
 remove_env NEXT_PUBLIC_WALLET_CONNECT_FEATURED_WALLET_IDS
 
-# Confirm the Dakota chain definition exposed to Thirdweb and Wagmi.
-set_env NEXT_PUBLIC_NETWORK_NAME '"Dakota Network"'
-set_env NEXT_PUBLIC_NETWORK_SHORT_NAME "Dakota"
-set_env NEXT_PUBLIC_NETWORK_ID "112311"
+# Confirm the Cryft chain definition exposed to Thirdweb and Wagmi.
+set_env NEXT_PUBLIC_NETWORK_NAME '"Cryft Network"'
+set_env NEXT_PUBLIC_NETWORK_SHORT_NAME "Cryft"
+set_env NEXT_PUBLIC_NETWORK_ID "113211"
 set_env NEXT_PUBLIC_NETWORK_RPC_URL "https://rpc.cryft.cards"
-set_env NEXT_PUBLIC_NETWORK_CURRENCY_NAME '"Dakota Coin"'
+set_env NEXT_PUBLIC_NETWORK_CURRENCY_NAME '"Cryft Coin"'
 set_env NEXT_PUBLIC_NETWORK_CURRENCY_SYMBOL "KOTA"
 set_env NEXT_PUBLIC_NETWORK_CURRENCY_DECIMALS "18"
 
@@ -113,7 +113,7 @@ The first Thirdweb deployment must use a new production build because the
 provider and Wagmi adapter are part of the application code. Adding the client
 ID to an older Reown build does not convert that build to Thirdweb.
 
-Use the normal Dakota Explorer deployment script after adding this line to its
+Use the normal Cryft Explorer deployment script after adding this line to its
 environment update block:
 
 ```bash
@@ -153,7 +153,7 @@ public assets, and restart the service using the same deployment steps.
 
 ## 4. Confirm the public runtime configuration
 
-Confirm that the deployed frontend exposes the Thirdweb client ID and Dakota
+Confirm that the deployed frontend exposes the Thirdweb client ID and Cryft
 chain settings:
 
 ```bash
@@ -168,7 +168,7 @@ Expected values include:
 ```text
 NEXT_PUBLIC_THIRDWEB_CLIENT_ID: "0e4af511c829602455e0dc651b354649"
 NEXT_PUBLIC_WEB3_WALLETS: "none"
-NEXT_PUBLIC_NETWORK_ID: "112311"
+NEXT_PUBLIC_NETWORK_ID: "113211"
 NEXT_PUBLIC_NETWORK_RPC_URL: "https://rpc.cryft.cards"
 NEXT_PUBLIC_NETWORK_CURRENCY_SYMBOL: "KOTA"
 ```
@@ -187,7 +187,7 @@ fi
 ## 5. Configure local development on port 3010
 
 Add the Thirdweb client ID to the existing `.env.local` file without changing
-the Dakota API, RPC, chain, or branding variables:
+the Cryft API, RPC, chain, or branding variables:
 
 ```bash
 NEXT_PUBLIC_THIRDWEB_CLIENT_ID=0e4af511c829602455e0dc651b354649
@@ -229,7 +229,7 @@ Expected response:
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": "0x1b6b7"
+  "result": "0x1ba3b"
 }
 ```
 
@@ -274,7 +274,7 @@ Then:
 3. Click **Connect wallet**.
 4. Choose Google, Apple, email, MetaMask, Coinbase, or WalletConnect.
 5. Approve the connection or complete the Thirdweb sign-in flow.
-6. Approve the switch to Dakota Network if an external wallet requests it.
+6. Approve the switch to Cryft Network if an external wallet requests it.
 7. Expand the contract method and enter its arguments.
 8. Click **Write**.
 9. Review the destination, method data, value, and gas estimate.
@@ -283,22 +283,22 @@ Then:
 The connected account must:
 
 - Have enough `KOTA` for gas.
-- Be connected to chain ID `112311`.
+- Be connected to chain ID `113211`.
 - Be authorized for the selected contract method.
 
 Owner-, voter-, validator-, or role-restricted methods revert when called from
 an unauthorized account. Thirdweb changes how the user connects; it does not
 bypass contract permissions or transaction confirmation.
 
-## 8. Add Dakota Network to an external wallet when needed
+## 8. Add Cryft Network to an external wallet when needed
 
-Thirdweb should request the Dakota Network switch for supported external
+Thirdweb should request the Cryft Network switch for supported external
 wallets. If an injected wallet does not add the chain automatically, use:
 
 ```text
-Network name: Dakota Network
+Network name: Cryft Network
 Default RPC URL: https://rpc.cryft.cards
-Chain ID: 112311
+Chain ID: 113211
 Currency symbol: KOTA
 Block explorer URL: https://explore.cryft.cards
 ```
@@ -308,7 +308,7 @@ the user to add a network manually in a separate browser extension.
 
 ## 9. Confirm transaction submission support
 
-The connected wallet signs locally, but the Dakota RPC must accept submitted
+The connected wallet signs locally, but the Cryft RPC must accept submitted
 transactions:
 
 ```bash
@@ -341,5 +341,5 @@ NEXT_PUBLIC_WEB3_WALLETS=none
 ```
 
 The complete contract-writing flow also requires a Thirdweb-enabled production
-build, valid Dakota chain settings, a working explorer RPC route, an authorized
+build, valid Cryft chain settings, a working explorer RPC route, an authorized
 account, and enough `KOTA` for gas.

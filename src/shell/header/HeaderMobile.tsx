@@ -16,7 +16,7 @@ import config from 'src/config';
 import { useIsSticky } from 'src/toolkit/hooks/useIsSticky';
 
 import Burger from './Burger';
-import DakotaThemeToggle from './DakotaThemeToggle';
+import CryftThemeToggle from './CryftThemeToggle';
 
 const UserProfileDynamic = dynamic(() => import('src/features/account/components/user-profile/dynamic/UserProfile'), { ssr: false });
 
@@ -87,7 +87,7 @@ const HeaderMobile = ({ hideSearchButton, onGoToSearchResults }: Props) => {
           { !hideSearchButton && <SearchBarMobile onGoToSearchResults={ onGoToSearchResults }/> }
           { config.features.rewards.isEnabled && <RewardsButton/> }
           { userProfile }
-          <DakotaThemeToggle/>
+          <CryftThemeToggle/>
           <Burger/>
         </Flex>
       </Flex>

@@ -18,17 +18,17 @@ import { IconButton } from 'src/toolkit/chakra/icon-button';
 import { useDisclosure } from 'src/toolkit/hooks/useDisclosure';
 import { latexBrand, latexBrandHover } from 'src/toolkit/theme/latex';
 
-import DakotaThemeToggle from './DakotaThemeToggle';
+import CryftThemeToggle from './CryftThemeToggle';
 
 interface Props {
   isMarketplaceAppPage?: boolean;
 }
 
-const DAKOTA_PLATFORM_LINKS = [
+const CRYFT_PLATFORM_LINKS = [
   { label: 'Cryft Cards', url: 'https://cryft.app', icon: 'globe' as const },
   { label: 'How it works', url: 'https://cryft.app/how', icon: 'docs' as const },
 ] as const;
-const DAKOTA_NAVIGATOR_MENU_ID = 'dakota-mobile-navigator-links';
+const CRYFT_NAVIGATOR_MENU_ID = 'cryft-mobile-navigator-links';
 
 const MenuIcon = () => (
   <chakra.svg aria-hidden="true" focusable="false" boxSize="22px" viewBox="0 0 24 24" fill="none">
@@ -85,7 +85,7 @@ const Burger = ({ isMarketplaceAppPage }: Props) => {
             { /* Chad 2026-11-22: the light/dark toggle sits right of the long Navigator button */ }
             <Flex mt="18px" gap="10px" alignItems="center">
               <Button
-                aria-controls={ DAKOTA_NAVIGATOR_MENU_ID }
+                aria-controls={ CRYFT_NAVIGATOR_MENU_ID }
                 aria-expanded={ isNavigatorOpen }
                 aria-label="Toggle Cryft platform navigator"
                 onClick={ handleNavigatorToggle }
@@ -120,10 +120,10 @@ const Burger = ({ isMarketplaceAppPage }: Props) => {
                   <SpriteIcon name="arrows/east-mini" boxSize="16px" transform="rotate(-90deg)" aria-hidden/>
                 </chakra.span>
               </Button>
-              <DakotaThemeToggle/>
+              <CryftThemeToggle/>
             </Flex>
             <chakra.ul
-              id={ DAKOTA_NAVIGATOR_MENU_ID }
+              id={ CRYFT_NAVIGATOR_MENU_ID }
               display={ isNavigatorOpen ? 'flex' : 'none' }
               flexDirection="column"
               gap="8px"
@@ -132,7 +132,7 @@ const Burger = ({ isMarketplaceAppPage }: Props) => {
               listStyleType="none"
               p={ 0 }
             >
-              { DAKOTA_PLATFORM_LINKS.map((link) => {
+              { CRYFT_PLATFORM_LINKS.map((link) => {
                 return (
                   <chakra.li key={ link.label }>
                     <chakra.a

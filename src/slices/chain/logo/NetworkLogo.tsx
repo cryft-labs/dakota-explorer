@@ -12,7 +12,7 @@ import { Image } from 'src/toolkit/chakra/image';
 
 import { INVERT_FILTER } from './consts';
 
-const DAKOTA_MARK_SRC = '/assets/cryft/cryft-cards-mark.svg';
+const CRYFT_MARK_SRC = '/assets/cryft/cryft-cards-mark.svg';
 
 const LogoFallback = () => {
   return (
@@ -33,9 +33,9 @@ type Props = {
 const NetworkLogo = ({ className }: Props) => {
 
   const logoSrc = useColorModeValue(config.chain.logo.default, config.chain.logo.dark || config.chain.logo.default);
-  const isDakotaLogo = logoSrc === DAKOTA_MARK_SRC;
+  const isCryftLogo = logoSrc === CRYFT_MARK_SRC;
 
-  if (isDakotaLogo) {
+  if (isCryftLogo) {
     return (
       <chakra.a
         className={ className }
@@ -53,7 +53,7 @@ const NetworkLogo = ({ className }: Props) => {
         <Image
           w="48px"
           h="48px"
-          src={ DAKOTA_MARK_SRC }
+          src={ CRYFT_MARK_SRC }
           alt="Cryft Network Explorer logo mark"
           fallback={ <LogoFallback/> }
           objectFit="contain"

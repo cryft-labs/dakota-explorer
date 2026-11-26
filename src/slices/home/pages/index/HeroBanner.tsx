@@ -13,9 +13,9 @@ import UserProfileDesktop from 'src/features/account/components/user-profile/Use
 import RewardsButton from 'src/features/rewards/components/RewardsButton';
 
 import config from 'src/config';
-import DakotaStarfield from 'src/shared/components/DakotaStarfield';
+import CryftStarfield from 'src/shared/components/CryftStarfield';
 
-const DAKOTA_HERO_PILLS = [
+const CRYFT_HERO_PILLS = [
   'Live blocks',
   'Transactions',
   'Token activity',
@@ -23,7 +23,7 @@ const DAKOTA_HERO_PILLS = [
   'IPFS CID search',
 ];
 
-const dakotaHeroPanelReveal = keyframes`
+const cryftHeroPanelReveal = keyframes`
   0% {
     opacity: 0;
     transform: translate3d(0, 18px, 0) scale(0.985);
@@ -35,7 +35,7 @@ const dakotaHeroPanelReveal = keyframes`
   }
 `;
 
-const DAKOTA_PANEL_REVEAL_ANIMATION = `${ dakotaHeroPanelReveal } 540ms ease-out both`;
+const CRYFT_PANEL_REVEAL_ANIMATION = `${ cryftHeroPanelReveal } 540ms ease-out both`;
 
 export const BACKGROUND_DEFAULT = [
   'linear-gradient(135deg, rgba(11, 125, 137, 0.12) 0%, rgba(255, 255, 255, 0.98) 58%, rgba(53, 194, 207, 0.08) 100%)',
@@ -95,7 +95,7 @@ const HeroBanner = () => {
 
   return (
     <Flex
-      data-dakota-hero-panel="true"
+      data-cryft-hero-panel="true"
       w="100%"
       background={ background }
       border={ border }
@@ -114,12 +114,12 @@ const HeroBanner = () => {
         _dark: '0 18px 58px rgba(0, 0, 0, 0.28), 0 0 34px rgba(53, 194, 207, 0.06)',
       }}
       backdropFilter="blur(18px) saturate(145%)"
-      animation={ DAKOTA_PANEL_REVEAL_ANIMATION }
+      animation={ CRYFT_PANEL_REVEAL_ANIMATION }
       _motionReduce={{
         animation: 'none',
       }}
     >
-      <DakotaStarfield/>
+      <CryftStarfield/>
       <Flex
         flexGrow={ 1 }
         position="relative"
@@ -191,7 +191,7 @@ const HeroBanner = () => {
           gap={ 2 }
           justifyContent="center"
         >
-          { DAKOTA_HERO_PILLS.map((label) => (
+          { CRYFT_HERO_PILLS.map((label) => (
             <Text
               as="li"
               key={ label }

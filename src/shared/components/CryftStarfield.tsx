@@ -187,12 +187,12 @@ interface Props {
   glimmerInset?: BoxProps['inset'];
 }
 
-const DakotaStarfield = ({ ambientInset = '-18px', glimmerInset = '-10px' }: Props) => {
+const CryftStarfield = ({ ambientInset = '-18px', glimmerInset = '-10px' }: Props) => {
   return (
     <>
       <Box
         aria-hidden="true"
-        data-dakota-animation-layer="ambient"
+        data-cryft-animation-layer="ambient"
         position="absolute"
         inset={ ambientInset }
         zIndex={ 1 }
@@ -237,7 +237,7 @@ const DakotaStarfield = ({ ambientInset = '-18px', glimmerInset = '-10px' }: Pro
       />
       <Box
         aria-hidden="true"
-        data-dakota-animation-layer="glimmer"
+        data-cryft-animation-layer="glimmer"
         position="absolute"
         inset={ glimmerInset }
         zIndex={ 2 }
@@ -258,4 +258,4 @@ const DakotaStarfield = ({ ambientInset = '-18px', glimmerInset = '-10px' }: Pro
   );
 };
 
-export default React.memo(DakotaStarfield);
+export default React.memo(CryftStarfield);
